@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/*
+ * Design tokeni izvučeni iz mockupa (slike/slika1-3.jpg).
+ * Nijedna komponenta ne sme da koristi sirovu heks vrednost — samo tokene odavde.
+ * Tema je namerno samo tamna: brend je definisan kontrastom crne i žute.
+ */
+@theme {
+  /* Površine — od najdublje pozadine ka izdignutim elementima */
+  --color-surface-base: #0b0b0c;
+  --color-surface-raised: #141416;
+  --color-surface-card: #1a1a1d;
+  --color-surface-hover: #232327;
+  --color-surface-input: #101012;
+
+  /* Brend žuta — akcenat, CTA, cene, aktivna stanja */
+  --color-brand: #f5c518;
+  --color-brand-hover: #ffd233;
+  --color-brand-muted: #8a6f0d;
+  --color-brand-foreground: #0b0b0c;
+
+  /* Tekst */
+  --color-content-primary: #f2f2f3;
+  --color-content-secondary: #a8a8b0;
+  --color-content-muted: #6f6f78;
+
+  /* Ivice */
+  --color-line: #2a2a2f;
+  --color-line-strong: #3a3a41;
+
+  /* Semantičke */
+  --color-verified: #f5c518;
+  --color-success: #3ecf8e;
+  --color-danger: #f05252;
+
+  /*
+   * Tri nivoa zaobljenja: kartica → kontrola → sitni element unutar kontrole.
+   * Skala je namerno plitka; jako zaobljeni uglovi kod guste liste rezultata
+   * prave „mehurast" utisak i otežavaju čitanje ivica.
+   */
+  --radius-card: 10px;
+  --radius-control: 8px;
+  --radius-sm: 6px;
+  --radius-pill: 999px;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+/*
+ * Jedini izvor širine stranice. Ranije je `max-w-[1400px] px-4 sm:px-6` stajalo
+ * prepisano na šest mesta, pa se svaka promena uvlačenja morala loviti po fajlovima.
+ *
+ * Sadržaj je proširen sa 1400 na 1560px, a bočno uvlačenje smanjeno sa 24 na 20px.
+ * Na ekranu od 1920px bočni prostor tako pada sa 284px na 200px (−30%),
+ * a na 1440px sa 44px na 20px.
+ */
+:root {
+  --page-max: 1560px;
+  --page-gutter: 1rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --page-gutter: 1.25rem;
+  }
+}
+
+.page-container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+body {
+  background-color: var(--color-surface-base);
+  color: var(--color-content-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fokus prsten — pristupačnost se ne dogovara naknadno */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Horizontalne trake kategorija skroluju bez vidljivog scrollbara */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

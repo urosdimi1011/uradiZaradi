@@ -1,0 +1,1808 @@
+[
+  {
+    "id": "maj_1",
+    "slug": "marko-petrovic-moler-beograd",
+    "userId": "usr_1",
+    "displayName": "Marko Petrović",
+    "primaryCategoryId": "cat_1",
+    "categoryIds": [
+      "cat_1"
+    ],
+    "bio": "Bavim se molerskim radovima više od 12 godina. Radim sve vrste molerskih radova: beljenje, farbanje, dekorativne tehnike, gletovanje i pripremu zidova. Dolazim na besplatno merenje i izlazim sa tačnom ponudom pre početka radova, bez naknadnih troškova. Prostor uvek zaštitim najlonom i po završetku ga ostavljam očišćenog. Garantujem kvalitet, čist rad i poštovanje dogovorenih rokova.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_1",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381611000000",
+    "yearsExperience": 12,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY",
+      "INVOICE",
+      "EMERGENCY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_1_1",
+        "majstorId": "maj_1",
+        "serviceTypeId": "svc_1_2",
+        "priceFromMinor": 93600,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_1_2",
+        "majstorId": "maj_1",
+        "serviceTypeId": "svc_1_1",
+        "priceFromMinor": 70200,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_1_3",
+        "majstorId": "maj_1",
+        "serviceTypeId": "svc_1_3",
+        "priceFromMinor": 58500,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 2
+      },
+      {
+        "id": "msv_1_4",
+        "majstorId": "maj_1",
+        "serviceTypeId": "svc_1_4",
+        "priceFromMinor": null,
+        "currency": "RSD",
+        "unit": "PO_DOGOVORU",
+        "sortOrder": 3
+      },
+      {
+        "id": "msv_1_5",
+        "majstorId": "maj_1",
+        "serviceTypeId": "svc_1_5",
+        "priceFromMinor": 35100,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 4
+      },
+      {
+        "id": "msv_1_6",
+        "majstorId": "maj_1",
+        "serviceTypeId": "svc_1_6",
+        "priceFromMinor": 105300,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 5
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_1_1",
+        "url": "https://picsum.photos/seed/marko-petrovic-moler-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Marko Petrović — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_1_2",
+        "url": "https://picsum.photos/seed/marko-petrovic-moler-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Marko Petrović — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_1_3",
+        "url": "https://picsum.photos/seed/marko-petrovic-moler-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Marko Petrović — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_1_4",
+        "url": "https://picsum.photos/seed/marko-petrovic-moler-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Marko Petrović — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 127,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 1,
+        "4": 6,
+        "5": 119
+      },
+      "bayesianScore": 4.8854
+    },
+    "seo": {
+      "title": "Marko Petrović — Moler",
+      "description": "Moler Marko Petrović, 4.9 od 5 na osnovu 127 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-03-03T09:00:00.000Z",
+    "updatedAt": "2025-03-03T09:00:00.000Z",
+    "publishedAt": "2025-03-03T09:00:00.000Z"
+  },
+  {
+    "id": "maj_2",
+    "slug": "nikola-jovanovic-elektricar-beograd",
+    "userId": "usr_2",
+    "displayName": "Nikola Jovanović",
+    "primaryCategoryId": "cat_2",
+    "categoryIds": [
+      "cat_2"
+    ],
+    "bio": "Električar sa 9 godina iskustva na terenu. Radim kompletne elektroinstalacije u stanovima i kućama, zamenu dotrajalih instalacija, ugradnju rasvete i otklanjanje kvarova. Izlazim i van radnog vremena za hitne slučajeve. Svaki posao ispratim merenjem i izdajem atest o ispravnosti instalacije. Radim isključivo sa kvalitetnim materijalom poznatih proizvođača.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/44.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_2",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381621137911",
+    "yearsExperience": 9,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_2_1",
+        "majstorId": "maj_2",
+        "serviceTypeId": "svc_2_1",
+        "priceFromMinor": 234000,
+        "currency": "RSD",
+        "unit": "SAT",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_2_2",
+        "majstorId": "maj_2",
+        "serviceTypeId": "svc_2_2",
+        "priceFromMinor": 163800,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_2_3",
+        "majstorId": "maj_2",
+        "serviceTypeId": "svc_2_3",
+        "priceFromMinor": 210600,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 2
+      },
+      {
+        "id": "msv_2_4",
+        "majstorId": "maj_2",
+        "serviceTypeId": "svc_2_4",
+        "priceFromMinor": 70200,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 3
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_2_1",
+        "url": "https://picsum.photos/seed/nikola-jovanovic-elektricar-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Nikola Jovanović — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_2_2",
+        "url": "https://picsum.photos/seed/nikola-jovanovic-elektricar-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Nikola Jovanović — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_2_3",
+        "url": "https://picsum.photos/seed/nikola-jovanovic-elektricar-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Nikola Jovanović — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_2_4",
+        "url": "https://picsum.photos/seed/nikola-jovanovic-elektricar-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Nikola Jovanović — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_2_5",
+        "url": "https://picsum.photos/seed/nikola-jovanovic-elektricar-beograd-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Nikola Jovanović — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 98,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 2,
+        "4": 9,
+        "5": 86
+      },
+      "bayesianScore": 4.7907
+    },
+    "seo": {
+      "title": "Nikola Jovanović — Električar",
+      "description": "Električar Nikola Jovanović, 4.8 od 5 na osnovu 98 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-04-04T09:00:00.000Z",
+    "updatedAt": "2025-04-04T09:00:00.000Z",
+    "publishedAt": "2025-04-04T09:00:00.000Z"
+  },
+  {
+    "id": "maj_3",
+    "slug": "petar-kostic-vodoinstalater-beograd",
+    "userId": "usr_3",
+    "displayName": "Petar Kostić",
+    "primaryCategoryId": "cat_3",
+    "categoryIds": [
+      "cat_3"
+    ],
+    "bio": "Vodoinstalater sa 15 godina prakse. Specijalizovan sam za hitna odgušenja, zamenu vodovodnih i kanalizacionih cevi, ugradnju sanitarija i bojlera. Dostupan sam i vikendom jer kvarovi ne biraju dan. Dolazim sa kompletnom opremom, uključujući mašinu za odgušenje i kameru za pregled cevi, pa se problem najčešće reši u prvom izlasku.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/51.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_3",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381631275822",
+    "yearsExperience": 15,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_3_1",
+        "majstorId": "maj_3",
+        "serviceTypeId": "svc_3_1",
+        "priceFromMinor": 175500,
+        "currency": "RSD",
+        "unit": "SAT",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_3_2",
+        "majstorId": "maj_3",
+        "serviceTypeId": "svc_3_2",
+        "priceFromMinor": 409500,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_3_3",
+        "majstorId": "maj_3",
+        "serviceTypeId": "svc_3_3",
+        "priceFromMinor": 468000,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 2
+      },
+      {
+        "id": "msv_3_4",
+        "majstorId": "maj_3",
+        "serviceTypeId": "svc_3_5",
+        "priceFromMinor": 140400,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 3
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_3_1",
+        "url": "https://picsum.photos/seed/petar-kostic-vodoinstalater-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Petar Kostić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_3_2",
+        "url": "https://picsum.photos/seed/petar-kostic-vodoinstalater-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Petar Kostić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_3_3",
+        "url": "https://picsum.photos/seed/petar-kostic-vodoinstalater-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Petar Kostić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_3_4",
+        "url": "https://picsum.photos/seed/petar-kostic-vodoinstalater-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Petar Kostić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_3_5",
+        "url": "https://picsum.photos/seed/petar-kostic-vodoinstalater-beograd-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Petar Kostić — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      },
+      {
+        "id": "pht_3_6",
+        "url": "https://picsum.photos/seed/petar-kostic-vodoinstalater-beograd-6/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Petar Kostić — fotografija izvedenog rada 6",
+        "sortOrder": 5
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 56,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 2,
+        "4": 7,
+        "5": 46
+      },
+      "bayesianScore": 4.7
+    },
+    "seo": {
+      "title": "Petar Kostić — Vodoinstalater",
+      "description": "Vodoinstalater Petar Kostić, 4.7 od 5 na osnovu 56 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-05-05T09:00:00.000Z",
+    "updatedAt": "2025-05-05T09:00:00.000Z",
+    "publishedAt": "2025-05-05T09:00:00.000Z"
+  },
+  {
+    "id": "maj_4",
+    "slug": "aleksandar-mitic-keramicar-beograd",
+    "userId": "usr_4",
+    "displayName": "Aleksandar Mitić",
+    "primaryCategoryId": "cat_4",
+    "categoryIds": [
+      "cat_4"
+    ],
+    "bio": "Keramičar sa 11 godina iskustva. Postavljam zidne i podne pločice, granitnu keramiku velikih formata, radim hidroizolaciju kupatila i fugovanje. Posebnu pažnju posvećujem pripremi podloge jer od nje zavisi da li će posao izdržati. Radim precizno sečenje i obradu uglova pod 45 stepeni. Sve fotografije u galeriji su sa mojih radova.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/64.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_4",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381641413733",
+    "yearsExperience": 11,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY",
+      "INVOICE"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_4_1",
+        "majstorId": "maj_4",
+        "serviceTypeId": "svc_4_1",
+        "priceFromMinor": 140400,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_4_2",
+        "majstorId": "maj_4",
+        "serviceTypeId": "svc_4_2",
+        "priceFromMinor": 175500,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_4_3",
+        "majstorId": "maj_4",
+        "serviceTypeId": "svc_4_3",
+        "priceFromMinor": 46800,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 2
+      },
+      {
+        "id": "msv_4_4",
+        "majstorId": "maj_4",
+        "serviceTypeId": "svc_4_4",
+        "priceFromMinor": 58500,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 3
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_4_1",
+        "url": "https://picsum.photos/seed/aleksandar-mitic-keramicar-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Aleksandar Mitić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_4_2",
+        "url": "https://picsum.photos/seed/aleksandar-mitic-keramicar-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Aleksandar Mitić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_4_3",
+        "url": "https://picsum.photos/seed/aleksandar-mitic-keramicar-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Aleksandar Mitić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_4_4",
+        "url": "https://picsum.photos/seed/aleksandar-mitic-keramicar-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Aleksandar Mitić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 74,
+      "distribution": {
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 4,
+        "5": 69
+      },
+      "bayesianScore": 4.8762
+    },
+    "seo": {
+      "title": "Aleksandar Mitić — Keramičar",
+      "description": "Keramičar Aleksandar Mitić, 4.9 od 5 na osnovu 74 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-06-06T09:00:00.000Z",
+    "updatedAt": "2025-06-06T09:00:00.000Z",
+    "publishedAt": "2025-06-06T09:00:00.000Z"
+  },
+  {
+    "id": "maj_5",
+    "slug": "milan-stojanovic-stolar-beograd",
+    "userId": "usr_5",
+    "displayName": "Milan Stojanović",
+    "primaryCategoryId": "cat_5",
+    "categoryIds": [
+      "cat_5"
+    ],
+    "bio": "Stolar sa 8 godina iskustva u izradi nameštaja po meri. Radim kuhinje, plakare, police i komode prema vašem prostoru i želji. Dolazim na merenje, pravim 3D prikaz pre izrade i tek nakon vaše potvrde krećem u proizvodnju. Koristim kvalitetan iverica i MDF materijal, okov Blum ili Hettich. Montaža i odvoz ambalaže su uključeni u cenu.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/75.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_5",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381651551644",
+    "yearsExperience": 8,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY",
+      "EMERGENCY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_5_1",
+        "majstorId": "maj_5",
+        "serviceTypeId": "svc_5_1",
+        "priceFromMinor": null,
+        "currency": "RSD",
+        "unit": "PO_DOGOVORU",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_5_2",
+        "majstorId": "maj_5",
+        "serviceTypeId": "svc_5_2",
+        "priceFromMinor": 1404000,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_5_3",
+        "majstorId": "maj_5",
+        "serviceTypeId": "svc_5_3",
+        "priceFromMinor": 210600,
+        "currency": "RSD",
+        "unit": "SAT",
+        "sortOrder": 2
+      },
+      {
+        "id": "msv_5_4",
+        "majstorId": "maj_5",
+        "serviceTypeId": "svc_5_4",
+        "priceFromMinor": 292500,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 3
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_5_1",
+        "url": "https://picsum.photos/seed/milan-stojanovic-stolar-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Milan Stojanović — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_5_2",
+        "url": "https://picsum.photos/seed/milan-stojanovic-stolar-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Milan Stojanović — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_5_3",
+        "url": "https://picsum.photos/seed/milan-stojanovic-stolar-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Milan Stojanović — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_5_4",
+        "url": "https://picsum.photos/seed/milan-stojanovic-stolar-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Milan Stojanović — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_5_5",
+        "url": "https://picsum.photos/seed/milan-stojanovic-stolar-beograd-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Milan Stojanović — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 45,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 1,
+        "4": 4,
+        "5": 39
+      },
+      "bayesianScore": 4.7818
+    },
+    "seo": {
+      "title": "Milan Stojanović — Stolar",
+      "description": "Stolar Milan Stojanović, 4.8 od 5 na osnovu 45 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-07-07T09:00:00.000Z",
+    "updatedAt": "2025-07-07T09:00:00.000Z",
+    "publishedAt": "2025-07-07T09:00:00.000Z"
+  },
+  {
+    "id": "maj_6",
+    "slug": "dejan-radovic-moler-beograd",
+    "userId": "usr_6",
+    "displayName": "Dejan Radović",
+    "primaryCategoryId": "cat_1",
+    "categoryIds": [
+      "cat_1"
+    ],
+    "bio": "Bavim se molerskim radovima više od 6 godina. Radim sve vrste molerskih radova: beljenje, farbanje, dekorativne tehnike, gletovanje i pripremu zidova. Dolazim na besplatno merenje i izlazim sa tačnom ponudom pre početka radova, bez naknadnih troškova. Prostor uvek zaštitim najlonom i po završetku ga ostavljam očišćenog. Garantujem kvalitet, čist rad i poštovanje dogovorenih rokova.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/83.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_6",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381661689555",
+    "yearsExperience": 6,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "PHONE",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_6_1",
+        "majstorId": "maj_6",
+        "serviceTypeId": "svc_1_2",
+        "priceFromMinor": 81900,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_6_2",
+        "majstorId": "maj_6",
+        "serviceTypeId": "svc_1_1",
+        "priceFromMinor": 58500,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_6_3",
+        "majstorId": "maj_6",
+        "serviceTypeId": "svc_1_3",
+        "priceFromMinor": 46800,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 2
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_6_1",
+        "url": "https://picsum.photos/seed/dejan-radovic-moler-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Dejan Radović — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_6_2",
+        "url": "https://picsum.photos/seed/dejan-radovic-moler-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Dejan Radović — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_6_3",
+        "url": "https://picsum.photos/seed/dejan-radovic-moler-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Dejan Radović — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_6_4",
+        "url": "https://picsum.photos/seed/dejan-radovic-moler-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Dejan Radović — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_6_5",
+        "url": "https://picsum.photos/seed/dejan-radovic-moler-beograd-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Dejan Radović — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      },
+      {
+        "id": "pht_6_6",
+        "url": "https://picsum.photos/seed/dejan-radovic-moler-beograd-6/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Dejan Radović — fotografija izvedenog rada 6",
+        "sortOrder": 5
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 38,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 2,
+        "4": 7,
+        "5": 28
+      },
+      "bayesianScore": 4.6208
+    },
+    "seo": {
+      "title": "Dejan Radović — Moler",
+      "description": "Moler Dejan Radović, 4.6 od 5 na osnovu 38 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-08-08T09:00:00.000Z",
+    "updatedAt": "2025-08-08T09:00:00.000Z",
+    "publishedAt": "2025-08-08T09:00:00.000Z"
+  },
+  {
+    "id": "maj_7",
+    "slug": "ivan-djordjevic-klima-majstor-beograd",
+    "userId": "usr_7",
+    "displayName": "Ivan Đorđević",
+    "primaryCategoryId": "cat_6",
+    "categoryIds": [
+      "cat_6"
+    ],
+    "bio": "Serviser klima uređaja sa 10 godina iskustva i položenim ispitom za rad sa freonima. Radim ugradnju, redovan servis, čišćenje i dopunu freona za sve poznate brendove. Ugradnju izvodim tako da instalacija bude uredna i nevidljiva gde god je moguće. Dajem garanciju na ugradnju i pišem servisnu knjižicu za uređaj.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/12.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_7",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381611827466",
+    "yearsExperience": 10,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY",
+      "INVOICE"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_7_1",
+        "majstorId": "maj_7",
+        "serviceTypeId": "svc_6_1",
+        "priceFromMinor": 526500,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_7_2",
+        "majstorId": "maj_7",
+        "serviceTypeId": "svc_6_2",
+        "priceFromMinor": 292500,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_7_3",
+        "majstorId": "maj_7",
+        "serviceTypeId": "svc_6_3",
+        "priceFromMinor": 351000,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 2
+      },
+      {
+        "id": "msv_7_4",
+        "majstorId": "maj_7",
+        "serviceTypeId": "svc_6_4",
+        "priceFromMinor": 234000,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 3
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_7_1",
+        "url": "https://picsum.photos/seed/ivan-djordjevic-klima-majstor-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Klima majstor Ivan Đorđević — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_7_2",
+        "url": "https://picsum.photos/seed/ivan-djordjevic-klima-majstor-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Klima majstor Ivan Đorđević — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_7_3",
+        "url": "https://picsum.photos/seed/ivan-djordjevic-klima-majstor-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Klima majstor Ivan Đorđević — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_7_4",
+        "url": "https://picsum.photos/seed/ivan-djordjevic-klima-majstor-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Klima majstor Ivan Đorđević — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 61,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 2,
+        "4": 8,
+        "5": 50
+      },
+      "bayesianScore": 4.7
+    },
+    "seo": {
+      "title": "Ivan Đorđević — Klima majstor",
+      "description": "Klima majstor Ivan Đorđević, 4.7 od 5 na osnovu 61 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-09-09T09:00:00.000Z",
+    "updatedAt": "2025-09-09T09:00:00.000Z",
+    "publishedAt": "2025-09-09T09:00:00.000Z"
+  },
+  {
+    "id": "maj_8",
+    "slug": "jelena-vasic-moler-beograd",
+    "userId": "usr_8",
+    "displayName": "Jelena Vasić",
+    "primaryCategoryId": "cat_1",
+    "categoryIds": [
+      "cat_1"
+    ],
+    "bio": "Bavim se molerskim radovima više od 7 godina. Radim sve vrste molerskih radova: beljenje, farbanje, dekorativne tehnike, gletovanje i pripremu zidova. Dolazim na besplatno merenje i izlazim sa tačnom ponudom pre početka radova, bez naknadnih troškova. Prostor uvek zaštitim najlonom i po završetku ga ostavljam očišćenog. Garantujem kvalitet, čist rad i poštovanje dogovorenih rokova.",
+    "avatarUrl": "https://randomuser.me/api/portraits/women/26.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_8",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381621965377",
+    "yearsExperience": 7,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_8_1",
+        "majstorId": "maj_8",
+        "serviceTypeId": "svc_1_4",
+        "priceFromMinor": null,
+        "currency": "RSD",
+        "unit": "PO_DOGOVORU",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_8_2",
+        "majstorId": "maj_8",
+        "serviceTypeId": "svc_1_2",
+        "priceFromMinor": 117000,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_8_3",
+        "majstorId": "maj_8",
+        "serviceTypeId": "svc_1_3",
+        "priceFromMinor": 70200,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 2
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_8_1",
+        "url": "https://picsum.photos/seed/jelena-vasic-moler-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Jelena Vasić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_8_2",
+        "url": "https://picsum.photos/seed/jelena-vasic-moler-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Jelena Vasić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_8_3",
+        "url": "https://picsum.photos/seed/jelena-vasic-moler-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Jelena Vasić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_8_4",
+        "url": "https://picsum.photos/seed/jelena-vasic-moler-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Jelena Vasić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_8_5",
+        "url": "https://picsum.photos/seed/jelena-vasic-moler-beograd-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Moler Jelena Vasić — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 41,
+      "distribution": {
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 2,
+        "5": 38
+      },
+      "bayesianScore": 4.8608
+    },
+    "seo": {
+      "title": "Jelena Vasić — Moler",
+      "description": "Moler Jelena Vasić, 4.9 od 5 na osnovu 41 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-10-10T09:00:00.000Z",
+    "updatedAt": "2025-10-10T09:00:00.000Z",
+    "publishedAt": "2025-10-10T09:00:00.000Z"
+  },
+  {
+    "id": "maj_9",
+    "slug": "bojan-ilic-bravar-beograd",
+    "userId": "usr_9",
+    "displayName": "Bojan Ilić",
+    "primaryCategoryId": "cat_8",
+    "categoryIds": [
+      "cat_8"
+    ],
+    "bio": "Bravar sa 14 godina iskustva, dostupan za hitne intervencije. Otvaram zaključana vrata bez oštećenja, menjam brave i cilindre, radim izradu i montažu ograda, gelendera i rešetki. Za hitne pozive izlazim u roku od sat vremena na području grada. Na sve ugrađene brave dajem garanciju i preporučujem samo proverene proizvođače.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/22.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_9",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381632103288",
+    "yearsExperience": 14,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY",
+      "EMERGENCY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_9_1",
+        "majstorId": "maj_9",
+        "serviceTypeId": "svc_8_1",
+        "priceFromMinor": 351000,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_9_2",
+        "majstorId": "maj_9",
+        "serviceTypeId": "svc_8_2",
+        "priceFromMinor": 257400,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_9_3",
+        "majstorId": "maj_9",
+        "serviceTypeId": "svc_8_3",
+        "priceFromMinor": 643500,
+        "currency": "RSD",
+        "unit": "M1",
+        "sortOrder": 2
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_9_1",
+        "url": "https://picsum.photos/seed/bojan-ilic-bravar-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Bravar Bojan Ilić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_9_2",
+        "url": "https://picsum.photos/seed/bojan-ilic-bravar-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Bravar Bojan Ilić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_9_3",
+        "url": "https://picsum.photos/seed/bojan-ilic-bravar-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Bravar Bojan Ilić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_9_4",
+        "url": "https://picsum.photos/seed/bojan-ilic-bravar-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Bravar Bojan Ilić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_9_5",
+        "url": "https://picsum.photos/seed/bojan-ilic-bravar-beograd-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Bravar Bojan Ilić — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      },
+      {
+        "id": "pht_9_6",
+        "url": "https://picsum.photos/seed/bojan-ilic-bravar-beograd-6/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Bravar Bojan Ilić — fotografija izvedenog rada 6",
+        "sortOrder": 5
+      }
+    ],
+    "rating": {
+      "average": 4.9,
+      "count": 83,
+      "distribution": {
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 4,
+        "5": 78
+      },
+      "bayesianScore": 4.8785
+    },
+    "seo": {
+      "title": "Bojan Ilić — Bravar",
+      "description": "Bravar Bojan Ilić, 4.9 od 5 na osnovu 83 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-11-11T09:00:00.000Z",
+    "updatedAt": "2025-11-11T09:00:00.000Z",
+    "publishedAt": "2025-11-11T09:00:00.000Z"
+  },
+  {
+    "id": "maj_10",
+    "slug": "stefan-nikolic-gradjevinac-novi-sad",
+    "userId": "usr_10",
+    "displayName": "Stefan Nikolić",
+    "primaryCategoryId": "cat_7",
+    "categoryIds": [
+      "cat_7"
+    ],
+    "bio": "Vodim ekipu za grube građevinske radove, 18 godina u poslu. Radimo zidanje, malterisanje, armirano-betonske radove, adaptacije stanova i rušenje sa odvozom šuta. Pre početka pravimo predmer i predračun sa jasnim stavkama, tako da znate na šta trošite. Radimo po dinamici koja je dogovorena i držimo gradilište urednim.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/91.jpg",
+    "cityId": "city_2",
+    "municipalityId": "muni_10",
+    "servesCityIds": [
+      "city_2"
+    ],
+    "phone": "+381642241199",
+    "yearsExperience": 18,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY",
+      "INVOICE"
+    ],
+    "verificationLevel": "PHONE",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_10_1",
+        "majstorId": "maj_10",
+        "serviceTypeId": "svc_7_1",
+        "priceFromMinor": 187200,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_10_2",
+        "majstorId": "maj_10",
+        "serviceTypeId": "svc_7_2",
+        "priceFromMinor": 105300,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_10_3",
+        "majstorId": "maj_10",
+        "serviceTypeId": "svc_7_3",
+        "priceFromMinor": 702000,
+        "currency": "RSD",
+        "unit": "DAN",
+        "sortOrder": 2
+      },
+      {
+        "id": "msv_10_4",
+        "majstorId": "maj_10",
+        "serviceTypeId": "svc_7_4",
+        "priceFromMinor": 585000,
+        "currency": "RSD",
+        "unit": "DAN",
+        "sortOrder": 3
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_10_1",
+        "url": "https://picsum.photos/seed/stefan-nikolic-gradjevinac-novi-sad-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Građevinac Stefan Nikolić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_10_2",
+        "url": "https://picsum.photos/seed/stefan-nikolic-gradjevinac-novi-sad-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Građevinac Stefan Nikolić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_10_3",
+        "url": "https://picsum.photos/seed/stefan-nikolic-gradjevinac-novi-sad-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Građevinac Stefan Nikolić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_10_4",
+        "url": "https://picsum.photos/seed/stefan-nikolic-gradjevinac-novi-sad-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Građevinac Stefan Nikolić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      }
+    ],
+    "rating": {
+      "average": 4.5,
+      "count": 29,
+      "distribution": {
+        "1": 1,
+        "2": 0,
+        "3": 2,
+        "4": 6,
+        "5": 20
+      },
+      "bayesianScore": 4.5513
+    },
+    "seo": {
+      "title": "Stefan Nikolić — Građevinac",
+      "description": "Građevinac Stefan Nikolić, 4.5 od 5 na osnovu 29 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-12-12T09:00:00.000Z",
+    "updatedAt": "2025-12-12T09:00:00.000Z",
+    "publishedAt": "2025-12-12T09:00:00.000Z"
+  },
+  {
+    "id": "maj_11",
+    "slug": "vladimir-simic-vodoinstalater-novi-sad",
+    "userId": "usr_11",
+    "displayName": "Vladimir Simić",
+    "primaryCategoryId": "cat_3",
+    "categoryIds": [
+      "cat_3"
+    ],
+    "bio": "Vodoinstalater sa 5 godina prakse. Specijalizovan sam za hitna odgušenja, zamenu vodovodnih i kanalizacionih cevi, ugradnju sanitarija i bojlera. Dostupan sam i vikendom jer kvarovi ne biraju dan. Dolazim sa kompletnom opremom, uključujući mašinu za odgušenje i kameru za pregled cevi, pa se problem najčešće reši u prvom izlasku.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/36.jpg",
+    "cityId": "city_2",
+    "municipalityId": "muni_11",
+    "servesCityIds": [
+      "city_2"
+    ],
+    "phone": "+381652379110",
+    "yearsExperience": 5,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "PHONE",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_11_1",
+        "majstorId": "maj_11",
+        "serviceTypeId": "svc_3_1",
+        "priceFromMinor": 152100,
+        "currency": "RSD",
+        "unit": "SAT",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_11_2",
+        "majstorId": "maj_11",
+        "serviceTypeId": "svc_3_2",
+        "priceFromMinor": 351000,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_11_3",
+        "majstorId": "maj_11",
+        "serviceTypeId": "svc_3_5",
+        "priceFromMinor": 117000,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 2
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_11_1",
+        "url": "https://picsum.photos/seed/vladimir-simic-vodoinstalater-novi-sad-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Vladimir Simić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_11_2",
+        "url": "https://picsum.photos/seed/vladimir-simic-vodoinstalater-novi-sad-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Vladimir Simić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_11_3",
+        "url": "https://picsum.photos/seed/vladimir-simic-vodoinstalater-novi-sad-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Vladimir Simić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_11_4",
+        "url": "https://picsum.photos/seed/vladimir-simic-vodoinstalater-novi-sad-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Vladimir Simić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_11_5",
+        "url": "https://picsum.photos/seed/vladimir-simic-vodoinstalater-novi-sad-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Vodoinstalater Vladimir Simić — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      }
+    ],
+    "rating": {
+      "average": 4.4,
+      "count": 18,
+      "distribution": {
+        "1": 1,
+        "2": 0,
+        "3": 1,
+        "4": 5,
+        "5": 11
+      },
+      "bayesianScore": 4.5071
+    },
+    "seo": {
+      "title": "Vladimir Simić — Vodoinstalater",
+      "description": "Vodoinstalater Vladimir Simić, 4.4 od 5 na osnovu 18 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-03-13T09:00:00.000Z",
+    "updatedAt": "2025-03-13T09:00:00.000Z",
+    "publishedAt": "2025-03-13T09:00:00.000Z"
+  },
+  {
+    "id": "maj_12",
+    "slug": "nemanja-pavlovic-parketar-nis",
+    "userId": "usr_12",
+    "displayName": "Nemanja Pavlović",
+    "primaryCategoryId": "cat_9",
+    "categoryIds": [
+      "cat_9"
+    ],
+    "bio": "Parketar sa 13 godina iskustva. Postavljam klasičan parket, brodski pod i laminat, radim hoblovanje, kitovanje i lakiranje. Koristim mašine sa usisivačem tako da prašine u stanu bude minimalno. Lakove nanosim u tri sloja sa međubrušenjem, što je jedini način da pod izdrži godine korišćenja. Merenje i savet o izboru materijala su besplatni.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/8.jpg",
+    "cityId": "city_3",
+    "municipalityId": "muni_13",
+    "servesCityIds": [
+      "city_3"
+    ],
+    "phone": "+381662517021",
+    "yearsExperience": 13,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_12_1",
+        "majstorId": "maj_12",
+        "serviceTypeId": "svc_9_1",
+        "priceFromMinor": 117000,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_12_2",
+        "majstorId": "maj_12",
+        "serviceTypeId": "svc_9_2",
+        "priceFromMinor": 81900,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_12_3",
+        "majstorId": "maj_12",
+        "serviceTypeId": "svc_9_3",
+        "priceFromMinor": 70200,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 2
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_12_1",
+        "url": "https://picsum.photos/seed/nemanja-pavlovic-parketar-nis-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Parketar Nemanja Pavlović — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_12_2",
+        "url": "https://picsum.photos/seed/nemanja-pavlovic-parketar-nis-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Parketar Nemanja Pavlović — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_12_3",
+        "url": "https://picsum.photos/seed/nemanja-pavlovic-parketar-nis-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Parketar Nemanja Pavlović — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_12_4",
+        "url": "https://picsum.photos/seed/nemanja-pavlovic-parketar-nis-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Parketar Nemanja Pavlović — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_12_5",
+        "url": "https://picsum.photos/seed/nemanja-pavlovic-parketar-nis-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Parketar Nemanja Pavlović — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      },
+      {
+        "id": "pht_12_6",
+        "url": "https://picsum.photos/seed/nemanja-pavlovic-parketar-nis-6/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Parketar Nemanja Pavlović — fotografija izvedenog rada 6",
+        "sortOrder": 5
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 52,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 1,
+        "4": 5,
+        "5": 45
+      },
+      "bayesianScore": 4.7839
+    },
+    "seo": {
+      "title": "Nemanja Pavlović — Parketar",
+      "description": "Parketar Nemanja Pavlović, 4.8 od 5 na osnovu 52 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-04-14T09:00:00.000Z",
+    "updatedAt": "2025-04-14T09:00:00.000Z",
+    "publishedAt": "2025-04-14T09:00:00.000Z"
+  },
+  {
+    "id": "maj_13",
+    "slug": "goran-antic-elektricar-kragujevac",
+    "userId": "usr_13",
+    "displayName": "Goran Antić",
+    "primaryCategoryId": "cat_2",
+    "categoryIds": [
+      "cat_2"
+    ],
+    "bio": "Električar sa 20 godina iskustva na terenu. Radim kompletne elektroinstalacije u stanovima i kućama, zamenu dotrajalih instalacija, ugradnju rasvete i otklanjanje kvarova. Izlazim i van radnog vremena za hitne slučajeve. Svaki posao ispratim merenjem i izdajem atest o ispravnosti instalacije. Radim isključivo sa kvalitetnim materijalom poznatih proizvođača.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/55.jpg",
+    "cityId": "city_4",
+    "municipalityId": "muni_15",
+    "servesCityIds": [
+      "city_4"
+    ],
+    "phone": "+381612654932",
+    "yearsExperience": 20,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY",
+      "INVOICE",
+      "EMERGENCY"
+    ],
+    "verificationLevel": "PHONE",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_13_1",
+        "majstorId": "maj_13",
+        "serviceTypeId": "svc_2_1",
+        "priceFromMinor": 198900,
+        "currency": "RSD",
+        "unit": "SAT",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_13_2",
+        "majstorId": "maj_13",
+        "serviceTypeId": "svc_2_4",
+        "priceFromMinor": 58500,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_13_3",
+        "majstorId": "maj_13",
+        "serviceTypeId": "svc_2_5",
+        "priceFromMinor": 81900,
+        "currency": "RSD",
+        "unit": "KOMAD",
+        "sortOrder": 2
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_13_1",
+        "url": "https://picsum.photos/seed/goran-antic-elektricar-kragujevac-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Goran Antić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_13_2",
+        "url": "https://picsum.photos/seed/goran-antic-elektricar-kragujevac-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Goran Antić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_13_3",
+        "url": "https://picsum.photos/seed/goran-antic-elektricar-kragujevac-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Goran Antić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_13_4",
+        "url": "https://picsum.photos/seed/goran-antic-elektricar-kragujevac-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Električar Goran Antić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      }
+    ],
+    "rating": {
+      "average": 4.6,
+      "count": 33,
+      "distribution": {
+        "1": 0,
+        "2": 1,
+        "3": 1,
+        "4": 6,
+        "5": 25
+      },
+      "bayesianScore": 4.6233
+    },
+    "seo": {
+      "title": "Goran Antić — Električar",
+      "description": "Električar Goran Antić, 4.6 od 5 na osnovu 33 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-05-15T09:00:00.000Z",
+    "updatedAt": "2025-05-15T09:00:00.000Z",
+    "publishedAt": "2025-05-15T09:00:00.000Z"
+  },
+  {
+    "id": "maj_14",
+    "slug": "milos-tadic-keramicar-novi-sad",
+    "userId": "usr_14",
+    "displayName": "Miloš Tadić",
+    "primaryCategoryId": "cat_4",
+    "categoryIds": [
+      "cat_4"
+    ],
+    "bio": "Keramičar sa 6 godina iskustva. Postavljam zidne i podne pločice, granitnu keramiku velikih formata, radim hidroizolaciju kupatila i fugovanje. Posebnu pažnju posvećujem pripremi podloge jer od nje zavisi da li će posao izdržati. Radim precizno sečenje i obradu uglova pod 45 stepeni. Sve fotografije u galeriji su sa mojih radova.",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/68.jpg",
+    "cityId": "city_2",
+    "municipalityId": "muni_12",
+    "servesCityIds": [
+      "city_2"
+    ],
+    "phone": "+381622792843",
+    "yearsExperience": 6,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "PHONE",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_14_1",
+        "majstorId": "maj_14",
+        "serviceTypeId": "svc_4_1",
+        "priceFromMinor": 128700,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_14_2",
+        "majstorId": "maj_14",
+        "serviceTypeId": "svc_4_3",
+        "priceFromMinor": 46800,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 1
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_14_1",
+        "url": "https://picsum.photos/seed/milos-tadic-keramicar-novi-sad-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Miloš Tadić — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_14_2",
+        "url": "https://picsum.photos/seed/milos-tadic-keramicar-novi-sad-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Miloš Tadić — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_14_3",
+        "url": "https://picsum.photos/seed/milos-tadic-keramicar-novi-sad-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Miloš Tadić — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_14_4",
+        "url": "https://picsum.photos/seed/milos-tadic-keramicar-novi-sad-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Miloš Tadić — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_14_5",
+        "url": "https://picsum.photos/seed/milos-tadic-keramicar-novi-sad-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Keramičar Miloš Tadić — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      }
+    ],
+    "rating": {
+      "average": 4.7,
+      "count": 24,
+      "distribution": {
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 3,
+        "5": 20
+      },
+      "bayesianScore": 4.7
+    },
+    "seo": {
+      "title": "Miloš Tadić — Keramičar",
+      "description": "Keramičar Miloš Tadić, 4.7 od 5 na osnovu 24 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-06-16T09:00:00.000Z",
+    "updatedAt": "2025-06-16T09:00:00.000Z",
+    "publishedAt": "2025-06-16T09:00:00.000Z"
+  },
+  {
+    "id": "maj_15",
+    "slug": "ana-markovic-stolar-beograd",
+    "userId": "usr_15",
+    "displayName": "Ana Marković",
+    "primaryCategoryId": "cat_5",
+    "categoryIds": [
+      "cat_5"
+    ],
+    "bio": "Stolar sa 9 godina iskustva u izradi nameštaja po meri. Radim kuhinje, plakare, police i komode prema vašem prostoru i želji. Dolazim na merenje, pravim 3D prikaz pre izrade i tek nakon vaše potvrde krećem u proizvodnju. Koristim kvalitetan iverica i MDF materijal, okov Blum ili Hettich. Montaža i odvoz ambalaže su uključeni u cenu.",
+    "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+    "cityId": "city_1",
+    "municipalityId": "muni_2",
+    "servesCityIds": [
+      "city_1"
+    ],
+    "phone": "+381632930754",
+    "yearsExperience": 9,
+    "badges": [
+      "PRO_TOOLS",
+      "WARRANTY"
+    ],
+    "verificationLevel": "IDENTITY",
+    "status": "ACTIVE",
+    "services": [
+      {
+        "id": "msv_15_1",
+        "majstorId": "maj_15",
+        "serviceTypeId": "svc_5_2",
+        "priceFromMinor": 1287000,
+        "currency": "RSD",
+        "unit": "M2",
+        "sortOrder": 0
+      },
+      {
+        "id": "msv_15_2",
+        "majstorId": "maj_15",
+        "serviceTypeId": "svc_5_3",
+        "priceFromMinor": 187200,
+        "currency": "RSD",
+        "unit": "SAT",
+        "sortOrder": 1
+      },
+      {
+        "id": "msv_15_3",
+        "majstorId": "maj_15",
+        "serviceTypeId": "svc_5_1",
+        "priceFromMinor": null,
+        "currency": "RSD",
+        "unit": "PO_DOGOVORU",
+        "sortOrder": 2
+      }
+    ],
+    "gallery": [
+      {
+        "id": "pht_15_1",
+        "url": "https://picsum.photos/seed/ana-markovic-stolar-beograd-1/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Ana Marković — fotografija izvedenog rada 1",
+        "sortOrder": 0
+      },
+      {
+        "id": "pht_15_2",
+        "url": "https://picsum.photos/seed/ana-markovic-stolar-beograd-2/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Ana Marković — fotografija izvedenog rada 2",
+        "sortOrder": 1
+      },
+      {
+        "id": "pht_15_3",
+        "url": "https://picsum.photos/seed/ana-markovic-stolar-beograd-3/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Ana Marković — fotografija izvedenog rada 3",
+        "sortOrder": 2
+      },
+      {
+        "id": "pht_15_4",
+        "url": "https://picsum.photos/seed/ana-markovic-stolar-beograd-4/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Ana Marković — fotografija izvedenog rada 4",
+        "sortOrder": 3
+      },
+      {
+        "id": "pht_15_5",
+        "url": "https://picsum.photos/seed/ana-markovic-stolar-beograd-5/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Ana Marković — fotografija izvedenog rada 5",
+        "sortOrder": 4
+      },
+      {
+        "id": "pht_15_6",
+        "url": "https://picsum.photos/seed/ana-markovic-stolar-beograd-6/900/700",
+        "width": 900,
+        "height": 700,
+        "alt": "Stolar Ana Marković — fotografija izvedenog rada 6",
+        "sortOrder": 5
+      }
+    ],
+    "rating": {
+      "average": 4.8,
+      "count": 31,
+      "distribution": {
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 3,
+        "5": 27
+      },
+      "bayesianScore": 4.7756
+    },
+    "seo": {
+      "title": "Ana Marković — Stolar",
+      "description": "Stolar Ana Marković, 4.8 od 5 na osnovu 31 recenzija. Pogledajte cene usluga i fotografije radova."
+    },
+    "createdAt": "2025-07-17T09:00:00.000Z",
+    "updatedAt": "2025-07-17T09:00:00.000Z",
+    "publishedAt": "2025-07-17T09:00:00.000Z"
+  }
+]

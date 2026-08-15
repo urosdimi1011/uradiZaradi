@@ -1,0 +1,264 @@
+/*
+ * Kartica majstora.
+ *
+ * Raspored je isti na svim širinama: slika levo, sadržaj desno, statistika kao
+ * odvojena traka u dnu. Nema prelamanja u kolonu na desktopu — jedan raspored
+ * znači jedan DOM, pa majstor ne postoji dvaput u HTML-u.
+ */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface-card);
+  /*
+   * Slika ide flush uz ivicu kartice, pa njene uglove seče sama kartica.
+   * Bez ovoga bi pravougaona slika virila preko zaobljenog ugla.
+   */
+  overflow: hidden;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.card:hover {
+  border-color: var(--color-line-strong);
+  background-color: var(--color-surface-raised);
+}
+
+/* Fokus prsten na celoj kartici kad se do linka dođe tastaturom. */
+.card:focus-within {
+  border-color: var(--color-brand);
+}
+
+/* ── Gornji deo: slika + sadržaj ── */
+.body {
+  display: flex;
+  min-width: 0;
+}
+
+/*
+ * Slika dodiruje gornju, levu i donju ivicu bloka — bez razmaka i bez sopstvenog
+ * radijusa. Jedini razmak je desno, i pravi ga leva margina sadržaja.
+ */
+.media {
+  flex: 0 0 38%;
+  align-self: stretch;
+  min-height: 12.5rem;
+}
+
+/*
+ * Gornji padding je veći od ostalih: ime počinje ispod linije srca, kako je
+ * na mockupu. Srce je zakačeno za gornji desni ugao kartice, ne za red imena.
+ */
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 1.375rem 0.875rem 0.875rem 0.875rem;
+}
+
+/*
+ * Mesto za srce se pravi SAMO na ona dva reda koja mu ulaze u visinu.
+ * Da je razmak na celom `.content`, ocena, lokacija i cena bi bespotrebno
+ * gubile širinu — a na uskoj kartici svaki piksel se vidi.
+ */
+.name,
+.category {
+  padding-right: 2.5rem;
+}
+
+.name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-content-primary);
+}
+
+/*
+ * Link pokriva celu karticu (stretched link), pa je cela površina klikabilna
+ * a u markupu i dalje postoji samo jedan link ka profilu — bitno i za crawlera
+ * i za čitače ekrana.
+ */
+.nameLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: var(--color-content-secondary);
+  min-width: 0;
+}
+
+/*
+ * Kvačica se centrira po x-visini teksta, ne po visini reda.
+ * Geometrijski centar reda je iznad optičkog centra malih slova ("Moler"),
+ * pa ikona bez ove korekcije izgleda kao da lebdi previsoko.
+ */
+.category > svg:last-child {
+  flex-shrink: 0;
+  translate: 0 0.5px;
+}
+
+.categoryName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.625rem;
+  font-size: 0.9375rem;
+}
+
+.ratingValue {
+  font-weight: 600;
+  color: var(--color-content-primary);
+}
+
+.ratingCount {
+  color: var(--color-content-muted);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-content-secondary);
+  min-width: 0;
+}
+
+.locationIcon {
+  flex-shrink: 0;
+  color: var(--color-content-muted);
+}
+
+.locationText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  margin-top: auto;
+  padding-top: 0.625rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-brand);
+}
+
+/* ── Dugme za čuvanje ── */
+.save {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  /* Iznad stretched linka, inače klik na srce otvara profil. */
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  /* Belo, ne prigušeno — čuvanje je radnja koju želimo da korisnik primeti. */
+  color: var(--color-content-primary);
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.save:hover {
+  color: var(--color-brand);
+  background-color: var(--color-surface-hover);
+}
+
+/* ── Donja traka: pregledi i poruke ── */
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-content-primary);
+}
+
+.statIcon {
+  flex-shrink: 0;
+  color: var(--color-content-secondary);
+}
+
+/* Brojevi u tabelarnim ciframa da se traka ne pomera kad se vrednosti menjaju. */
+.statValue {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══ Skeleton ═══ */
+
+/*
+ * Skeleton koristi ISTE klase rasporeda kao prava kartica (`.card`, `.body`,
+ * `.media`, `.content`, `.stats`), pa su mu dimenzije po definiciji identične.
+ * Zaseban skeleton sa svojim merama bi se razišao od kartice pri prvoj izmeni
+ * i prelaz bi „poskočio".
+ */
+.skeletonLine {
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-hover);
+}
+
+.skeletonPulse,
+.skeletonPulse .skeletonLine {
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.skeletonPulse .media {
+  background-color: var(--color-surface-hover);
+}
+
+@keyframes skeletonPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonPulse,
+  .skeletonPulse .skeletonLine {
+    animation: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .content {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+
+  .media {
+    min-height: 13.5rem;
+  }
+}

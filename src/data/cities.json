@@ -1,0 +1,92 @@
+[
+  {
+    "id": "city_1",
+    "slug": "beograd",
+    "name": {
+      "latn": "Beograd",
+      "cyrl": "Београд"
+    },
+    "region": {
+      "latn": "Grad Beograd",
+      "cyrl": "Град Београд"
+    },
+    "lat": 44.7866,
+    "lng": 20.4489,
+    "population": 1197000
+  },
+  {
+    "id": "city_2",
+    "slug": "novi-sad",
+    "name": {
+      "latn": "Novi Sad",
+      "cyrl": "Нови Сад"
+    },
+    "region": {
+      "latn": "Južnobački okrug",
+      "cyrl": "Јужнобачки округ"
+    },
+    "lat": 45.2671,
+    "lng": 19.8335,
+    "population": 306000
+  },
+  {
+    "id": "city_3",
+    "slug": "nis",
+    "name": {
+      "latn": "Niš",
+      "cyrl": "Ниш"
+    },
+    "region": {
+      "latn": "Nišavski okrug",
+      "cyrl": "Нишавски округ"
+    },
+    "lat": 43.3209,
+    "lng": 21.8958,
+    "population": 260000
+  },
+  {
+    "id": "city_4",
+    "slug": "kragujevac",
+    "name": {
+      "latn": "Kragujevac",
+      "cyrl": "Крагујевац"
+    },
+    "region": {
+      "latn": "Šumadijski okrug",
+      "cyrl": "Шумадијски округ"
+    },
+    "lat": 44.0128,
+    "lng": 20.9114,
+    "population": 179000
+  },
+  {
+    "id": "city_5",
+    "slug": "subotica",
+    "name": {
+      "latn": "Subotica",
+      "cyrl": "Суботица"
+    },
+    "region": {
+      "latn": "Severnobački okrug",
+      "cyrl": "Севернобачки округ"
+    },
+    "lat": 46.1,
+    "lng": 19.665,
+    "population": 123000
+  },
+  {
+    "id": "city_6",
+    "slug": "cacak",
+    "name": {
+      "latn": "Čačak",
+      "cyrl": "Чачак"
+    },
+    "region": {
+      "latn": "Moravički okrug",
+      "cyrl": "Моравички округ"
+    },
+    "lat": 43.8914,
+    "lng": 20.3497,
+    "population": 115000
+  }
+]

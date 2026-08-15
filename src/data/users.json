@@ -1,0 +1,152 @@
+[
+  {
+    "id": "usr_1",
+    "email": "marko-petrovic@primer.rs",
+    "emailVerifiedAt": "2025-03-03T09:00:00.000Z",
+    "displayName": "Marko Petrović",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-03-03T09:00:00.000Z"
+  },
+  {
+    "id": "usr_2",
+    "email": "nikola-jovanovic@primer.rs",
+    "emailVerifiedAt": "2025-04-04T09:00:00.000Z",
+    "displayName": "Nikola Jovanović",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/44.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-04-04T09:00:00.000Z"
+  },
+  {
+    "id": "usr_3",
+    "email": "petar-kostic@primer.rs",
+    "emailVerifiedAt": "2025-05-05T09:00:00.000Z",
+    "displayName": "Petar Kostić",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/51.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-05-05T09:00:00.000Z"
+  },
+  {
+    "id": "usr_4",
+    "email": "aleksandar-mitic@primer.rs",
+    "emailVerifiedAt": "2025-06-06T09:00:00.000Z",
+    "displayName": "Aleksandar Mitić",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/64.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-06-06T09:00:00.000Z"
+  },
+  {
+    "id": "usr_5",
+    "email": "milan-stojanovic@primer.rs",
+    "emailVerifiedAt": "2025-07-07T09:00:00.000Z",
+    "displayName": "Milan Stojanović",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/75.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-07-07T09:00:00.000Z"
+  },
+  {
+    "id": "usr_6",
+    "email": "dejan-radovic@primer.rs",
+    "emailVerifiedAt": "2025-08-08T09:00:00.000Z",
+    "displayName": "Dejan Radović",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/83.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-08-08T09:00:00.000Z"
+  },
+  {
+    "id": "usr_7",
+    "email": "ivan-djordjevic@primer.rs",
+    "emailVerifiedAt": "2025-09-09T09:00:00.000Z",
+    "displayName": "Ivan Đorđević",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/12.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-09-09T09:00:00.000Z"
+  },
+  {
+    "id": "usr_8",
+    "email": "jelena-vasic@primer.rs",
+    "emailVerifiedAt": "2025-10-10T09:00:00.000Z",
+    "displayName": "Jelena Vasić",
+    "avatarUrl": "https://randomuser.me/api/portraits/women/26.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-10-10T09:00:00.000Z"
+  },
+  {
+    "id": "usr_9",
+    "email": "bojan-ilic@primer.rs",
+    "emailVerifiedAt": "2025-11-11T09:00:00.000Z",
+    "displayName": "Bojan Ilić",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/22.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-11-11T09:00:00.000Z"
+  },
+  {
+    "id": "usr_10",
+    "email": "stefan-nikolic@primer.rs",
+    "emailVerifiedAt": "2025-12-12T09:00:00.000Z",
+    "displayName": "Stefan Nikolić",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/91.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-12-12T09:00:00.000Z"
+  },
+  {
+    "id": "usr_11",
+    "email": "vladimir-simic@primer.rs",
+    "emailVerifiedAt": "2025-03-13T09:00:00.000Z",
+    "displayName": "Vladimir Simić",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/36.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-03-13T09:00:00.000Z"
+  },
+  {
+    "id": "usr_12",
+    "email": "nemanja-pavlovic@primer.rs",
+    "emailVerifiedAt": "2025-04-14T09:00:00.000Z",
+    "displayName": "Nemanja Pavlović",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/8.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-04-14T09:00:00.000Z"
+  },
+  {
+    "id": "usr_13",
+    "email": "goran-antic@primer.rs",
+    "emailVerifiedAt": "2025-05-15T09:00:00.000Z",
+    "displayName": "Goran Antić",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/55.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-05-15T09:00:00.000Z"
+  },
+  {
+    "id": "usr_14",
+    "email": "milos-tadic@primer.rs",
+    "emailVerifiedAt": "2025-06-16T09:00:00.000Z",
+    "displayName": "Miloš Tadić",
+    "avatarUrl": "https://randomuser.me/api/portraits/men/68.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-06-16T09:00:00.000Z"
+  },
+  {
+    "id": "usr_15",
+    "email": "ana-markovic@primer.rs",
+    "emailVerifiedAt": "2025-07-17T09:00:00.000Z",
+    "displayName": "Ana Marković",
+    "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+    "role": "MAJSTOR",
+    "status": "ACTIVE",
+    "createdAt": "2025-07-17T09:00:00.000Z"
+  }
+]

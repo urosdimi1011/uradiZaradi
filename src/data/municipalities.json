@@ -1,0 +1,155 @@
+[
+  {
+    "id": "muni_1",
+    "citySlug": "beograd",
+    "slug": "zvezdara",
+    "name": {
+      "latn": "Zvezdara",
+      "cyrl": "Звездара"
+    }
+  },
+  {
+    "id": "muni_2",
+    "citySlug": "beograd",
+    "slug": "novi-beograd",
+    "name": {
+      "latn": "Novi Beograd",
+      "cyrl": "Нови Београд"
+    }
+  },
+  {
+    "id": "muni_3",
+    "citySlug": "beograd",
+    "slug": "vracar",
+    "name": {
+      "latn": "Vračar",
+      "cyrl": "Врачар"
+    }
+  },
+  {
+    "id": "muni_4",
+    "citySlug": "beograd",
+    "slug": "palilula",
+    "name": {
+      "latn": "Palilula",
+      "cyrl": "Палилула"
+    }
+  },
+  {
+    "id": "muni_5",
+    "citySlug": "beograd",
+    "slug": "cukarica",
+    "name": {
+      "latn": "Čukarica",
+      "cyrl": "Чукарица"
+    }
+  },
+  {
+    "id": "muni_6",
+    "citySlug": "beograd",
+    "slug": "zemun",
+    "name": {
+      "latn": "Zemun",
+      "cyrl": "Земун"
+    }
+  },
+  {
+    "id": "muni_7",
+    "citySlug": "beograd",
+    "slug": "vozdovac",
+    "name": {
+      "latn": "Voždovac",
+      "cyrl": "Вождовац"
+    }
+  },
+  {
+    "id": "muni_8",
+    "citySlug": "beograd",
+    "slug": "stari-grad",
+    "name": {
+      "latn": "Stari grad",
+      "cyrl": "Стари град"
+    }
+  },
+  {
+    "id": "muni_9",
+    "citySlug": "beograd",
+    "slug": "rakovica",
+    "name": {
+      "latn": "Rakovica",
+      "cyrl": "Раковица"
+    }
+  },
+  {
+    "id": "muni_10",
+    "citySlug": "novi-sad",
+    "slug": "liman",
+    "name": {
+      "latn": "Liman",
+      "cyrl": "Лиман"
+    }
+  },
+  {
+    "id": "muni_11",
+    "citySlug": "novi-sad",
+    "slug": "detelinara",
+    "name": {
+      "latn": "Detelinara",
+      "cyrl": "Детелинара"
+    }
+  },
+  {
+    "id": "muni_12",
+    "citySlug": "novi-sad",
+    "slug": "petrovaradin",
+    "name": {
+      "latn": "Petrovaradin",
+      "cyrl": "Петроварадин"
+    }
+  },
+  {
+    "id": "muni_13",
+    "citySlug": "nis",
+    "slug": "medijana",
+    "name": {
+      "latn": "Medijana",
+      "cyrl": "Медијана"
+    }
+  },
+  {
+    "id": "muni_14",
+    "citySlug": "nis",
+    "slug": "palilula-nis",
+    "name": {
+      "latn": "Palilula",
+      "cyrl": "Палилула"
+    }
+  },
+  {
+    "id": "muni_15",
+    "citySlug": "kragujevac",
+    "slug": "aerodrom",
+    "name": {
+      "latn": "Aerodrom",
+      "cyrl": "Аеродром"
+    }
+  },
+  {
+    "id": "muni_16",
+    "citySlug": "subotica",
+    "slug": "centar",
+    "name": {
+      "latn": "Centar",
+      "cyrl": "Центар"
+    }
+  },
+  {
+    "id": "muni_17",
+    "citySlug": "cacak",
+    "slug": "centar-cacak",
+    "name": {
+      "latn": "Centar",
+      "cyrl": "Центар"
+    }
+  }
+]

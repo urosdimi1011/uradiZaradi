@@ -1,0 +1,614 @@
+[
+  {
+    "id": "svc_1_1",
+    "slug": "belenje-zidova",
+    "categoryId": "cat_1",
+    "name": {
+      "latn": "Beljenje zidova",
+      "cyrl": "Бељење зидова"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_1_2",
+    "slug": "farbanje-zidova",
+    "categoryId": "cat_1",
+    "name": {
+      "latn": "Farbanje zidova",
+      "cyrl": "Фарбање зидова"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_1_3",
+    "slug": "gletovanje",
+    "categoryId": "cat_1",
+    "name": {
+      "latn": "Gletovanje",
+      "cyrl": "Глетовање"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_1_4",
+    "slug": "dekorativne-tehnike",
+    "categoryId": "cat_1",
+    "name": {
+      "latn": "Dekorativne tehnike",
+      "cyrl": "Декоративне технике"
+    },
+    "defaultUnit": "PO_DOGOVORU",
+    "allowedUnits": [
+      "PO_DOGOVORU",
+      "M2",
+      "SAT"
+    ],
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "svc_1_5",
+    "slug": "priprema-zidova",
+    "categoryId": "cat_1",
+    "name": {
+      "latn": "Priprema zidova",
+      "cyrl": "Припрема зидова"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "id": "svc_1_6",
+    "slug": "farbanje-stolarije",
+    "categoryId": "cat_1",
+    "name": {
+      "latn": "Farbanje stolarije",
+      "cyrl": "Фарбање столарије"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "id": "svc_2_1",
+    "slug": "popravka-kvara",
+    "categoryId": "cat_2",
+    "name": {
+      "latn": "Popravka kvara",
+      "cyrl": "Поправка квара"
+    },
+    "defaultUnit": "SAT",
+    "allowedUnits": [
+      "SAT",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_2_2",
+    "slug": "elektro-instalacije",
+    "categoryId": "cat_2",
+    "name": {
+      "latn": "Elektroinstalacije u stanu",
+      "cyrl": "Електроинсталације у стану"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_2_3",
+    "slug": "ugradnja-lustera",
+    "categoryId": "cat_2",
+    "name": {
+      "latn": "Ugradnja lustera",
+      "cyrl": "Уградња лустера"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_2_4",
+    "slug": "zamena-uticnice",
+    "categoryId": "cat_2",
+    "name": {
+      "latn": "Zamena utičnice ili prekidača",
+      "cyrl": "Замена утичнице или прекидача"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "svc_2_5",
+    "slug": "zamena-osiguraca",
+    "categoryId": "cat_2",
+    "name": {
+      "latn": "Zamena osigurača",
+      "cyrl": "Замена осигурача"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "id": "svc_3_1",
+    "slug": "odgusenje-odvoda",
+    "categoryId": "cat_3",
+    "name": {
+      "latn": "Odgušenje odvoda",
+      "cyrl": "Одгушење одвода"
+    },
+    "defaultUnit": "SAT",
+    "allowedUnits": [
+      "SAT",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_3_2",
+    "slug": "zamena-bojlera",
+    "categoryId": "cat_3",
+    "name": {
+      "latn": "Zamena bojlera",
+      "cyrl": "Замена бојлера"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_3_3",
+    "slug": "ugradnja-sanitarija",
+    "categoryId": "cat_3",
+    "name": {
+      "latn": "Ugradnja sanitarija",
+      "cyrl": "Уградња санитарија"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_3_4",
+    "slug": "zamena-cevi",
+    "categoryId": "cat_3",
+    "name": {
+      "latn": "Zamena vodovodnih cevi",
+      "cyrl": "Замена водоводних цеви"
+    },
+    "defaultUnit": "M1",
+    "allowedUnits": [
+      "M1",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "svc_3_5",
+    "slug": "popravka-slavine",
+    "categoryId": "cat_3",
+    "name": {
+      "latn": "Popravka slavine",
+      "cyrl": "Поправка славине"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "id": "svc_4_1",
+    "slug": "postavljanje-plocica",
+    "categoryId": "cat_4",
+    "name": {
+      "latn": "Postavljanje pločica",
+      "cyrl": "Постављање плочица"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_4_2",
+    "slug": "granitna-keramika",
+    "categoryId": "cat_4",
+    "name": {
+      "latn": "Granitna keramika",
+      "cyrl": "Гранитна керамика"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_4_3",
+    "slug": "fugovanje",
+    "categoryId": "cat_4",
+    "name": {
+      "latn": "Fugovanje",
+      "cyrl": "Фуговање"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_4_4",
+    "slug": "rusenje-plocica",
+    "categoryId": "cat_4",
+    "name": {
+      "latn": "Rušenje stare keramike",
+      "cyrl": "Рушење старе керамике"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "svc_5_1",
+    "slug": "kuhinja-po-meri",
+    "categoryId": "cat_5",
+    "name": {
+      "latn": "Kuhinja po meri",
+      "cyrl": "Кухиња по мери"
+    },
+    "defaultUnit": "PO_DOGOVORU",
+    "allowedUnits": [
+      "PO_DOGOVORU",
+      "M2",
+      "SAT"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_5_2",
+    "slug": "plakar-po-meri",
+    "categoryId": "cat_5",
+    "name": {
+      "latn": "Plakar po meri",
+      "cyrl": "Плакар по мери"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_5_3",
+    "slug": "montaza-namestaja",
+    "categoryId": "cat_5",
+    "name": {
+      "latn": "Montaža nameštaja",
+      "cyrl": "Монтажа намештаја"
+    },
+    "defaultUnit": "SAT",
+    "allowedUnits": [
+      "SAT",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_5_4",
+    "slug": "popravka-vrata",
+    "categoryId": "cat_5",
+    "name": {
+      "latn": "Popravka vrata",
+      "cyrl": "Поправка врата"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "svc_6_1",
+    "slug": "ugradnja-klime",
+    "categoryId": "cat_6",
+    "name": {
+      "latn": "Ugradnja klima uređaja",
+      "cyrl": "Уградња клима уређаја"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_6_2",
+    "slug": "servis-klime",
+    "categoryId": "cat_6",
+    "name": {
+      "latn": "Servis i čišćenje klime",
+      "cyrl": "Сервис и чишћење климе"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_6_3",
+    "slug": "dopuna-freona",
+    "categoryId": "cat_6",
+    "name": {
+      "latn": "Dopuna freona",
+      "cyrl": "Допуна фреона"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_6_4",
+    "slug": "demontaza-klime",
+    "categoryId": "cat_6",
+    "name": {
+      "latn": "Demontaža klime",
+      "cyrl": "Демонтажа климе"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "svc_7_1",
+    "slug": "zidanje",
+    "categoryId": "cat_7",
+    "name": {
+      "latn": "Zidanje",
+      "cyrl": "Зидање"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_7_2",
+    "slug": "malterisanje",
+    "categoryId": "cat_7",
+    "name": {
+      "latn": "Malterisanje",
+      "cyrl": "Малтерисање"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_7_3",
+    "slug": "ab-radovi",
+    "categoryId": "cat_7",
+    "name": {
+      "latn": "Armirano-betonski radovi",
+      "cyrl": "Армирано-бетонски радови"
+    },
+    "defaultUnit": "DAN",
+    "allowedUnits": [
+      "DAN",
+      "SAT",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_7_4",
+    "slug": "rusenje-i-odvoz",
+    "categoryId": "cat_7",
+    "name": {
+      "latn": "Rušenje i odvoz šuta",
+      "cyrl": "Рушење и одвоз шута"
+    },
+    "defaultUnit": "DAN",
+    "allowedUnits": [
+      "DAN",
+      "SAT",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "svc_8_1",
+    "slug": "hitno-otvaranje",
+    "categoryId": "cat_8",
+    "name": {
+      "latn": "Hitno otvaranje vrata",
+      "cyrl": "Хитно отварање врата"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_8_2",
+    "slug": "zamena-brave",
+    "categoryId": "cat_8",
+    "name": {
+      "latn": "Zamena brave",
+      "cyrl": "Замена браве"
+    },
+    "defaultUnit": "KOMAD",
+    "allowedUnits": [
+      "KOMAD",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_8_3",
+    "slug": "izrada-ograde",
+    "categoryId": "cat_8",
+    "name": {
+      "latn": "Izrada ograde",
+      "cyrl": "Израда ограде"
+    },
+    "defaultUnit": "M1",
+    "allowedUnits": [
+      "M1",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "svc_9_1",
+    "slug": "postavljanje-parketa",
+    "categoryId": "cat_9",
+    "name": {
+      "latn": "Postavljanje parketa",
+      "cyrl": "Постављање паркета"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "svc_9_2",
+    "slug": "hoblovanje-lakiranje",
+    "categoryId": "cat_9",
+    "name": {
+      "latn": "Hoblovanje i lakiranje",
+      "cyrl": "Хобловање и лакирање"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "svc_9_3",
+    "slug": "postavljanje-laminata",
+    "categoryId": "cat_9",
+    "name": {
+      "latn": "Postavljanje laminata",
+      "cyrl": "Постављање ламината"
+    },
+    "defaultUnit": "M2",
+    "allowedUnits": [
+      "M2",
+      "PO_DOGOVORU"
+    ],
+    "sortOrder": 2,
+    "isActive": true
+  }
+]

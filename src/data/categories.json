@@ -1,0 +1,209 @@
+[
+  {
+    "id": "cat_1",
+    "slug": "moleri",
+    "name": {
+      "latn": "Moleri",
+      "cyrl": "Молери"
+    },
+    "nameSingular": {
+      "latn": "Moler",
+      "cyrl": "Молер"
+    },
+    "icon": "PaintRoller",
+    "intro": {
+      "latn": "Molerski radovi obuhvataju sve od pripreme i gletovanja zidova do finalnog farbanja i dekorativnih tehnika. Cena se najčešće obračunava po kvadratnom metru obrađene površine, a razlikuje se prema stanju zida i broju slojeva.",
+      "cyrl": "Молерски радови обухватају све од припреме и глетовања зидова до финалног фарбања и декоративних техника. Цена се најчешће обрачунава по квадратном метру обрађене површине, а разликује се према стању зида и броју слојева."
+    },
+    "seo": {
+      "title": "Moleri — cene i majstori po gradovima",
+      "description": "Pronađite proverenog molera. Uporedite cene krečenja, gletovanja i farbanja po m² i pročitajte recenzije stvarnih korisnika."
+    },
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "cat_2",
+    "slug": "elektricari",
+    "name": {
+      "latn": "Električari",
+      "cyrl": "Електричари"
+    },
+    "nameSingular": {
+      "latn": "Električar",
+      "cyrl": "Електричар"
+    },
+    "icon": "Zap",
+    "intro": {
+      "latn": "Elektroinstalaterski radovi se naplaćuju po satu za intervencije ili po komadu za ugradnju elemenata. Kompletno opremanje stana obračunava se po kvadratu.",
+      "cyrl": "Електроинсталатерски радови се наплаћују по сату за интервенције или по комаду за уградњу елемената. Комплетно опремање стана обрачунава се по квадрату."
+    },
+    "seo": {
+      "title": "Električari — hitne intervencije i instalacije",
+      "description": "Verifikovani električari za popravke, zamenu instalacija i ugradnju rasvete. Cene po satu i po komadu, sa recenzijama."
+    },
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "cat_3",
+    "slug": "vodoinstalateri",
+    "name": {
+      "latn": "Vodoinstalateri",
+      "cyrl": "Водоинсталатери"
+    },
+    "nameSingular": {
+      "latn": "Vodoinstalater",
+      "cyrl": "Водоинсталатер"
+    },
+    "icon": "Droplets",
+    "intro": {
+      "latn": "Vodoinstalaterske usluge pokrivaju hitna odgušenja, zamenu cevi i ugradnju sanitarija. Intervencije se plaćaju po satu, ugradnja uređaja po komadu, a razvod instalacija po dužnom metru.",
+      "cyrl": "Водоинсталатерске услуге покривају хитна одгушења, замену цеви и уградњу санитарија. Интервенције се плаћају по сату, уградња уређаја по комаду, а развод инсталација по дужном метру."
+    },
+    "seo": {
+      "title": "Vodoinstalateri — odgušenja, cevi i sanitarije",
+      "description": "Pozovite vodoinstalatera za hitno odgušenje ili zamenu bojlera. Uporedite cene po satu i po komadu."
+    },
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "cat_4",
+    "slug": "keramicari",
+    "name": {
+      "latn": "Keramičari",
+      "cyrl": "Керамичари"
+    },
+    "nameSingular": {
+      "latn": "Keramičar",
+      "cyrl": "Керамичар"
+    },
+    "icon": "Grid2x2",
+    "intro": {
+      "latn": "Postavljanje pločica se obračunava po kvadratnom metru, a cena zavisi od formata pločice, podloge i složenosti sečenja. Rušenje stare keramike se naplaćuje odvojeno.",
+      "cyrl": "Постављање плочица се обрачунава по квадратном метру, а цена зависи од формата плочице, подлоге и сложености сечења. Рушење старе керамике се наплаћује одвојено."
+    },
+    "seo": {
+      "title": "Keramičari — cena postavljanja pločica po m²",
+      "description": "Majstori za keramiku i granitnu keramiku. Uporedite cenu po m², pogledajte fotografije radova i recenzije."
+    },
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "cat_5",
+    "slug": "stolari",
+    "name": {
+      "latn": "Stolari",
+      "cyrl": "Столари"
+    },
+    "nameSingular": {
+      "latn": "Stolar",
+      "cyrl": "Столар"
+    },
+    "icon": "Hammer",
+    "intro": {
+      "latn": "Nameštaj po meri se ugovara po projektu, dok se montaža gotovog nameštaja i popravke naplaćuju po satu ili po komadu.",
+      "cyrl": "Намештај по мери се уговара по пројекту, док се монтажа готовог намештаја и поправке наплаћују по сату или по комаду."
+    },
+    "seo": {
+      "title": "Stolari — nameštaj po meri i montaža",
+      "description": "Stolari za kuhinje, plakare i montažu nameštaja. Pogledajte radove i zatražite procenu."
+    },
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "id": "cat_6",
+    "slug": "klima-uredjaji",
+    "name": {
+      "latn": "Klima uređaji",
+      "cyrl": "Клима уређаји"
+    },
+    "nameSingular": {
+      "latn": "Klima majstor",
+      "cyrl": "Клима мајстор"
+    },
+    "icon": "Wind",
+    "intro": {
+      "latn": "Ugradnja i servis klima uređaja naplaćuju se po uređaju. Cena ugradnje zavisi od dužine instalacije i potrebe za bušenjem fasade.",
+      "cyrl": "Уградња и сервис клима уређаја наплаћују се по уређају. Цена уградње зависи од дужине инсталације и потребе за бушењем фасаде."
+    },
+    "seo": {
+      "title": "Ugradnja i servis klima uređaja",
+      "description": "Majstori za klima uređaje: ugradnja, servis i dopuna freona. Cene po uređaju."
+    },
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "id": "cat_7",
+    "slug": "gradjevinski-radovi",
+    "name": {
+      "latn": "Građevinski radovi",
+      "cyrl": "Грађевински радови"
+    },
+    "nameSingular": {
+      "latn": "Građevinac",
+      "cyrl": "Грађевинац"
+    },
+    "icon": "HardHat",
+    "intro": {
+      "latn": "Grubi građevinski radovi se ugovaraju po kvadratu izvedene površine ili po dnevnici ekipe, u zavisnosti od obima posla.",
+      "cyrl": "Груби грађевински радови се уговарају по квадрату изведене површине или по дневници екипе, у зависности од обима посла."
+    },
+    "seo": {
+      "title": "Građevinski radovi — zidanje, malterisanje, adaptacije",
+      "description": "Ekipe za grube građevinske radove i adaptacije. Cene po m² i po dnevnici."
+    },
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "id": "cat_8",
+    "slug": "bravari",
+    "name": {
+      "latn": "Bravari",
+      "cyrl": "Бравари"
+    },
+    "nameSingular": {
+      "latn": "Bravar",
+      "cyrl": "Бравар"
+    },
+    "icon": "KeyRound",
+    "intro": {
+      "latn": "Bravarske usluge uključuju hitno otvaranje vrata, zamenu brava i izradu ograda. Hitne intervencije se naplaćuju po izlasku, izrada po dužnom metru.",
+      "cyrl": "Браварске услуге укључују хитно отварање врата, замену брава и израду ограда. Хитне интервенције се наплаћују по изласку, израда по дужном метру."
+    },
+    "seo": {
+      "title": "Bravari — hitno otvaranje vrata i zamena brava",
+      "description": "Bravari dostupni za hitne intervencije. Zamena brava, izrada ograda i gelendera."
+    },
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "id": "cat_9",
+    "slug": "parketari",
+    "name": {
+      "latn": "Parketari",
+      "cyrl": "Паркетари"
+    },
+    "nameSingular": {
+      "latn": "Parketar",
+      "cyrl": "Паркетар"
+    },
+    "icon": "Layers",
+    "intro": {
+      "latn": "Postavljanje i obrada parketa se obračunavaju po kvadratnom metru. Hoblovanje i lakiranje se često ugovaraju zajedno sa postavljanjem.",
+      "cyrl": "Постављање и обрада паркета се обрачунавају по квадратном метру. Хобловање и лакирање се често уговарају заједно са постављањем."
+    },
+    "seo": {
+      "title": "Parketari — postavljanje, hoblovanje i lakiranje",
+      "description": "Majstori za parket i laminat. Uporedite cene po m² i pogledajte fotografije radova."
+    },
+    "sortOrder": 8,
+    "isActive": true
+  }
+]

@@ -1,0 +1,99 @@
+/*
+ * Traka poverenja u podnožju.
+ *
+ * Razdelnici između stavki su pseudo-elementi, ne `border-left`, jer moraju da
+ * budu uvučeni od gornje i donje ivice — okvir bi išao celom visinom stavke.
+ * Postavljaju se u sredinu razmaka mreže, pa ostaju tačno na pola između kolona
+ * bez obzira na širinu.
+ */
+
+.grid {
+  --footer-gap: 1.5rem;
+
+  display: grid;
+  gap: var(--footer-gap);
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-block: 2rem;
+  padding-inline: var(--page-gutter);
+}
+
+/*
+ * Ikonica stoji sama, bez okvira: u podnožju je četiri stavke u nizu, pa su
+ * četiri uokvirena kvadrata pravila vizuelni šum i takmičila se sa tekstom.
+ * Vertikalno centriranje u odnosu na ceo tekstualni blok, ne u odnosu na prvi red.
+ */
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--color-brand);
+}
+
+/* Na mobilnom nema razdelnika, pa tekst prirodno popunjava red — bez fiksne širine. */
+.text {
+  min-width: 0;
+  flex: 1;
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  top: 0.375rem;
+  bottom: 0.375rem;
+  left: calc(var(--footer-gap) / -2);
+  width: 1px;
+  background-color: var(--color-line);
+  /* U jednoj koloni nema šta da se razdvaja — linija se pali tek od dve kolone. */
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /*
+   * Sadržaj se centrira u svojoj koloni, a tekstualni blok dobija FIKSNU širinu
+   * jednaku za sva četiri natpisa.
+   *
+   * Bez ovoga je razmak od crte do teksta zavisio od dužine naslova: "Brzo i lako"
+   * ostavlja skoro 100px praznine pre crte, dok ikonica sa druge strane crte uvek
+   * stoji na fiksnih 12px (jer je priljubljena uz početak kolone). Kad je širina
+   * teksta ista za sve stavke, margina levo i desno od svake kolone je identična,
+   * pa je i razmak do crte identičan sa obe strane — bez obzira koji je tekst.
+   */
+  .item {
+    justify-content: center;
+  }
+
+  .text {
+    flex: none;
+    width: 10rem;
+  }
+
+  /* Dve kolone: linija samo ispred druge stavke u redu. */
+  .item:nth-child(2n)::before {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* Četiri kolone u jednom redu: linija ispred svih osim prve. */
+  .item::before {
+    display: block;
+  }
+
+  .item:first-child::before {
+    display: none;
+  }
+}

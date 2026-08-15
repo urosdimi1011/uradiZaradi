@@ -1,0 +1,233 @@
+/*
+ * Stil pretrage — CSS Module, kolociran uz komponentu.
+ *
+ * Zašto ne Tailwind utility klase kao drugde: ovo je jedna složena, ponovljiva
+ * celina sa unutrašnjim stanjima (fokus na grupi, a ne na inputu). Takav slučaj
+ * u utility zapisu postaje niz od 15 klasa po elementu koji niko ne održava.
+ *
+ * Koriste se tokeni iz @theme (globals.css) preko `var(--color-*)`, ne sirove
+ * heks vrednosti — tema ostaje jedan izvor istine.
+ */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ── Grupa: input + filter + dugme, sve u jednom okviru kao na mockupu ── */
+.group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.3125rem;
+  padding-left: 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-input);
+  transition: border-color 150ms ease;
+}
+
+.group:hover {
+  border-color: var(--color-line-strong);
+}
+
+/*
+ * Fokus prsten ide na GRUPU, ne na input.
+ * Inače se unutar okvira pojavi drugi okvir i celina izgleda razlomljeno.
+ */
+.group:focus-within {
+  border-color: var(--color-brand);
+  outline: 2px solid color-mix(in oklab, var(--color-brand) 35%, transparent);
+  outline-offset: 1px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 2.375rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-content-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+
+.input::placeholder {
+  color: var(--color-content-muted);
+}
+
+.input:focus {
+  outline: none;
+}
+
+/* Krstić koji Chrome dodaje na type="search" kvari poravnanje sa ikonicom filtera. */
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+/*
+ * Razdelnik između polja i ikonice filtera.
+ * Namerno je kraći od okvira — uvučen odozgo i odozdo, da deluje kao tanka
+ * crta u sadržaju, a ne kao druga ivica unutar prve.
+ */
+.divider {
+  align-self: stretch;
+  flex-shrink: 0;
+  width: 1px;
+  margin-block: 0.25rem;
+  background-color: var(--color-line-strong);
+}
+
+/* ── Dugme koje otvara filter panel (samo mobilni) ── */
+.filterButton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: calc(var(--radius-control) - 4px);
+  background: transparent;
+  color: var(--color-content-muted);
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.filterButton:hover {
+  color: var(--color-content-primary);
+  background-color: var(--color-surface-hover);
+}
+
+/* Brojač aktivnih filtera */
+.filterButton [data-filter-count] {
+  position: absolute;
+  top: -0.125rem;
+  right: -0.125rem;
+  display: grid;
+  place-items: center;
+  min-width: 1.0625rem;
+  height: 1.0625rem;
+  padding-inline: 0.25rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-brand);
+  color: var(--color-brand-foreground);
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+/* ── Dugme pretrage, uvučeno u okvir ── */
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.375rem;
+  flex-shrink: 0;
+  padding-inline: 1rem;
+  border: 0;
+  border-radius: calc(var(--radius-control) - 4px);
+  background-color: var(--color-brand);
+  color: var(--color-brand-foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.submit:hover {
+  background-color: var(--color-brand-hover);
+}
+
+.submitLabel {
+  display: none;
+}
+
+/* ── Izbor grada ── */
+.city {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.cityIcon,
+.cityChevron {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: none;
+  color: var(--color-content-muted);
+}
+
+.cityIcon {
+  left: 0.875rem;
+}
+
+.cityChevron {
+  right: 0.875rem;
+}
+
+.citySelect {
+  width: 100%;
+  height: 3rem;
+  padding-inline: 2.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-input);
+  color: var(--color-content-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.citySelect:hover {
+  border-color: var(--color-line-strong);
+}
+
+.citySelect:focus-visible {
+  border-color: var(--color-brand);
+}
+
+/* ── Desktop: sve u jednom redu, dugme odmah uz input ── */
+@media (min-width: 1024px) {
+  .form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .group {
+    height: 3rem;
+  }
+
+  .submit {
+    height: 2.5rem;
+    padding-inline: 1.5rem;
+  }
+
+  .input {
+    height: 2.5rem;
+  }
+
+  /* Panel je na desktopu već otvoren u koloni — dugme i razdelnik nemaju svrhu. */
+  .filterButton,
+  .divider {
+    display: none;
+  }
+
+  .submitIcon {
+    display: none;
+  }
+
+  .submitLabel {
+    display: inline;
+  }
+
+  .city {
+    width: 15rem;
+  }
+}

@@ -1,0 +1,454 @@
+/*
+ * Panel filtera.
+ *
+ * Sve kontrole dele istu osnovu (`.control`) da bi visina, radijus i ponašanje
+ * na fokus bili identični za `select` i `input` — inače se native elementi
+ * razilaze po nekoliko piksela i to se u uskoj koloni odmah vidi.
+ */
+
+/* ═══ Dijalog: pun ekran na mobilnom, obična kolona na desktopu ═══ */
+
+/*
+ * Isti `<dialog>` element služi i kao mobilni modal i kao desktop sidebar.
+ * Razlog nije štednja koda nego ispravnost: forma sme da postoji SAMO jednom u
+ * dokumentu. Da je renderujemo dvaput pa jednu sakrijemo, pretraga bi slala
+ * duplirane parametre (`grad=beograd&grad=beograd`).
+ *
+ * Na mobilnom `showModal()` diže element u top layer, pa raspored roditelja
+ * (grid ćelija) nema nikakvog uticaja — zauzme ceo ekran.
+ */
+.dialog {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: var(--color-surface-base);
+  color: var(--color-content-primary);
+}
+
+.dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.6);
+}
+
+/* Zaglavlje i podnožje modala postoje samo na mobilnom. */
+.dialogHeader,
+.dialogFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background-color: var(--color-surface-base);
+}
+
+.dialogHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.dialogTitle {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.dialogClose {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-left: auto;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-content-secondary);
+  cursor: pointer;
+}
+
+.dialogClose:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-content-primary);
+}
+
+.dialogFooter {
+  position: sticky;
+  bottom: 0;
+  border-top: 1px solid var(--color-line);
+  padding-bottom: calc(0.875rem + env(safe-area-inset-bottom));
+}
+
+.dialogApply {
+  /* Flex centriranje, da spinner koji zamenjuje tekst stoji na sredini dugmeta. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 3rem;
+  border: 0;
+  border-radius: var(--radius-control);
+  background-color: var(--color-brand);
+  color: var(--color-brand-foreground);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.dialogScroll {
+  overflow-y: auto;
+}
+
+/*
+ * U modalu je panel RAVAN — bez okvira, radijusa i sopstvene pozadine.
+ * Zadržavanje stila kartice unutar modala pravilo je kutiju u kutiji: modal ima
+ * svoje zaglavlje i ivice, pa je panel unutra izgledao kao zalutala kartica.
+ * Chrome kartice se dodaje tek na desktopu, gde panel zaista stoji sam u koloni.
+ */
+.panel {
+  padding: 1rem;
+}
+
+/* Naslov nosi zaglavlje modala na mobilnom — ovaj bi bio drugi isti tekst. */
+.title {
+  display: none;
+}
+
+/* Modal ima svoje „Prikaži rezultate" u podnožju; ovo bi bilo drugo isto dugme. */
+.apply {
+  display: none;
+}
+
+/* ═══ Kategorija kao stanje, ne kao drugi izbor ═══ */
+
+/*
+ * Gornji blok PRIKAZUJE izabranu kategoriju umesto da nudi novi dropdown.
+ * Izbor se pravi u traci sa ikonicama iznad rezultata; dva selektora za istu
+ * stvar su zbunila korisnika i ponašala se različito (traka odmah, dropdown
+ * tek posle „Primeni filtere").
+ */
+.categoryChip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-input);
+  font-size: 0.875rem;
+}
+
+.categoryChipActive {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.categoryChipName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryClear {
+  display: grid;
+  place-items: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  color: var(--color-content-secondary);
+}
+
+.categoryClear:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-content-primary);
+}
+
+.categoryHint {
+  margin-top: 0.4375rem;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--color-content-muted);
+}
+
+/* ═══ Usluge unutar kategorije ═══ */
+.serviceItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-content-secondary);
+  cursor: pointer;
+}
+
+.serviceName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Merna jedinica stoji uz uslugu — bez nje cenovni filter ispod nema značenje. */
+.serviceUnit {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  color: var(--color-content-muted);
+}
+
+
+.titleText {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-content-primary);
+}
+
+.group {
+  margin-top: 1.125rem;
+}
+
+/*
+ * Naslovi iznad polja su u primarnoj (beloj) boji, ne prigušenoj.
+ * Oni imenuju filter i moraju da se čitaju pre nego što se pogleda vrednost.
+ */
+.label {
+  display: block;
+  margin-bottom: 0.4375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-content-primary);
+}
+
+.control {
+  width: 100%;
+  height: 2.5rem;
+  padding-inline: 0.75rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-input);
+  color: var(--color-content-primary);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  transition: border-color 150ms ease;
+}
+
+.control::placeholder {
+  color: var(--color-content-muted);
+}
+
+.control:hover {
+  border-color: var(--color-line-strong);
+}
+
+.control:focus-visible {
+  border-color: var(--color-brand);
+  outline: none;
+}
+
+/* ── Padajuće liste ── */
+.selectWrap {
+  position: relative;
+}
+
+.select {
+  appearance: none;
+  /* Mesto za strelicu, da duga vrednost ne prođe ispod nje. */
+  padding-right: 2.125rem;
+  cursor: pointer;
+}
+
+.chevron {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: none;
+  color: var(--color-content-secondary);
+}
+
+/* ── Cena od / do ── */
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priceField {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.priceInput {
+  /* Mesto za fiksiranu oznaku valute desno. */
+  padding-right: 2.75rem;
+}
+
+/* Skriva strelice number inputa — sa oznakom valute desno nemaju gde da stanu. */
+.priceInput::-webkit-outer-spin-button,
+.priceInput::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.priceInput {
+  -moz-appearance: textfield;
+}
+
+.currency {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: none;
+  font-size: 0.75rem;
+  color: var(--color-content-secondary);
+}
+
+.hint {
+  margin-top: 0.4375rem;
+  font-size: 0.6875rem;
+  color: var(--color-content-muted);
+}
+
+/* ── Ocene i verifikacija ── */
+.checkList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-content-secondary);
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex-shrink: 0;
+  accent-color: var(--color-brand);
+  cursor: pointer;
+}
+
+.checkItemWide {
+  align-items: flex-start;
+  line-height: 1.35;
+}
+
+.checkItemWide .checkbox {
+  margin-top: 0.125rem;
+}
+
+/* ── Akcije ── */
+.apply {
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 1.5rem;
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-brand);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.apply:hover {
+  background-color: color-mix(in oklab, var(--color-brand) 12%, transparent);
+}
+
+/* Podvučeno stalno, ne samo na hover — to je jedina oznaka da je link. */
+.reset {
+  display: block;
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--color-content-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.reset:hover {
+  color: var(--color-content-primary);
+}
+
+/*
+ * Panel se rasteže na visinu reda, da mu donja ivica bude u ravni sa paginacijom
+ * desno. Bez ovoga panel staje na svom sadržaju i kolone se završavaju na
+ * različitim visinama (izmereno: 55px razlike).
+ *
+ * Akcije se pritom guraju na dno, da višak visine ostane IZNAD njih umesto kao
+ * mrtav prostor ispod „Poništi filtere".
+ *
+ * Blok MORA da stoji na kraju fajla: `margin-top: auto` i `.apply { margin-top:
+ * 1.5rem }` imaju istu specifičnost, pa odlučuje redosled u fajlu.
+ */
+@media (min-width: 1024px) {
+  /*
+   * Desktop: dialog prestaje da bude modal i postaje obična kolona.
+   * `display: block` nadjačava UA pravilo `dialog:not([open]) { display: none }`,
+   * pa se sidebar vidi bez ijednog reda JavaScripta.
+   */
+  .dialog {
+    display: block;
+    position: static;
+    height: 100%;
+    background: transparent;
+    color: inherit;
+  }
+
+  .dialogHeader,
+  .dialogFooter {
+    display: none;
+  }
+
+  .dialogScroll {
+    overflow: visible;
+    height: 100%;
+  }
+
+  .panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background-color: var(--color-surface-card);
+    padding: 1.25rem 1rem;
+  }
+
+  .title {
+    display: block;
+  }
+
+  .apply {
+    display: flex;
+    margin-top: auto;
+  }
+
+  /*
+   * Lokacija na desktopu pripada traci pretrage gore — ovde bi bio drugi
+   * selektor za istu stvar. Polje ostaje u formi (samo sakriveno) da bi
+   * „Primeni filtere" preneo trenutno izabrani grad umesto da ga obriše.
+   */
+  .locationGroup {
+    display: none;
+  }
+}
