@@ -32,14 +32,15 @@ const L = (latn, cyrl) => ({ latn, cyrl });
 // ─────────────────────────────── Geografija ───────────────────────────────
 
 const cities = [
-  ["beograd", L("Beograd", "Београд"), L("Grad Beograd", "Град Београд"), 44.7866, 20.4489, 1_197_000],
-  ["novi-sad", L("Novi Sad", "Нови Сад"), L("Južnobački okrug", "Јужнобачки округ"), 45.2671, 19.8335, 306_000],
-  ["nis", L("Niš", "Ниш"), L("Nišavski okrug", "Нишавски округ"), 43.3209, 21.8958, 260_000],
-  ["kragujevac", L("Kragujevac", "Крагујевац"), L("Šumadijski okrug", "Шумадијски округ"), 44.0128, 20.9114, 179_000],
-  ["subotica", L("Subotica", "Суботица"), L("Severnobački okrug", "Севернобачки округ"), 46.1000, 19.6650, 123_000],
-  ["cacak", L("Čačak", "Чачак"), L("Moravički okrug", "Моравички округ"), 43.8914, 20.3497, 115_000],
-].map(([slug, name, region, lat, lng, population], i) => ({
-  id: `city_${i + 1}`, slug, name, region, lat, lng, population,
+  // [slug, nominativ, LOKATIV, okrug, lat, lng, stanovnika]
+  ["beograd", L("Beograd", "Београд"), L("Beogradu", "Београду"), L("Grad Beograd", "Град Београд"), 44.7866, 20.4489, 1_197_000],
+  ["novi-sad", L("Novi Sad", "Нови Сад"), L("Novom Sadu", "Новом Саду"), L("Južnobački okrug", "Јужнобачки округ"), 45.2671, 19.8335, 306_000],
+  ["nis", L("Niš", "Ниш"), L("Nišu", "Нишу"), L("Nišavski okrug", "Нишавски округ"), 43.3209, 21.8958, 260_000],
+  ["kragujevac", L("Kragujevac", "Крагујевац"), L("Kragujevcu", "Крагујевцу"), L("Šumadijski okrug", "Шумадијски округ"), 44.0128, 20.9114, 179_000],
+  ["subotica", L("Subotica", "Суботица"), L("Subotici", "Суботици"), L("Severnobački okrug", "Севернобачки округ"), 46.1000, 19.6650, 123_000],
+  ["cacak", L("Čačak", "Чачак"), L("Čačku", "Чачку"), L("Moravički okrug", "Моравички округ"), 43.8914, 20.3497, 115_000],
+].map(([slug, name, nameLocative, region, lat, lng, population], i) => ({
+  id: `city_${i + 1}`, slug, name, nameLocative, region, lat, lng, population,
 }));
 
 const municipalityData = {

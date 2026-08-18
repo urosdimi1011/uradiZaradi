@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { getScript, SCRIPT_LANG } from "@/lib/script";
+import { SCRIPT_LANG } from "@/lib/script";
+import { getScript } from "@/lib/script.server";
 import { IS_DEMO } from "@/lib/site";
 import "./globals.css";
 

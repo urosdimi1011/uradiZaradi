@@ -40,7 +40,7 @@ export function CategoryIcon({
 }: {
   name: string;
   size?: number;
-  className?: string;
+  className?: string | undefined;
 }) {
   const Icon = ICONS[name as CategoryIconName] ?? LayoutGrid;
   return <Icon width={size} height={size} className={className} aria-hidden />;

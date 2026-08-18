@@ -11,6 +11,15 @@ export const citySchema = z.object({
   id: idSchema,
   slug: slugSchema,
   name: localizedTextSchema,
+  /**
+   * Lokativ — oblik za „u Beogradu", „u Novom Sadu", „u Čačku".
+   *
+   * Čuva se, a ne izvodi pravilom: srpski lokativ ima previše izuzetaka
+   * („Novi Sad" → „Novom Sadu", „Čačak" → „Čačku") da bi ga algoritam pogodio.
+   * A naslov „Moleri u Beograd" je i gramatički pogrešan i promašuje upit koji
+   * ljudi zaista kucaju — „moleri u beogradu".
+   */
+  nameLocative: localizedTextSchema,
   /** Okrug/region — koristi se za "majstori u okolini" kad grad nema pokrivenost. */
   region: localizedTextSchema,
   lat: z.number(),

@@ -2,9 +2,12 @@ import Link from "next/link";
 
 import type { Category } from "@/modules/catalog/domain";
 import { CategoryIcon } from "@/modules/catalog/ui/category-icon";
+import { ScrollActiveIntoView } from "@/modules/catalog/ui/scroll-active-into-view";
 import { cn } from "@/lib/cn";
 import { makeT } from "@/lib/dictionary";
 import { t as pick, type Script } from "@/lib/script";
+
+const STRIP_ID = "traka-kategorija";
 
 /**
  * Horizontalna traka kategorija sa mockupa. Na mobilnom skroluje, na desktopu se
@@ -23,12 +26,29 @@ export function CategoryStrip({
   visibleCount?: number;
 }) {
   const t = makeT(script);
-  const visible = categories.slice(0, visibleCount);
-  const hasMore = categories.length > visibleCount;
+
+  /*
+   * Izabrana kategorija MORA da bude u traci, čak i kad ispada iz prvih
+   * `visibleCount`. Bez ovoga bi izbor „Parketara" (devetih po redu) dao traku
+   * u kojoj se nigde ne vidi šta je izabrano — a to je gore od skrolovanja.
+   */
+  const head = categories.slice(0, visibleCount);
+  const activeOutside =
+    activeSlug && !head.some((c) => c.slug === activeSlug)
+      ? categories.find((c) => c.slug === activeSlug)
+      : undefined;
+
+  const visible = activeOutside ? [...head, activeOutside] : head;
+  const hasMore = categories.length > visible.length;
 
   return (
     <nav aria-label={t("allCategories")}>
-      <ul className="no-scrollbar -mx-4 flex gap-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:gap-6 sm:px-0 lg:flex-wrap lg:justify-start lg:overflow-visible">
+      <ScrollActiveIntoView containerId={STRIP_ID} activeKey={activeSlug ?? ""} />
+
+      <ul
+        id={STRIP_ID}
+        className="no-scrollbar -mx-4 flex gap-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:gap-6 sm:px-0 lg:flex-wrap lg:justify-start lg:overflow-visible"
+      >
         <CategoryItem
           href="/"
           icon="LayoutGrid"

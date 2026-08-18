@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import type { LocalizedText } from "@/modules/shared/domain/primitives";
 
 /**
@@ -14,17 +13,16 @@ export type Script = (typeof SCRIPTS)[number];
 export const DEFAULT_SCRIPT: Script = "latn";
 export const SCRIPT_COOKIE = "pismo";
 
+/*
+ * Ovaj modul mora da ostane bez `next/headers` — uvoze ga i klijentske
+ * komponente (mobilni meni, filter). Čitanje cookie-ja živi u `script.server.ts`.
+ */
+
 /** Vrednost za <html lang> — hreflang parovi se generišu iz istog izvora. */
 export const SCRIPT_LANG: Record<Script, string> = {
   latn: "sr-Latn-RS",
   cyrl: "sr-Cyrl-RS",
 };
-
-export async function getScript(): Promise<Script> {
-  const store = await cookies();
-  const value = store.get(SCRIPT_COOKIE)?.value;
-  return value === "cyrl" ? "cyrl" : DEFAULT_SCRIPT;
-}
 
 /** Uzima pravu varijantu iz LocalizedText polja. */
 export function t(text: LocalizedText, script: Script): string {

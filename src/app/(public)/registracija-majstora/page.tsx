@@ -11,7 +11,8 @@ import { CategoryIcon } from "@/modules/catalog/ui/category-icon";
 import { PRICE_UNIT_LABEL } from "@/modules/catalog/domain";
 import { INDEXABILITY_THRESHOLD } from "@/modules/majstori/domain";
 import { makeT } from "@/lib/dictionary";
-import { getScript, t as pick } from "@/lib/script";
+import { t as pick } from "@/lib/script";
+import { getScript } from "@/lib/script.server";
 import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {

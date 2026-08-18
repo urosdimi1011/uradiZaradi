@@ -54,6 +54,29 @@ export function formatCount(value: number): string {
 }
 
 /**
+ * „1 majstor", „3 majstora", „12 majstora".
+ *
+ * Srpski traži genitiv posle broja, pa je „3 moleri" gramatički pogrešno.
+ * Broji se namerno reč „majstor", a ne naziv kategorije: tako je potreban samo
+ * jedan skup oblika umesto padeža za svaki od devet zanata (i svaki naredni).
+ *
+ * Pravilo: 1 (ali ne 11) → jednina; sve ostalo → genitiv, koji je za „majstor"
+ * isti i za 2–4 i za 5+.
+ */
+export function countMajstoriLabel(count: number, script: Script): string {
+  const lastTwo = count % 100;
+  const singular = lastTwo !== 11 && count % 10 === 1;
+  const word = singular
+    ? script === "cyrl"
+      ? "мајстор"
+      : "majstor"
+    : script === "cyrl"
+      ? "мајстора"
+      : "majstora";
+  return `${rsdFormatter.format(count)} ${word}`;
+}
+
+/**
  * Srpski mobilni broj u čitljiv oblik: +381611234567 → "+381 61 123 4567".
  *
  * Za `tel:` link se i dalje koristi sirov broj — razmaci u `href`-u zbunjuju

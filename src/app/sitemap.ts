@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (count < MIN_MAJSTORI_PER_LANDING) continue;
 
       entries.push({
-        url: abs(`/${category.slug}-${city.slug}`),
+        url: abs(`/${category.slug}/${city.slug}`),
         changeFrequency: "daily",
         priority: 0.8,
       });

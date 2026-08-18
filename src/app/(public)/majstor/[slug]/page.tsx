@@ -31,7 +31,8 @@ import { RatingBreakdown } from "@/modules/reviews/ui/rating-breakdown";
 import { ReviewItem } from "@/modules/reviews/ui/review-item";
 import { approxEur, formatCount, formatPriceFrom } from "@/lib/format";
 import { makeT, ui, type UiKey } from "@/lib/dictionary";
-import { getScript, t as pick } from "@/lib/script";
+import { t as pick } from "@/lib/script";
+import { getScript } from "@/lib/script.server";
 import { toCyrillic } from "@/lib/translit";
 import { abs } from "@/lib/site";
 

@@ -7,7 +7,8 @@ import { CategoryIcon } from "@/modules/catalog/ui/category-icon";
 import { geoRepository } from "@/modules/geo/repository";
 import { majstorRepository } from "@/modules/majstori/repository";
 import { makeT } from "@/lib/dictionary";
-import { getScript, t as pick } from "@/lib/script";
+import { t as pick } from "@/lib/script";
+import { getScript } from "@/lib/script.server";
 import { IS_DEMO } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -101,7 +102,7 @@ export default async function CategoriesPage() {
                 .map(({ city, count }) => (
                   <li key={city.id}>
                     <Link
-                      href={`/${category.slug}?grad=${city.slug}`}
+                      href={`/${category.slug}/${city.slug}`}
                       className="inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] border border-line px-2.5 py-1 text-xs text-content-secondary transition-colors hover:border-brand hover:text-brand"
                     >
                       {pick(city.name, script)}

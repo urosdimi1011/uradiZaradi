@@ -35,6 +35,7 @@ export function FilterSidebar({
   cities,
   services,
   activeCategory,
+  activeCity,
   basePath,
   total,
   script,
@@ -46,6 +47,8 @@ export function FilterSidebar({
   /** Usluge izabrane kategorije. Prazno kad kategorija nije izabrana. */
   services: ServiceType[];
   activeCategory: Category | null;
+  /** Grad iz putanje. Kad postoji, prikazuje se kao stanje umesto kao selektor. */
+  activeCity: City | null;
   /** `/moleri` ili `/` — forma mora da se vrati na istu putanju. */
   basePath: string;
   script: Script;
@@ -137,20 +140,41 @@ export function FilterSidebar({
         </fieldset>
       ) : null}
 
-      <FilterSelect
-        id="f-grad"
-        name="grad"
-        label={t("location")}
-        defaultValue={values.grad}
-        className={styles.locationGroup}
-      >
-        <option value="">{allCountry}</option>
-        {cities.map((c) => (
-          <option key={c.id} value={c.slug}>
-            {pick(c.name, script)}
-          </option>
-        ))}
-      </FilterSelect>
+      {/*
+        Kad je grad u putanji (`/moleri/beograd`), prikazuje se kao stanje sa „×",
+        isto kao kategorija — a NE kao selektor. Da je ostao select, forma bi ga
+        slala kao `?grad=`, pa bi ista stranica postojala na dve adrese.
+      */}
+      {activeCity ? (
+        <div className={styles.group}>
+          <span className={styles.label}>{t("location")}</span>
+          <div className={cn(styles.categoryChip, styles.categoryChipActive)}>
+            <span className={styles.categoryChipName}>{pick(activeCity.name, script)}</span>
+            <Link
+              href={activeCategory ? `/${activeCategory.slug}` : "/"}
+              className={styles.categoryClear}
+              aria-label={t("clearFilters")}
+            >
+              <X width={14} height={14} aria-hidden />
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <FilterSelect
+          id="f-grad"
+          name="grad"
+          label={t("location")}
+          defaultValue={values.grad}
+          className={styles.locationGroup}
+        >
+          <option value="">{allCountry}</option>
+          {cities.map((c) => (
+            <option key={c.id} value={c.slug}>
+              {pick(c.name, script)}
+            </option>
+          ))}
+        </FilterSelect>
+      )}
 
       <FilterPriceRange
         script={script}

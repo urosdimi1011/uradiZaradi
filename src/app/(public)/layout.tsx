@@ -1,5 +1,6 @@
 import { PublicLayout } from "@/components/layouts/public/public-layout";
-import { getScript } from "@/lib/script";
+import { getScript } from "@/lib/script.server";
+import { catalogRepository } from "@/modules/catalog/repository";
 
 /**
  * Granica javnog dela sajta.
@@ -13,6 +14,14 @@ import { getScript } from "@/lib/script";
  * Ovako Next drži okvir u životu i menja samo sadržaj.
  */
 export default async function PublicGroupLayout({ children }: LayoutProps<"/">) {
-  const script = await getScript();
-  return <PublicLayout script={script}>{children}</PublicLayout>;
+  const [script, categories] = await Promise.all([
+    getScript(),
+    catalogRepository.listCategories(),
+  ]);
+
+  return (
+    <PublicLayout script={script} categories={categories}>
+      {children}
+    </PublicLayout>
+  );
 }

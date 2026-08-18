@@ -4,6 +4,7 @@ import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import { MobileNav } from "./mobile-nav";
 import type { Script } from "@/lib/script";
+import type { Category } from "@/modules/catalog/domain";
 
 /**
  * Okvir javnog dela sajta — zaglavlje, podnožje i donja mobilna navigacija.
@@ -16,10 +17,18 @@ import type { Script } from "@/lib/script";
  * `pb-16` na mobilnom pravi mesto za fiksiranu donju navigaciju; bez toga
  * poslednja kartica u listi ostaje ispod nje.
  */
-export function PublicLayout({ script, children }: { script: Script; children: ReactNode }) {
+export function PublicLayout({
+  script,
+  categories,
+  children,
+}: {
+  script: Script;
+  categories: Category[];
+  children: ReactNode;
+}) {
   return (
     <div className="flex min-h-full flex-col pb-16 lg:pb-0">
-      <SiteHeader script={script} />
+      <SiteHeader script={script} categories={categories} />
       <main className="flex-1">{children}</main>
       <SiteFooter script={script} />
       <MobileNav script={script} />

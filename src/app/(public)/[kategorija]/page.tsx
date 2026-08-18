@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { catalogRepository } from "@/modules/catalog/repository";
+import { geoRepository } from "@/modules/geo/repository";
 import { abs, IS_DEMO } from "@/lib/site";
 import { MajstoriListing } from "../_listing/majstori-listing";
 
@@ -47,5 +48,28 @@ export default async function CategoryPage({
   // putanja postaje indeksabilna stranica bez sadržaja.
   if (!category) notFound();
 
-  return <MajstoriListing category={category} searchParams={await searchParams} />;
+  const query = await searchParams;
+
+  /*
+   * `?grad=beograd` se preusmerava na `/moleri/beograd`.
+   *
+   * Bez ovoga bi isti sadržaj postojao na dve adrese: forma pretrage šalje grad
+   * kao parametar, a rute ga očekuju u putanji. Preusmerenje je i fallback za
+   * rad bez JavaScripta — obična GET forma i dalje završi na pravoj stranici.
+   */
+  const gradParam = Array.isArray(query.grad) ? query.grad[0] : query.grad;
+  if (gradParam) {
+    const city = await geoRepository.findCityBySlug(gradParam);
+    if (city) {
+      const rest = new URLSearchParams();
+      for (const [key, value] of Object.entries(query)) {
+        if (key === "grad" || value === undefined) continue;
+        for (const v of Array.isArray(value) ? value : [value]) rest.append(key, v);
+      }
+      const suffix = rest.toString();
+      redirect(`/${category.slug}/${city.slug}${suffix ? `?${suffix}` : ""}`);
+    }
+  }
+
+  return <MajstoriListing category={category} city={null} searchParams={query} />;
 }

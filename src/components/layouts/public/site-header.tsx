@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { Heart, Menu } from "lucide-react";
+import { Heart } from "lucide-react";
 
 import { Logo } from "@/components/brand/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { ScriptToggle } from "./script-toggle";
+import { MobileMenu } from "./mobile-menu";
+import type { Category } from "@/modules/catalog/domain";
 import { makeT } from "@/lib/dictionary";
 import type { Script } from "@/lib/script";
 
@@ -13,7 +15,13 @@ import type { Script } from "@/lib/script";
  * ekrana zajedno uokviruju sadržaj kao u aplikaciji.
  * Na desktopu ostaje prigušena ivica, jer bi žuta preko cele širine bila preglasna.
  */
-export function SiteHeader({ script }: { script: Script }) {
+export function SiteHeader({
+  script,
+  categories,
+}: {
+  script: Script;
+  categories: Category[];
+}) {
   const t = makeT(script);
 
   return (
@@ -22,7 +30,7 @@ export function SiteHeader({ script }: { script: Script }) {
         <Logo script={script} size="sm" />
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <ScriptToggle script={script} />
+          <ScriptToggle script={script} className="hidden sm:inline-flex" />
 
           <Link
             href="/sacuvano"
@@ -40,13 +48,7 @@ export function SiteHeader({ script }: { script: Script }) {
             {t("signUp")}
           </ButtonLink>
 
-          <button
-            type="button"
-            className="inline-grid h-9 w-9 place-items-center rounded-[var(--radius-control)] text-content-secondary hover:bg-surface-hover hover:text-content-primary sm:hidden"
-            aria-label="Meni"
-          >
-            <Menu width={20} height={20} aria-hidden />
-          </button>
+          <MobileMenu categories={categories} script={script} />
         </div>
       </div>
     </header>
