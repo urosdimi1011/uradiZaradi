@@ -135,7 +135,7 @@
   gap: 0.5rem;
   padding: 0.625rem 0.75rem;
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-control);
   background-color: var(--color-surface-input);
   font-size: 0.875rem;
 }
@@ -193,14 +193,6 @@
   white-space: nowrap;
 }
 
-/* Merna jedinica stoji uz uslugu — bez nje cenovni filter ispod nema značenje. */
-.serviceUnit {
-  flex-shrink: 0;
-  font-size: 0.6875rem;
-  color: var(--color-content-muted);
-}
-
-
 .titleText {
   font-size: 0.875rem;
   font-weight: 600;
@@ -228,7 +220,7 @@
   height: 2.5rem;
   padding-inline: 0.75rem;
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-control);
   background-color: var(--color-surface-input);
   color: var(--color-content-primary);
   font-size: 0.8125rem;
@@ -360,7 +352,7 @@
   height: 2.5rem;
   margin-top: 1.5rem;
   border: 1px solid var(--color-brand);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-control);
   background: transparent;
   color: var(--color-brand);
   font-size: 0.8125rem;

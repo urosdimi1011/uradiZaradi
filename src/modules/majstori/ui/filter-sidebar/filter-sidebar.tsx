@@ -2,7 +2,6 @@ import Link from "next/link";
 import { X } from "lucide-react";
 
 import {
-  PRICE_UNIT_LABEL,
   type Category,
   type ServiceType,
 } from "@/modules/catalog/domain";
@@ -12,10 +11,11 @@ import { makeT } from "@/lib/dictionary";
 import { t as pick, type Script } from "@/lib/script";
 
 import { ApplyButton } from "./apply-button";
-import { FilterForm } from "./filter-form";
+import { FILTER_DIALOG_ID } from "./filter-dialog";
+import { Combobox } from "@/components/ui/combobox";
+import { GetForm } from "@/components/ui/get-form";
 import { FilterPriceRange } from "./filter-price-range";
 import { FilterRating } from "./filter-rating";
-import { FilterSelect } from "./filter-select";
 import styles from "./filter-sidebar.module.css";
 
 /** Forma ima id da dugme „Primeni" u podnožju modala može da je pošalje spolja. */
@@ -71,7 +71,7 @@ export function FilterSidebar({
   };
 
   return (
-    <FilterForm id={FILTER_FORM_ID} action={basePath} className={styles.panel}>
+    <GetForm id={FILTER_FORM_ID} action={basePath} zatvoriDialogId={FILTER_DIALOG_ID} className={styles.panel}>
       {values.q ? <input type="hidden" name="q" value={values.q} /> : null}
       {/*
         Kategorija je u putanji (`action`), pa nema skrivenog polja za nju —
@@ -128,12 +128,14 @@ export function FilterSidebar({
                   defaultChecked={values.usluga?.includes(s.slug)}
                   className={styles.checkbox}
                 />
-                <span className={styles.serviceName}>
-                  {pick(s.name, script)}
-                </span>
-                <span className={styles.serviceUnit}>
-                  {pick(PRICE_UNIT_LABEL[s.defaultUnit], script)}
-                </span>
+                {/*
+                  Bez merne jedinice. Filter odgovara na pitanje „koja usluga mi
+                  treba?" — jedinica na to ne odgovara, ne može se po njoj
+                  filtrirati, i u desnoj koloni bez zaglavlja izgleda kao podatak
+                  koji je nekud ispao. Stoji tamo gde ima smisla: uz cenu, na
+                  kartici i na profilu.
+                */}
+                <span className={styles.serviceName}>{pick(s.name, script)}</span>
               </label>
             ))}
           </div>
@@ -160,20 +162,24 @@ export function FilterSidebar({
           </div>
         </div>
       ) : (
-        <FilterSelect
+        /*
+          Gradova ima četrdeset i raste — kroz padajuću listu se do „Sremske
+          Mitrovice" stiže skrolovanjem. Ovde ide polje sa pretragom; bez
+          JavaScript-a i na telefonu se i dalje iscrtava nativni select.
+        */
+        <Combobox
           id="f-grad"
           name="grad"
           label={t("location")}
-          defaultValue={values.grad}
+          podrazumevana={values.grad}
+          placeholder={allCountry}
+          praznoTekst={t("noCityFound")}
           className={styles.locationGroup}
-        >
-          <option value="">{allCountry}</option>
-          {cities.map((c) => (
-            <option key={c.id} value={c.slug}>
-              {pick(c.name, script)}
-            </option>
-          ))}
-        </FilterSelect>
+          opcije={[
+            { vrednost: "", tekst: allCountry },
+            ...cities.map((c) => ({ vrednost: c.slug, tekst: pick(c.name, script) })),
+          ]}
+        />
       )}
 
       <FilterPriceRange
@@ -209,6 +215,6 @@ export function FilterSidebar({
       <Link href="/" className={styles.reset}>
         {t("clearFilters")}
       </Link>
-    </FilterForm>
+    </GetForm>
   );
 }

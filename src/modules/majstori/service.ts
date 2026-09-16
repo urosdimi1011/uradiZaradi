@@ -16,6 +16,7 @@ import {
   type RatingSummary,
   type VerificationLevel,
 } from "./domain";
+import { jeNovProfil } from "./domain/statistika";
 import { majstorRepository, type MajstorQuery, type Paginated } from "./repository";
 
 /**
@@ -43,6 +44,8 @@ export type MajstorCardView = {
   priceFrom: PriceTag | null;
   profileViews: number;
   messageCount: number;
+  /** Profil postavljen skoro — kartica to kaže dok brojke još nema. */
+  jeNov: boolean;
   isPromoted: boolean;
 };
 
@@ -53,6 +56,8 @@ export type ServiceRow = {
 };
 
 export type MajstorDetailView = MajstorCardView & {
+  /** Vlasnik profila — da se njemu prikažu podaci koje posetilac ne vidi. */
+  userId: string;
   bio: string;
   yearsExperience: number | null;
   badges: MajstorBadge[];
@@ -111,6 +116,7 @@ async function toCardView(majstor: Majstor, viewCount: number, messageCount: num
     priceFrom: headlineService(majstor),
     profileViews: viewCount,
     messageCount,
+    jeNov: jeNovProfil(majstor.createdAt),
     // Promocije nisu u MVP opsegu; polje postoji da ranking ne mora da se menja kasnije.
     isPromoted: false,
   };
@@ -132,6 +138,27 @@ export const searchMajstori = cache(
   },
 );
 
+/**
+ * Kartice za konkretne id-jeve — za „Sačuvano".
+ *
+ * Redosled koji baza vrati NIJE redosled koji je tražen, pa ga pozivalac vraća
+ * sam. Ovde se zadržava samo ono što je još `ACTIVE`: majstor koji je u
+ * međuvremenu skinut sa sajta ne sme da iskrsne u tuđoj listi sačuvanih.
+ */
+export const getMajstorCards = cache(async (ids: string[]): Promise<MajstorCardView[]> => {
+  if (ids.length === 0) return [];
+
+  const majstori = await majstorRepository.findActiveByIds(ids);
+  const stats = await majstorRepository.listStats(majstori.map((m) => m.id));
+
+  return Promise.all(
+    majstori.map((m) => {
+      const s = stats.get(m.id);
+      return toCardView(m, s?.profileViews ?? 0, s?.messageCount ?? 0);
+    }),
+  );
+});
+
 export const getMajstorDetail = cache(async (slug: string): Promise<MajstorDetailView | null> => {
   const majstor = await majstorRepository.findBySlug(slug);
   if (!majstor || majstor.status !== "ACTIVE") return null;
@@ -147,6 +174,7 @@ export const getMajstorDetail = cache(async (slug: string): Promise<MajstorDetai
 
   return {
     ...card,
+    userId: majstor.userId,
     bio: majstor.bio,
     yearsExperience: majstor.yearsExperience,
     badges: majstor.badges,

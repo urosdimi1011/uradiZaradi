@@ -204,6 +204,14 @@
   color: var(--color-content-primary);
 }
 
+/*
+ * „Nov na sajtu" je oznaka, ne merenje — ide prigušeno, da ne konkuriše ceni
+ * i oceni iznad. Brojka pregleda sme da bude naglašena jer je podatak.
+ */
+.statNew {
+  color: var(--color-content-secondary);
+}
+
 .statIcon {
   flex-shrink: 0;
   color: var(--color-content-secondary);

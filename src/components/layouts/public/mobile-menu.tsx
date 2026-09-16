@@ -11,6 +11,10 @@ import type { Category } from "@/modules/catalog/domain";
 import { cn } from "@/lib/cn";
 import { makeT } from "@/lib/dictionary";
 import { t as pick, type Script } from "@/lib/script";
+/* Samo tip — `import type` se briše pri prevođenju, pa `server-only` iz sesije
+   nikad ne stigne u paket za pretraživač. */
+import type { CurrentUser } from "@/lib/session";
+import { signOutAction } from "@/modules/users/actions";
 import styles from "./mobile-menu.module.css";
 
 /**
@@ -25,9 +29,12 @@ import styles from "./mobile-menu.module.css";
 export function MobileMenu({
   categories,
   script,
+  user,
 }: {
   categories: Category[];
   script: Script;
+  /** `null` znači gost — meni tada nudi prijavu umesto odjave. */
+  user: CurrentUser | null;
 }) {
   const t = makeT(script);
   const pathname = usePathname();
@@ -111,20 +118,40 @@ export function MobileMenu({
           </div>
 
           <div className={styles.scroll}>
-            <div className={styles.auth}>
-              <Link
-                href="/prijava"
-                className="inline-flex h-11 items-center justify-center rounded-[var(--radius-control)] border border-line-strong text-sm font-medium text-content-primary"
-              >
-                {t("signIn")}
-              </Link>
-              <Link
-                href="/registracija-majstora"
-                className="inline-flex h-11 items-center justify-center rounded-[var(--radius-control)] bg-brand text-sm font-semibold text-brand-foreground"
-              >
-                {t("signUp")}
-              </Link>
-            </div>
+            {user ? (
+              <div className={styles.auth}>
+                <Link
+                  href="/nalog"
+                  className="inline-flex h-11 items-center justify-center rounded-[var(--radius-control)] border border-line-strong text-sm font-medium text-content-primary"
+                >
+                  {t("myProfile")}
+                </Link>
+                {/* Odjava menja stanje na serveru — zato forma, ne link. */}
+                <form action={signOutAction}>
+                  <button
+                    type="submit"
+                    className="inline-flex h-11 w-full items-center justify-center rounded-[var(--radius-control)] bg-brand text-sm font-semibold text-brand-foreground"
+                  >
+                    {t("signOut")}
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div className={styles.auth}>
+                <Link
+                  href="/prijava"
+                  className="inline-flex h-11 items-center justify-center rounded-[var(--radius-control)] border border-line-strong text-sm font-medium text-content-primary"
+                >
+                  {t("signIn")}
+                </Link>
+                <Link
+                  href="/registracija"
+                  className="inline-flex h-11 items-center justify-center rounded-[var(--radius-control)] bg-brand text-sm font-semibold text-brand-foreground"
+                >
+                  {t("signUp")}
+                </Link>
+              </div>
+            )}
 
             <nav className={styles.section} aria-label={t("navigation")}>
               <p className={styles.sectionLabel}>{t("navigation")}</p>

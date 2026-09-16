@@ -44,7 +44,14 @@ export function MajstorCardSkeleton() {
   );
 }
 
-/** Mreža skeleta — isti prelom kao mreža rezultata. */
+/**
+ * Mreža skeleta — isti prelom kao mreža rezultata.
+ *
+ * `count` prosleđuje pozivalac i to je STVARAN broj rezultata koji stiže, ne
+ * pretpostavka: listing prebroji rezultate pre nego što uđe u `<Suspense>`, jer
+ * je brojanje jeftino a sklapanje kartica nije. Šest praznih okvira koji se
+ * sruče u jedan izgleda kao greška, ne kao učitavanje.
+ */
 export function MajstorGridSkeleton({ count = 6 }: { count?: number }) {
   return (
     <ul

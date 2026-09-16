@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { Phone } from "lucide-react";
 
 import { revealPhoneAction } from "@/app/actions";
+import { zabeleziOtkrivanjeBrojaAction } from "@/modules/majstori/statistika";
 import { Button } from "@/components/ui/button";
 import { makeT } from "@/lib/dictionary";
 import { formatPhone } from "@/lib/format";
@@ -19,7 +20,15 @@ import type { Script } from "@/lib/script";
  * Sam broj i dalje ne dolazi sa stranicom nego iz Server Action, pa ga scraperi
  * ne pokupe iz HTML-a.
  */
-export function PhoneReveal({ slug, script }: { slug: string; script: Script }) {
+export function PhoneReveal({
+  slug,
+  majstorId,
+  script,
+}: {
+  slug: string;
+  majstorId: string;
+  script: Script;
+}) {
   const t = makeT(script);
   const [phone, setPhone] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -43,6 +52,12 @@ export function PhoneReveal({ slug, script }: { slug: string; script: Script }) 
       onClick={() =>
         startTransition(async () => {
           setPhone(await revealPhoneAction(slug));
+          /*
+            Klik na broj je vredniji podatak od pregleda — ko uzme broj, obično
+            i zove. Broji se posle otkrivanja i greška ovde ne sme da pokvari
+            samu radnju, pa se ne čeka.
+          */
+          void zabeleziOtkrivanjeBrojaAction(majstorId).catch(() => undefined);
         })
       }
     >

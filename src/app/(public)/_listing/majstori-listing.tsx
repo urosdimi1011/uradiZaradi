@@ -174,7 +174,14 @@ export async function MajstoriListing({
             filtera. Bez njega React zadrzi stari sadrzaj dok se novi ucitava,
             pa se ne vidi da se nesto desilo.
           */}
-          <Suspense key={suspenseKey} fallback={<MajstorGridSkeleton count={PER_PAGE} />}>
+          <Suspense key={suspenseKey} fallback={
+              /*
+                Tačan broj, ne pretpostavka: `total` je već prebrojan iznad, pre
+                ulaska u `<Suspense>`. Brojanje je jeftino (indeksirano), pa se
+                radi odmah; sklapanje kartica je skupo i zato ide odvojeno.
+              */
+              <MajstorGridSkeleton count={Math.max(1, Math.min(PER_PAGE, total - (page - 1) * PER_PAGE))} />
+            }>
             <ResultsGrid
               filters={filtersWithCity}
               categorySlug={category?.slug ?? null}

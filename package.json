@@ -8,15 +8,32 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "seed": "node scripts/generate-seed.mjs"
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset --force && npm run db:seed",
+    "postinstall": "prisma generate",
+    "seed:json": "node scripts/generate-seed.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:seed:ref": "tsx prisma/seed-reference.ts",
+    "admin:postavi": "tsx prisma/postavi-admina.mts"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "@vercel/blob": "^2.8.0",
+    "better-auth": "^1.7.5",
     "clsx": "^2.1.1",
+    "downshift": "^9.4.0",
     "lucide-react": "^1.31.0",
     "next": "16.3.0",
     "next-intl": "^4.13.6",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-easy-crop": "^6.2.3",
     "server-only": "^0.0.1",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
@@ -26,9 +43,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
+    "prisma": "^7.10.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.23.13",
+    "typescript": "^5",
+    "vitest": "^3.2.7"
   }
 }

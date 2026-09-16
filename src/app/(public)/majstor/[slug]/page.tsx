@@ -9,7 +9,7 @@ import {
   ChevronRight,
   Eye,
   FileText,
-  Heart,
+  ImageOff,
   MapPin,
   MessageSquare,
   Siren,
@@ -27,6 +27,12 @@ import { majstorRepository } from "@/modules/majstori/repository";
 import type { MajstorBadge } from "@/modules/majstori/domain";
 import { MajstorJsonLd } from "@/modules/majstori/ui/majstor-jsonld";
 import { PhoneReveal } from "@/modules/majstori/ui/phone-reveal";
+import { BrojacPregleda } from "@/modules/majstori/ui/brojac-pregleda";
+import { vidljivostPregleda } from "@/modules/majstori/domain/statistika";
+import { SaveButton } from "@/modules/saved/ui/save-button";
+import { savedRepository } from "@/modules/saved/repository";
+import { getCurrentUser } from "@/lib/session";
+import { EmptyState } from "@/components/ui/empty-state";
 import { RatingBreakdown } from "@/modules/reviews/ui/rating-breakdown";
 import { ReviewItem } from "@/modules/reviews/ui/review-item";
 import { approxEur, formatCount, formatPriceFrom } from "@/lib/format";
@@ -90,6 +96,23 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
   const majstor = await getMajstorDetail(slug);
   if (!majstor) notFound();
 
+  /* Za goste se baza ne dodiruje — srce je prazno i vodi na prijavu. */
+  const korisnik = await getCurrentUser();
+  const sacuvan = korisnik ? await savedRepository.isSaved(korisnik.id, majstor.id) : false;
+
+  /*
+   * Vlasnik gleda svoj profil — njemu se brojka prikazuje UVEK, bez praga, i
+   * jasno označena kao vidljiva samo njemu.
+   *
+   * Bez ovoga majstor sa pet pregleda ne vidi ništa i profil mu deluje mrtvo,
+   * iako se pregledi uredno broje. Sesija se ionako već čita zbog srca, pa ova
+   * provera ne košta nijedan dodatni upit.
+   */
+  const vidljivostBroja = vidljivostPregleda({
+    broj: majstor.profileViews,
+    jeVlasnik: korisnik?.id === majstor.userId,
+  });
+
   const bio = script === "cyrl" ? toCyrillic(majstor.bio) : majstor.bio;
   const name = script === "cyrl" ? toCyrillic(majstor.displayName) : majstor.displayName;
   const location = majstor.municipalityLabel
@@ -102,8 +125,11 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
   const hiddenPhotos = majstor.gallery.length - visiblePhotos.length;
 
   return (
-    <div className="page-container py-5">
+    <div className="page-container py-6 lg:py-8">
       <MajstorJsonLd majstor={majstor} />
+
+      {/* Broji pregled — vidi komentar u `statistika.ts` zašto iz pretraživača. */}
+      <BrojacPregleda majstorId={majstor.id} />
 
       <Link
         href="/"
@@ -146,16 +172,22 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
             {location}
           </p>
 
-          <p className="mt-2 flex flex-wrap items-center gap-4 text-sm text-content-muted">
-            <span className="inline-flex items-center gap-1.5">
-              <Eye width={14} height={14} aria-hidden />
+          {/*
+            Broj poruka se NE prikazuje: poruke ne postoje, pa bi „0 poruka"
+            bilo obećanje funkcije koje nema. Vraća se kad stigne ćaskanje.
+
+            Pregledi se pojavljuju tek iznad praga — nov majstor sa nulom
+            izgleda kao da niko nije bio na sajtu.
+          */}
+          {vidljivostBroja !== "skriveno" ? (
+            <p className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm text-content-muted">
+              <Eye width={14} height={14} className="shrink-0" aria-hidden />
               {formatCount(majstor.profileViews)} {t("views")}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <MessageSquare width={14} height={14} aria-hidden />
-              {formatCount(majstor.messageCount)} {t("messages")}
-            </span>
-          </p>
+              {vidljivostBroja === "samo-vlasnik" ? (
+                <span className="text-xs">(vidite samo vi)</span>
+              ) : null}
+            </p>
+          ) : null}
 
           {majstor.priceFrom ? (
             <p className="mt-4 text-lg font-semibold text-brand">
@@ -171,12 +203,15 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
 
         {/* ── Akcije ── */}
         <div className="flex flex-col gap-3">
-          <PhoneReveal slug={majstor.slug} script={script} />
+          <PhoneReveal slug={majstor.slug} majstorId={majstor.id} script={script} />
 
-          <Button variant="outline" fullWidth>
-            <Heart width={16} height={16} aria-hidden />
-            {t("saveMajstor")}
-          </Button>
+          <SaveButton
+            majstorId={majstor.id}
+            sacuvan={sacuvan}
+            prijavljen={korisnik !== null}
+            script={script}
+            varijanta="wide"
+          />
 
           {/*
             Poruke nisu u MVP opsegu. Dugme stoji vidljivo i onemogućeno umesto da
@@ -253,26 +288,44 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
 
         <div className="flex flex-col gap-5">
           <Card>
+            {/*
+              Link „Prikaži sve" postoji samo kad ima šta da se prikaže. Inače
+              vodi na praznu stranicu, a posetilac pomisli da se nešto nije
+              učitalo.
+            */}
             <CardHeader
               title={t("reviews")}
               action={
-                <Link
-                  href={`/majstor/${majstor.slug}/recenzije`}
-                  className="inline-flex items-center gap-0.5 text-sm text-brand"
-                >
-                  {t("showAll")}
-                  <ChevronRight width={15} height={15} aria-hidden />
-                </Link>
+                majstor.rating.count > 0 ? (
+                  <Link
+                    href={`/majstor/${majstor.slug}/recenzije`}
+                    className="inline-flex items-center gap-0.5 text-sm text-brand"
+                  >
+                    {t("showAll")}
+                    <ChevronRight width={15} height={15} aria-hidden />
+                  </Link>
+                ) : null
               }
             />
             <CardBody>
-              <RatingBreakdown summary={majstor.ratingSummary} script={script} />
+              {majstor.rating.count > 0 ? (
+                <>
+                  <RatingBreakdown summary={majstor.ratingSummary} script={script} />
 
-              <div className="mt-5 space-y-4 border-t border-line pt-5">
-                {majstor.reviews.slice(0, 2).map((review) => (
-                  <ReviewItem key={review.id} review={review} script={script} />
-                ))}
-              </div>
+                  <div className="mt-5 space-y-4 border-t border-line pt-5">
+                    {majstor.reviews.slice(0, 2).map((review) => (
+                      <ReviewItem key={review.id} review={review} script={script} />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                /*
+                  Bez recenzija se NE prikazuje raspodela: pet praznih traka i
+                  „0.0" izgledaju kao loša ocena, a ne kao odsustvo ocene. Novom
+                  majstoru bi to odbijalo posetioce zbog nečega što nije skrivio.
+                */
+                <EmptyState icon={MessageSquare} naslov={t("noReviews")} opis={t("noReviewsHint")} />
+              )}
             </CardBody>
           </Card>
 
@@ -280,16 +333,21 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
             <CardHeader
               title={t("workPhotos")}
               action={
-                <Link
-                  href={`/majstor/${majstor.slug}/galerija`}
-                  className="inline-flex items-center gap-0.5 text-sm text-brand"
-                >
-                  {t("showAll")}
-                  <ChevronRight width={15} height={15} aria-hidden />
-                </Link>
+                majstor.gallery.length > 0 ? (
+                  <Link
+                    href={`/majstor/${majstor.slug}/galerija`}
+                    className="inline-flex items-center gap-0.5 text-sm text-brand"
+                  >
+                    {t("showAll")}
+                    <ChevronRight width={15} height={15} aria-hidden />
+                  </Link>
+                ) : null
               }
             />
             <CardBody>
+              {majstor.gallery.length === 0 ? (
+                <EmptyState icon={ImageOff} naslov={t("noPhotos")} opis={t("noPhotosHint")} />
+              ) : (
               <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {visiblePhotos.map((photo, i) => (
                   <li key={photo.id} className="relative aspect-square overflow-hidden rounded-[var(--radius-control)] bg-surface-hover">
@@ -311,6 +369,7 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
                   </li>
                 ))}
               </ul>
+              )}
             </CardBody>
           </Card>
         </div>

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { savedRepository } from "@/modules/saved/repository";
+import { getCurrentUser } from "@/lib/session";
 import { SearchX } from "lucide-react";
 
 import { searchMajstori } from "@/modules/majstori/service";
@@ -82,12 +84,30 @@ export async function ResultsGrid({
     );
   }
 
+  /*
+   * Sačuvani se čitaju JEDNIM upitom za celu stranicu. Da svaka kartica pita za
+   * sebe, mreža od dvanaest kartica bi napravila dvanaest upita.
+   *
+   * Za goste se baza ne dodiruje uopšte — `getCurrentUser()` vrati `null` i
+   * ovde se staje.
+   */
+  const korisnik = await getCurrentUser();
+  const sacuvani = korisnik
+    ? await savedRepository.savedIds(korisnik.id, results.items.map((m) => m.id))
+    : new Set<string>();
+
   return (
     <>
       <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4 xl:grid-cols-3">
         {results.items.map((m, i) => (
           <li key={m.id} className="flex">
-            <MajstorCard majstor={m} script={script} priority={i < 3} />
+            <MajstorCard
+              majstor={m}
+              script={script}
+              priority={i < 3}
+              sacuvan={sacuvani.has(m.id)}
+              prijavljen={korisnik !== null}
+            />
           </li>
         ))}
       </ul>

@@ -1,5 +1,7 @@
-import { ChevronDown, MapPin, Search } from "lucide-react";
+import { MapPin, Search } from "lucide-react";
 
+import { Combobox } from "@/components/ui/combobox";
+import { GetForm } from "@/components/ui/get-form";
 import type { City } from "@/modules/geo/domain";
 import { makeT } from "@/lib/dictionary";
 import { t as pick, type Script } from "@/lib/script";
@@ -33,7 +35,7 @@ export function SearchBar({
   const allCountry = script === "cyrl" ? "Цела Србија" : "Cela Srbija";
 
   return (
-    <form action={action} method="get" className={styles.form} role="search">
+    <GetForm action={action} className={styles.form} role="search">
       <div className={styles.group}>
         <input
           type="search"
@@ -69,23 +71,29 @@ export function SearchBar({
         </button>
       </div>
 
-      <div className={styles.city}>
-        <MapPin width={16} height={16} aria-hidden className={styles.cityIcon} />
-        <select
-          name="grad"
-          defaultValue={defaultCity ?? ""}
-          aria-label={t("city")}
-          className={styles.citySelect}
-        >
-          <option value="">{allCountry}</option>
-          {cities.map((c) => (
-            <option key={c.id} value={c.slug}>
-              {pick(c.name, script)}
-            </option>
-          ))}
-        </select>
-        <ChevronDown width={16} height={16} aria-hidden className={styles.cityChevron} />
-      </div>
-    </form>
+      {/*
+        Gradova je četrdeset i lista raste sa svakim novim — kroz padajuću listu
+        se do „Sremske Mitrovice" stiže skrolovanjem. Zato polje sa pretragom.
+        Bez JavaScript-a i na telefonu se iscrtava nativni select, pa forma
+        ostaje običan GET i bez klijentskog koda.
+      */}
+      <Combobox
+        id="pretraga-grad"
+        name="grad"
+        label={t("city")}
+        sakrijLabel
+        podrazumevana={defaultCity}
+        placeholder={allCountry}
+        praznoTekst={t("noCityFound")}
+        posaljiNaIzbor
+        ikona={<MapPin width={16} height={16} aria-hidden />}
+        className={styles.city}
+        inputClassName={styles.citySelect}
+        opcije={[
+          { vrednost: "", tekst: allCountry },
+          ...cities.map((c) => ({ vrednost: c.slug, tekst: pick(c.name, script) })),
+        ]}
+      />
+    </GetForm>
   );
 }

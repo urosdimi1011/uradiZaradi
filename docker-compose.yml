@@ -1,0 +1,26 @@
+services:
+  # Lokalna baza za razvoj. Produkcija ide na hostovani Postgres (Neon/Supabase,
+  # EU region) — Prisma šema i migracije su iste, menja se samo DATABASE_URL.
+  postgres:
+    image: postgres:17-alpine
+    container_name: uradi-zaradi-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: uradizaradi
+      POSTGRES_PASSWORD: lokalna-lozinka
+      POSTGRES_DB: uradizaradi
+      # Srpsko sortiranje i poređenje — bitno za ORDER BY po nazivima i za
+      # kasniji full-text nad srpskim tekstom.
+      POSTGRES_INITDB_ARGS: "--locale=C.UTF-8 --encoding=UTF8"
+    ports:
+      - "5436:5432"
+    volumes:
+      - uradi-zaradi-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U uradizaradi -d uradizaradi"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  uradi-zaradi-pgdata:

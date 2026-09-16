@@ -37,10 +37,25 @@
    * Tri nivoa zaobljenja: kartica → kontrola → sitni element unutar kontrole.
    * Skala je namerno plitka; jako zaobljeni uglovi kod guste liste rezultata
    * prave „mehurast" utisak i otežavaju čitanje ivica.
+   *
+   * Koja vrednost gde — bez izuzetaka, jer se razlika od 2px ne vidi na jednom
+   * dugmetu ali se vidi kad dva stoje jedno pored drugog:
+   *
+   *   --radius-card     kartice, paneli, moduli
+   *   --radius-control  SVAKO dugme, input i select — i kad stoji samo, i kad
+   *                     je uvučeno u drugu kontrolu (dugme u okviru pretrage)
+   *   --radius-sm       sitne oznake i ukrasi; nikad dugme
+   *   --radius-pill     prekidači, brojači, čipovi koji se čitaju kao oznaka
+   *
+   * Ne piši `calc(...)` po komponentama. Tako su nastale tri različite
+   * zaobljenosti na istom ekranu: 8px u zaglavlju, 6px u filterima, 4px na
+   * dugmetu pretrage. Pravilo „ugnežđeno je manje od spoljnog" ovde ne važi:
+   * razlika od 2px se ne vidi kao dubina nego kao nedoslednost, a žuto dugme
+   * pretrage i žuto dugme u zaglavlju posetilac vidi kao isto dugme.
    */
-  --radius-card: 10px;
-  --radius-control: 8px;
-  --radius-sm: 6px;
+  --radius-card: 8px;
+  --radius-control: 6px;
+  --radius-sm: 4px;
   --radius-pill: 999px;
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -83,10 +98,14 @@ body {
 }
 
 /* Fokus prsten — pristupačnost se ne dogovara naknadno */
+/*
+ * Bez `border-radius` ovde: obris prati zaobljenje samog elementa, pa je
+ * postavljanje svoje vrednosti menjalo oblik dugmeta u trenutku fokusa —
+ * dugme od 6px bi na tab postalo 4px.
+ */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--color-brand);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 /* Horizontalne trake kategorija skroluju bez vidljivog scrollbara */

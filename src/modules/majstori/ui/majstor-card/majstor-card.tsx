@@ -10,7 +10,7 @@ import type { MajstorCardView } from "@/modules/majstori/service";
 import { MajstorLocation } from "./majstor-location";
 import { MajstorRating } from "./majstor-rating";
 import { MajstorStats } from "./majstor-stats";
-import { SaveMajstorButton } from "./save-majstor-button";
+import { SaveButton } from "@/modules/saved/ui/save-button";
 import styles from "./majstor-card.module.css";
 
 /**
@@ -23,10 +23,16 @@ export function MajstorCard({
   majstor,
   script,
   priority,
+  sacuvan = false,
+  prijavljen = false,
 }: {
   majstor: MajstorCardView;
   script: Script;
   priority?: boolean;
+  /** Da li ga je PRIJAVLJENI korisnik sačuvao; za goste je uvek `false`. */
+  sacuvan?: boolean;
+  /** Gost dobija link ka prijavi umesto dugmeta. */
+  prijavljen?: boolean;
 }) {
   // Ime unosi majstor latinicom; na ćiriličnoj verziji se transliteruje kao i
   // ostatak korisničkog sadržaja — inače stoji "Stefan Nikolić" pored "Грађевинац".
@@ -34,7 +40,13 @@ export function MajstorCard({
 
   return (
     <article className={styles.card}>
-      <SaveMajstorButton script={script} />
+      <SaveButton
+        majstorId={majstor.id}
+        sacuvan={sacuvan}
+        prijavljen={prijavljen}
+        script={script}
+        className={styles.save}
+      />
 
       <div className={styles.body}>
         <Avatar
@@ -73,11 +85,7 @@ export function MajstorCard({
         </div>
       </div>
 
-      <MajstorStats
-        profileViews={majstor.profileViews}
-        messageCount={majstor.messageCount}
-        script={script}
-      />
+      <MajstorStats profileViews={majstor.profileViews} jeNov={majstor.jeNov} script={script} />
     </article>
   );
 }

@@ -123,6 +123,23 @@
   outline: none;
 }
 
+/*
+ * Polje sa greškom. Boja NIJE jedini znak — uz input stoji i poruka ispod, jer
+ * crvenu ivicu ne vidi svako (oko 8% muškaraca ima neki oblik daltonizma).
+ */
+.fieldInputInvalid,
+.fieldInputInvalid:hover {
+  border-color: var(--color-danger);
+}
+
+.fieldError {
+  margin-top: 0.375rem;
+  padding-left: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--color-danger);
+}
+
 /* Lozinka ima dugme za prikaz desno, pa joj treba mesta. */
 .fieldInputWithToggle {
   padding-right: 3rem;
@@ -165,7 +182,118 @@
   text-underline-offset: 3px;
 }
 
+/* ── Izbor uloge (registracija) ── */
+
+/*
+ * `fieldset` bez ivice i razmaka: potreban je zbog čitača ekrana (legend imenuje
+ * grupu), ali pretraživači mu daju sopstveni okvir koji ovde smeta.
+ */
+.roleGroup {
+  margin-top: 1.5rem;
+  border: 0;
+  padding: 0;
+}
+
+.roleLegend {
+  margin-bottom: 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--color-content-secondary);
+}
+
+.roleOptions {
+  display: grid;
+  gap: 0.625rem;
+}
+
+/*
+ * Kartica je `label` oko skrivenog radio dugmeta — klik bilo gde po kartici bira
+ * opciju, a tastatura i dalje radi kroz pravi `input` (strelice, Tab, formulari).
+ * Vizuelni okvir za fokus stiže preko `:focus-visible` na skrivenom inputu.
+ */
+.role {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-input);
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.role:hover {
+  border-color: var(--color-line-strong);
+}
+
+.roleInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.role:has(.roleInput:checked) {
+  border-color: var(--color-brand);
+  background-color: color-mix(in oklab, var(--color-brand) 8%, transparent);
+}
+
+.role:has(.roleInput:focus-visible) {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.roleIcon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-card);
+  color: var(--color-brand);
+}
+
+.roleTitle {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-content-primary);
+}
+
+.roleHint {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--color-content-secondary);
+}
+
+/* Objašnjenje ispod polja (npr. dužina lozinke) — tiho, ali vidljivo pre greške. */
+.hint {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-content-muted);
+}
+
+/* Poruka o grešci iznad polja — mora da se vidi pre nego što korisnik ponovo kuca. */
+.error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in oklab, var(--color-danger) 45%, transparent);
+  border-radius: var(--radius-control);
+  background-color: color-mix(in oklab, var(--color-danger) 12%, transparent);
+  color: var(--color-content-primary);
+  font-size: 0.8125rem;
+}
+
 .submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 3.25rem;
   margin-top: 1.25rem;

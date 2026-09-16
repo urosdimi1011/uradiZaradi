@@ -61,6 +61,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.7,
     });
+
+    /*
+     * Recenzije su jedini tekst na sajtu koji raste sam i koji piše neko drugi —
+     * zato imaju svoju adresu u sitemapu, ali tek kad ih ima. Prazna stranica
+     * recenzija nosi `noindex`, pa bi njen URL ovde bio isti kontradiktoran
+     * signal kao i profil ispod praga.
+     *
+     * Galerija se NE upisuje: ona je namerno `noindex`, jer je skoro sav sadržaj
+     * u slikama i takmičila bi se sa profilom koji ima i tekst.
+     */
+    if (majstor.rating.count > 0) {
+      entries.push({
+        url: abs(`/majstor/${slug}/recenzije`),
+        lastModified: majstor.updatedAt,
+        changeFrequency: "weekly",
+        priority: 0.5,
+      });
+    }
   }
 
   return entries;

@@ -1,0 +1,572 @@
+// Šema je prevod Zod domena iz `src/modules/*/domain`.
+//
+// Pravilo: domen ostaje izvor istine za pravila (pragovi, Bayesian ocena,
+// indeksabilnost). Ovde stoji samo ono što baza mora da zna — oblik, veze i
+// ograničenja koja ne smeju da se prekrše ni kad aplikacija pogreši.
+//
+// `LocalizedText { latn, cyrl }` se razlaže na DVE kolone umesto u Json:
+// tako mogu da se indeksiraju, sortiraju i pretražuju. Json bi značio da svako
+// sortiranje po nazivu grada ide kroz parsiranje.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────── Enumi ───────────────────────────────
+
+/// Merna jedinica pripada USLUZI, ne kategoriji i ne majstoru.
+enum PriceUnit {
+  M2
+  M1
+  SAT
+  DAN
+  KOMAD
+  PO_DOGOVORU
+}
+
+/// Jedna vrednost zasad — da dodavanje evra kasnije bude migracija, a ne izmena tipa svuda.
+enum Currency {
+  RSD
+}
+
+enum UserRole {
+  USER
+  MAJSTOR
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+/// Kvačica na profilu je IDENTITY, ne PHONE — SMS dokazuje samo posedovanje broja.
+enum VerificationLevel {
+  NONE
+  EMAIL
+  PHONE
+  IDENTITY
+}
+
+enum MajstorStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+enum MajstorBadge {
+  PRO_TOOLS
+  WARRANTY
+  INVOICE
+  EMERGENCY
+}
+
+enum ReviewStatus {
+  PENDING
+  PUBLISHED
+  REJECTED
+  HIDDEN
+}
+
+enum ProposalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PromotionPlacement {
+  HOME
+  CATEGORY
+  CATEGORY_CITY
+  SEARCH
+}
+
+enum PromotionStatus {
+  SCHEDULED
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+// ─────────────────────────────── Geografija ───────────────────────────────
+
+model City {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  nameLatn String
+  nameCyrl String
+
+  /// Lokativ: „u Beogradu", „u Novom Sadu". Čuva se jer srpski lokativ ima
+  /// previše izuzetaka da bi ga pravilo pogodilo.
+  nameLocativeLatn String
+  nameLocativeCyrl String
+
+  regionLatn String
+  regionCyrl String
+
+  lat        Float
+  lng        Float
+  /// Redosled gradova u navigaciji i prioritet u sitemapu.
+  population Int
+
+  municipalities Municipality[]
+  majstori       Majstor[]
+  servedBy       MajstorCity[]
+  promotions     Promotion[]
+
+  @@index([population(sort: Desc)])
+}
+
+model Municipality {
+  id     String @id @default(cuid())
+  cityId String
+  slug   String
+
+  nameLatn String
+  nameCyrl String
+
+  city     City      @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  majstori Majstor[]
+
+  /// Slug je jedinstven U OKVIRU grada — „palilula" postoji i u Beogradu i u Nišu.
+  @@unique([cityId, slug])
+}
+
+// ─────────────────────────────── Katalog ───────────────────────────────
+
+model Category {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  nameLatn String
+  nameCyrl String
+
+  /// Jednina za naslov profila („Moler"), dok je `name` množina („Moleri").
+  nameSingularLatn String
+  nameSingularCyrl String
+
+  /// Ime ikone iz lucide-react seta.
+  icon String
+
+  /// Uvodni tekst kategorijske stranice — mora biti jedinstven zbog thin-content rizika.
+  introLatn String
+  introCyrl String
+
+  seoTitle       String?
+  seoDescription String?
+
+  sortOrder Int
+  isActive  Boolean @default(true)
+
+  serviceTypes ServiceType[]
+  proposals    ServiceTypeProposal[]
+  majstori     Majstor[]
+  categoryOf   MajstorCategory[]
+  promotions   Promotion[]
+
+  @@index([isActive, sortOrder])
+}
+
+model ServiceType {
+  id         String @id @default(cuid())
+  slug       String @unique
+  categoryId String
+
+  nameLatn String
+  nameCyrl String
+
+  defaultUnit PriceUnit
+  /// Dozvoljene jedinice — majstor bira, ali samo iz smislenog podskupa.
+  allowedUnits PriceUnit[]
+
+  sortOrder Int
+  isActive  Boolean @default(true)
+
+  category        Category         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  majstorServices MajstorService[]
+  reviews         Review[]
+
+  @@index([categoryId, sortOrder])
+}
+
+/// Majstor predloži uslugu, admin je odobri i tek tada ulazi u katalog.
+/// Katalog raste organski, a ostaje čist — bez toga se pojavi 40 varijanti istog naziva.
+model ServiceTypeProposal {
+  id           String         @id @default(cuid())
+  majstorId    String
+  categoryId   String
+  proposedName String
+  proposedUnit PriceUnit
+  status       ProposalStatus @default(PENDING)
+  createdAt    DateTime       @default(now())
+
+  majstor  Majstor  @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+}
+
+// ─────────────────────────────── Nalozi ───────────────────────────────
+
+/// Nalog je odvojen od profila majstora namerno: jedan nalog kasnije može da drži
+/// više profila (firma sa više majstora), a običan korisnik može da postane
+/// majstor bez migracije naloga.
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+
+  /// Zastavica koju vodi better-auth.
+  emailVerified Boolean @default(false)
+  /// KADA je potvrđen — domenski podatak, za prikaz i reviziju.
+  /// Odvojeno od zastavice jer biblioteka očekuje boolean, a domen je od početka
+  /// pamtio trenutak. Mapiranje jednog na drugo tiho bi pokvarilo tip.
+  emailVerifiedAt DateTime?
+
+  displayName String
+  avatarUrl   String?
+  role        UserRole   @default(USER)
+  status      UserStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  /// better-auth ga zahteva na `user` modelu.
+  updatedAt DateTime @updatedAt
+
+  majstor       Majstor?
+  reviews       Review[]
+  moderated     Review[]       @relation("ReviewModerator")
+  savedMajstori SavedMajstor[]
+  sessions      Session[]
+  accounts      Account[]
+}
+
+// ─────────────────────────────── Autentifikacija ───────────────────────────────
+//
+// Oblik ovih tabela diktira better-auth — pročitan je iz same biblioteke
+// (`getAuthTables`), ne prepisan iz dokumentacije.
+
+/// Sesija u bazi, ne JWT: admin mora da može da banuje majstora i da on istog
+/// trena ispadne. Sa tokenom bi ostao prijavljen do isteka.
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+/// Način prijave. Za mejl+lozinku `providerId` je "credential", a hash lozinke
+/// stoji u `password` — zato `User` nema svoju kolonu za lozinku.
+/// Za Google je `providerId` "google" i čuvaju se tokeni.
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// Jedan nalog po provajderu — bez ovoga se isti Google nalog može vezati dvaput.
+  @@unique([providerId, accountId])
+  @@index([userId])
+}
+
+/// Jednokratni tokeni: potvrda mejla, reset lozinke.
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@index([expiresAt])
+}
+
+// ─────────────────────────────── Majstori ───────────────────────────────
+
+model Majstor {
+  id     String @id @default(cuid())
+  slug   String @unique
+  userId String @unique
+
+  displayName       String
+  primaryCategoryId String
+
+  bio       String
+  avatarUrl String?
+
+  cityId         String
+  municipalityId String?
+
+  /// Nikad ne odlazi na klijent sa stranicom — otkriva se tek Server Action-om.
+  /// Jedinstven je: jedan profil po broju telefona je prva prepreka lažnim nalozima.
+  phone String @unique
+
+  yearsExperience Int?
+  badges          MajstorBadge[]
+
+  verificationLevel VerificationLevel @default(NONE)
+  status            MajstorStatus     @default(DRAFT)
+
+  seoTitle       String?
+  seoDescription String?
+
+  /// Denormalizovan tekst za pretragu: ime + opis + zanat + usluge + grad,
+  /// oba pisma, svedeno na ASCII kroz `normalizeForSearch()`.
+  ///
+  /// Popunjava se pri UPISU, istom funkcijom koju koristi i upit — tako „cacak"
+  /// i dalje nalazi „Čačak", a „керамичар" nalazi „keramicar".
+  ///
+  /// Jedna kolona umesto pretrage po pet tabela: `LIKE '%…%'` nad spojem tabela
+  /// ne može da koristi indeks i pada čim bude par hiljada profila. Nad ovom
+  /// kolonom stoji GIN trigram indeks (dodat u SQL-u migracije).
+  ///
+  /// Ne `tsvector`: Postgres nema srpski rečnik, pa bi stemovanje tražilo ručnu
+  /// konfiguraciju. Trigram daje ponašanje koje već imamo — danas.
+  searchText String @default("")
+
+  /// Najniža cena među uslugama majstora, u parama. `null` kad su sve po dogovoru.
+  ///
+  /// Denormalizovano jer se po njoj I filtrira I sortira. Kroz `MIN()` nad
+  /// `MajstorService` to bi bio korelisani podupit po svakom redu — ne može da
+  /// koristi indeks i raspada se na desetak hiljada profila.
+  ///
+  /// PAŽNJA: nije isto što i cena na kartici. Kartica prikazuje PRVU uslugu po
+  /// redosledu koji je majstor odredio; ovo je najjeftinija. Razlika je namerna
+  /// i objašnjena u `headlineService()`.
+  minPriceMinor Int?
+
+  /// Denormalizovan sažetak ocena — čita se na svakoj kartici, pa se ne računa u letu.
+  ratingAverage  Float @default(0)
+  ratingCount    Int   @default(0)
+  /// Bayesian prosek: jedini ispravan ključ za sortiranje. Sirov prosek bi majstora
+  /// sa jednom peticom stavio iznad onog sa 4.9 i 127 recenzija.
+  ratingBayesian Float @default(0)
+  ratingDist1    Int   @default(0)
+  ratingDist2    Int   @default(0)
+  ratingDist3    Int   @default(0)
+  ratingDist4    Int   @default(0)
+  ratingDist5    Int   @default(0)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  publishedAt DateTime?
+
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  primaryCategory Category              @relation(fields: [primaryCategoryId], references: [id])
+  city            City                  @relation(fields: [cityId], references: [id])
+  municipality    Municipality?         @relation(fields: [municipalityId], references: [id])
+  categories      MajstorCategory[]
+  servesCities    MajstorCity[]
+  services        MajstorService[]
+  gallery         WorkPhoto[]
+  reviews         Review[]
+  stats           MajstorStats?
+  promotions      Promotion[]
+  proposals       ServiceTypeProposal[]
+  savedBy         SavedMajstor[]
+
+  /// Indeksi prate stvarne upite listinga: filtriranje po statusu, gradu i
+  /// kategoriji, pa sortiranje po Bayesian oceni ili datumu.
+  @@index([status, cityId])
+  @@index([status, primaryCategoryId])
+  @@index([status, ratingBayesian(sort: Desc)])
+  @@index([status, createdAt(sort: Desc)])
+  @@index([status, minPriceMinor])
+}
+
+/// Majstor može da pokriva više kategorija; `primaryCategoryId` je glavna.
+model MajstorCategory {
+  majstorId  String
+  categoryId String
+
+  majstor  Majstor  @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([majstorId, categoryId])
+  @@index([categoryId])
+}
+
+/// Gradovi u kojima majstor radi pored matičnog.
+model MajstorCity {
+  majstorId String
+  cityId    String
+
+  majstor Majstor @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+  city    City    @relation(fields: [cityId], references: [id], onDelete: Cascade)
+
+  @@id([majstorId, cityId])
+  @@index([cityId])
+}
+
+model MajstorService {
+  id            String @id @default(cuid())
+  majstorId     String
+  serviceTypeId String
+
+  /// Cena je uvek „od" („Od 936 RSD / m²"). `null` znači po dogovoru.
+  priceFromMinor Int?
+  currency       Currency  @default(RSD)
+  unit           PriceUnit
+  note           String?
+  sortOrder      Int       @default(0)
+
+  majstor     Majstor     @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+  serviceType ServiceType @relation(fields: [serviceTypeId], references: [id])
+
+  /// Majstor ne može dvaput da ponudi istu uslugu.
+  @@unique([majstorId, serviceTypeId])
+  @@index([serviceTypeId])
+}
+
+model WorkPhoto {
+  id        String @id @default(cuid())
+  majstorId String
+
+  url    String
+  width  Int
+  height Int
+  /// Obavezan — pristupačnost i image search su deo SEO plana.
+  alt     String
+  caption String?
+
+  sortOrder Int @default(0)
+
+  majstor Majstor @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+
+  @@index([majstorId, sortOrder])
+}
+
+/// Brojači su odvojeni od profila jer se pišu često i ne smeju da invalidiraju ISR keš.
+model MajstorStats {
+  majstorId    String @id
+  profileViews Int    @default(0)
+  phoneReveals Int    @default(0)
+  messageCount Int    @default(0)
+
+  majstor Majstor @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+}
+
+// ─────────────────────────────── Recenzije ───────────────────────────────
+
+model Review {
+  id           String @id @default(cuid())
+  majstorId    String
+  authorUserId String
+
+  /// Prikazuje se skraćeno („Milan L.") — puno ime se ne objavljuje.
+  authorDisplayName String
+  authorAvatarUrl   String?
+
+  rating        Int
+  body          String
+  serviceTypeId String?
+
+  status ReviewStatus @default(PENDING)
+
+  replyBody      String?
+  replyCreatedAt DateTime?
+
+  createdAt   DateTime  @default(now())
+  moderatedAt DateTime?
+  moderatorId String?
+
+  /// INTERNA beleška moderatora — zašto je recenzija odbijena ili zadržana.
+  /// Nikad ne izlazi na javni deo sajta: javni odgovor na recenziju piše
+  /// majstor (`replyBody`), a ovo je trag za sledećeg čoveka koji otvori isti
+  /// slučaj za pola godine.
+  moderatorNote String?
+
+  majstor     Majstor      @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+  author      User         @relation(fields: [authorUserId], references: [id], onDelete: Cascade)
+  serviceType ServiceType? @relation(fields: [serviceTypeId], references: [id])
+  moderator   User?        @relation("ReviewModerator", fields: [moderatorId], references: [id])
+
+  /// Jedna recenzija po korisniku po majstoru — pravilo integriteta iz domena,
+  /// ovde zaključano u bazi da ga aplikacija ne može zaobići.
+  @@unique([majstorId, authorUserId])
+  @@index([majstorId, status, createdAt(sort: Desc)])
+  @@index([status, createdAt])
+}
+
+// ─────────────────────────────── Sačuvani majstori ───────────────────────────────
+
+/// „Sačuvano" radi i za NEPRIJAVLJENE posetioce — vezuje se za uređaj preko
+/// anonimnog cookie-ja. Kad korisnik napravi nalog, redovi se prepišu na `userId`
+/// i lista se ne gubi.
+///
+/// Većina posetilaca marketplace-a nikad ne napravi nalog; uslovljavanje čuvanja
+/// prijavom značilo bi da funkcija praktično ne postoji.
+model SavedMajstor {
+  id        String   @id @default(cuid())
+  majstorId String
+  userId    String?
+  deviceId  String?
+  createdAt DateTime @default(now())
+
+  majstor Majstor @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// NULL vrednosti se u Postgres unique indeksu ne sudaraju, pa oba para rade
+  /// nezavisno: isti majstor ne može dvaput ni za nalog ni za uređaj.
+  @@unique([userId, majstorId])
+  @@unique([deviceId, majstorId])
+  @@index([deviceId, createdAt(sort: Desc)])
+  @@index([userId, createdAt(sort: Desc)])
+}
+
+// ─────────────────────────────── Promocije ───────────────────────────────
+
+/// Monetizacija nije u MVP opsegu, ali tabela postoji od prvog dana —
+/// naknadno ubacivanje plaćene promocije u postojeći ranking je bolan refaktor.
+model Promotion {
+  id         String             @id @default(cuid())
+  majstorId  String
+  placement  PromotionPlacement
+  categoryId String?
+  cityId     String?
+
+  startsAt DateTime
+  endsAt   DateTime
+  /// Veći broj = više pozicioniran među plaćenima.
+  priority Int      @default(0)
+
+  pricePaidMinor    Int?
+  pricePaidCurrency Currency?
+
+  status PromotionStatus @default(SCHEDULED)
+
+  majstor  Majstor   @relation(fields: [majstorId], references: [id], onDelete: Cascade)
+  category Category? @relation(fields: [categoryId], references: [id])
+  city     City?     @relation(fields: [cityId], references: [id])
+
+  @@index([status, placement, priority(sort: Desc)])
+  @@index([majstorId])
+}
