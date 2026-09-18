@@ -107,6 +107,7 @@ export async function ResultsGrid({
               priority={i < 3}
               sacuvan={sacuvani.has(m.id)}
               prijavljen={korisnik !== null}
+              prijavljeniId={korisnik?.id ?? null}
             />
           </li>
         ))}

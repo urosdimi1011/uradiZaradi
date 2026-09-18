@@ -1,0 +1,66 @@
+/*
+ * Zvezdice koje se pune do one pod kursorom — bez ijedne linije JavaScripta.
+ *
+ * Trik je u obrnutom redosledu: u DOM-u stoje 5,4,3,2,1, a `row-reverse` ih
+ * okreće nazad u 1..5. Zvezdici pod kursorom tada su sledeći braća u DOM-u
+ * tačno one koje su vizuelno LEVO od nje, pa `~` puni ceo niz do nje.
+ *
+ * Isto važi za tastaturu (`:focus-visible`), pa se ponašanje ne gubi kad se
+ * kroz zvezdice prolazi tabom.
+ */
+/*
+ * BEZ `justify-content` — poravnanje bira varijanta koja ovo koristi.
+ *
+ * Ovde je stajalo `flex-end` i lepilo zvezdice uz LEVU ivicu: uz `row-reverse`
+ * glavna osa ide zdesna nalevo, pa je `flex-end` njen levi kraj. Uz to je, kao
+ * pravilo iz modula, pobeđivalo `justify-center` postavljen na komponenti.
+ */
+.zvezde {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.125rem;
+}
+
+.zvezda {
+  display: inline-flex;
+  padding: 0.125rem;
+  color: var(--color-content-muted);
+  border-radius: var(--radius-sm);
+  transition: color 120ms ease, transform 120ms ease;
+}
+
+.zvezda svg {
+  fill: transparent;
+}
+
+/*
+ * Ovde je nekad stajalo pravilo koje vraća sve zvezdice na prigušeno kad je
+ * miš nad grupom. Bilo je suvišno — osnovno stanje je već prigušeno — a imalo
+ * je VEĆU specifičnost (`.zvezde:hover .zvezda` = tri selektora) od pravila
+ * koje boji (`.zvezda:hover` = dva), pa je gasilo baš ono što treba da radi.
+ * Zvezdica pod kursorom ostajala je siva.
+ */
+.zvezda:hover,
+.zvezda:hover ~ .zvezda,
+.zvezda:focus-visible,
+.zvezda:focus-visible ~ .zvezda {
+  color: var(--color-brand);
+}
+
+.zvezda:hover svg,
+.zvezda:hover ~ .zvezda svg,
+.zvezda:focus-visible svg,
+.zvezda:focus-visible ~ .zvezda svg {
+  fill: var(--color-brand);
+}
+
+.zvezda:hover {
+  transform: scale(1.12);
+}
+
+/* Na dodir nema kursora ni hover stanja — uvećanje bi samo poskočilo pri kliku. */
+@media (hover: none) {
+  .zvezda:hover {
+    transform: none;
+  }
+}

@@ -49,6 +49,24 @@
 }
 
 /*
+ * Omotač oko slike postoji samo zato što oznaka „Novo" mora da ima uporište
+ * za apsolutnu poziciju. Preuzima meru od `.media`, a slika unutra popunjava
+ * njega — skeleton i dalje koristi `.media` samostalno, pa mu se mera ne menja.
+ */
+.mediaWrap {
+  position: relative;
+  display: flex;
+  flex: 0 0 38%;
+  align-self: stretch;
+  min-height: 12.5rem;
+}
+
+.mediaWrap .media {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/*
  * Gornji padding je veći od ostalih: ime počinje ispod linije srca, kako je
  * na mockupu. Srce je zakačeno za gornji desni ugao kartice, ne za red imena.
  */
@@ -187,6 +205,38 @@
   background-color: var(--color-surface-hover);
 }
 
+/*
+ * Oznaka „Novo" — gornji LEVI ugao fotografije.
+ *
+ * Levi, jer je desni zauzet srcem za čuvanje (`.save`, isti razmak od ivice).
+ *
+ * Zlatna sa OBRISOM, ne puna: cena u dnu kartice je već puna žuta, a dve pune
+ * žute na istoj kartici se takmiče i obe gube. Obris čita se kao brend, a
+ * ostaje iza cene.
+ *
+ * Namerno NIJE dijagonalna vrpca. To je najglasniji potez na kartici i čuva se
+ * za plaćeno isticanje (`isPromoted`) — potrošen na besplatnu osobinu, kasnije
+ * nema čime da se razlikuje ono što se naplaćuje.
+ */
+.novo {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  padding: 0.1875rem 0.5rem;
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius-pill);
+  background-color: rgb(11 11 12 / 0.72);
+  backdrop-filter: blur(2px);
+  color: var(--color-brand);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  /* Ne sme da presretne klik — ceo blok slike vodi na profil. */
+  pointer-events: none;
+}
+
 /* ── Donja traka: pregledi i poruke ── */
 .stats {
   display: flex;
@@ -204,17 +254,15 @@
   color: var(--color-content-primary);
 }
 
-/*
- * „Nov na sajtu" je oznaka, ne merenje — ide prigušeno, da ne konkuriše ceni
- * i oceni iznad. Brojka pregleda sme da bude naglašena jer je podatak.
- */
-.statNew {
-  color: var(--color-content-secondary);
-}
-
 .statIcon {
   flex-shrink: 0;
   color: var(--color-content-secondary);
+}
+
+/* Napomena vlasniku — prigušena, da se ne pomeša sa javnim podatkom. */
+.statNote {
+  color: var(--color-content-muted);
+  font-size: 0.75rem;
 }
 
 /* Brojevi u tabelarnim ciframa da se traka ne pomera kad se vrednosti menjaju. */
@@ -266,7 +314,8 @@
     padding: 1.5rem 1rem 1rem 1rem;
   }
 
-  .media {
+  .media,
+  .mediaWrap {
     min-height: 13.5rem;
   }
 }

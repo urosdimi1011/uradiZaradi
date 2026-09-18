@@ -113,3 +113,21 @@ export const PORUKE_ZABRANE: Record<RazlogZabrane, string> = {
   "vec-ocenio": "Već ste ocenili ovog majstora.",
   "nije-objavljen": "Ovaj profil trenutno nije objavljen.",
 };
+
+/**
+ * Ocena stigla kroz adresu (`?ocena=4`), sa profila.
+ *
+ * Adresu piše korisnik, pa se sve van 1–5 ćutke odbacuje — nula znači „nije
+ * izabrana". Bez ove provere forma bi se otvorila sa vrednošću koju je neko
+ * ukucao u adresu, a onda bi je akcija odbila porukom o grešci koju korisnik
+ * ničim nije izazvao.
+ *
+ * Ćutke, ne greškom: pokvarena adresa iz poruke ili istorije nije razlog da se
+ * čoveku prikaže crvena traka — samo da počne od prazne ocene.
+ */
+export function ocenaIzUpita(vrednost: unknown): number {
+  if (typeof vrednost !== "string" || vrednost.trim() === "") return 0;
+  const broj = Number(vrednost);
+  if (!Number.isInteger(broj)) return 0;
+  return broj >= 1 && broj <= 5 ? broj : 0;
+}

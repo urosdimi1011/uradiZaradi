@@ -94,7 +94,7 @@ export function Korak3Form({
       </FormField>
 
       <div className="mt-2">
-        <Button type="submit" size="lg" disabled={pending} className="sm:w-48">
+        <Button type="submit" size="lg" disabled={pending} fullWidth className="h-12 sm:w-48">
           {pending ? (
             <Loader2 aria-hidden className="h-[1em] w-[1em] animate-spin" />
           ) : (

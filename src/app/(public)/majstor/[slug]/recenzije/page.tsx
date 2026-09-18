@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeft, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 
 import { Card, CardBody } from "@/components/ui/card";
+import { NazadLink } from "@/components/ui/nazad-link";
 import { EmptyState } from "@/components/ui/empty-state";
 import { getMajstorDetail } from "@/modules/majstori/service";
 import { majstorRepository } from "@/modules/majstori/repository";
 import { ReviewsBrowser } from "@/modules/reviews/ui/reviews-browser";
 import { FormaRecenzije } from "@/modules/reviews/ui/forma-recenzije";
 import { reviewRepository } from "@/modules/reviews/repository";
-import { PORUKE_ZABRANE, smeDaOceni } from "@/modules/reviews/domain/pravila";
+import { PORUKE_ZABRANE, ocenaIzUpita, smeDaOceni } from "@/modules/reviews/domain/pravila";
 import { getCurrentUser } from "@/lib/session";
 import { catalogRepository } from "@/modules/catalog/repository";
 import { makeT } from "@/lib/dictionary";
@@ -63,7 +63,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function RecenzijePage({ params }: PageProps<"/majstor/[slug]/recenzije">) {
+export default async function RecenzijePage({
+  params,
+  searchParams,
+}: PageProps<"/majstor/[slug]/recenzije">) {
   const { slug } = await params;
   const script = await getScript();
   const t = makeT(script);
@@ -89,6 +92,20 @@ export default async function RecenzijePage({ params }: PageProps<"/majstor/[slu
   const korisnik = await getCurrentUser();
   const majstorZapis = await majstorRepository.findBySlug(slug);
 
+  /*
+   * Ocena stignuta klikom na zvezdicu sa profila (`?ocena=4`).
+   *
+   * Sve van 1–5 se ćutke odbacuje: adresu piše korisnik i ne sme da ubaci
+   * vrednost koju forma posle pošalje kao ispravnu.
+   */
+  const raw = await searchParams;
+  const pocetnaOcena = ocenaIzUpita(raw.ocena);
+
+  /* Gost se posle prijave vraća OVDE, sa ocenom koju je već izabrao. */
+  const povratak = pocetnaOcena
+    ? `/majstor/${slug}/recenzije?ocena=${pocetnaOcena}`
+    : `/majstor/${slug}/recenzije`;
+
   const pravo = smeDaOceni({
     korisnikId: korisnik?.id ?? null,
     majstorUserId: majstorZapis?.userId ?? "",
@@ -105,14 +122,8 @@ export default async function RecenzijePage({ params }: PageProps<"/majstor/[slu
     .filter((u) => u.naziv);
 
   return (
-    <div className="page-container py-6 lg:py-8">
-      <Link
-        href={`/majstor/${majstor.slug}`}
-        className="inline-flex items-center gap-1 text-sm text-content-secondary transition-colors hover:text-content-primary"
-      >
-        <ChevronLeft width={16} height={16} aria-hidden />
-        {name}
-      </Link>
+    <div className="page-container pt-4 pb-6 lg:pt-5 lg:pb-8">
+      <NazadLink href={`/majstor/${majstor.slug}`}>{name}</NazadLink>
 
       <div className="mt-4">
         <h1 className="text-2xl font-semibold text-content-primary">
@@ -130,6 +141,8 @@ export default async function RecenzijePage({ params }: PageProps<"/majstor/[slu
               usluge={njegoveUsluge}
               mozeDaOceni={pravo.sme}
               razlog={pravo.sme ? undefined : PORUKE_ZABRANE[pravo.razlog]}
+              pocetnaOcena={pocetnaOcena}
+              povratak={povratak}
             />
           </CardBody>
         </Card>

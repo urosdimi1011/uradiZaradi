@@ -12,7 +12,8 @@ import { t as pick, type Script } from "@/lib/script";
 
 import { ApplyButton } from "./apply-button";
 import { FILTER_DIALOG_ID } from "./filter-dialog";
-import { Combobox } from "@/components/ui/combobox";
+import { kljucFiltera } from "./kljuc";
+import { Combobox } from "@/components/ui/select";
 import { GetForm } from "@/components/ui/get-form";
 import { FilterPriceRange } from "./filter-price-range";
 import { FilterRating } from "./filter-rating";
@@ -71,7 +72,21 @@ export function FilterSidebar({
   };
 
   return (
-    <GetForm id={FILTER_FORM_ID} action={basePath} zatvoriDialogId={FILTER_DIALOG_ID} className={styles.panel}>
+    /*
+      `key` iz primenjenih filtera — vidi `kljuc.ts`. Bez njega „Poništi
+      filtere" ostavlja kvačice na ekranu: ruta se ne menja, React zadrži iste
+      `<input>` elemente, a `defaultChecked` se primenjuje samo pri montiranju.
+    */
+    <GetForm
+      key={kljucFiltera(values, {
+        kategorija: activeCategory?.slug ?? null,
+        grad: activeCity?.slug ?? null,
+      })}
+      id={FILTER_FORM_ID}
+      action={basePath}
+      zatvoriDialogId={FILTER_DIALOG_ID}
+      className={styles.panel}
+    >
       {values.q ? <input type="hidden" name="q" value={values.q} /> : null}
       {/*
         Kategorija je u putanji (`action`), pa nema skrivenog polja za nju —

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeft, ImageOff } from "lucide-react";
+import { ImageOff } from "lucide-react";
 
+import { NazadLink } from "@/components/ui/nazad-link";
 import { EmptyState } from "@/components/ui/empty-state";
 import { getMajstorDetail } from "@/modules/majstori/service";
 import { majstorRepository } from "@/modules/majstori/repository";
@@ -66,14 +66,8 @@ export default async function GalerijaPage({ params }: PageProps<"/majstor/[slug
   const name = script === "cyrl" ? toCyrillic(majstor.displayName) : majstor.displayName;
 
   return (
-    <div className="page-container py-6 lg:py-8">
-      <Link
-        href={`/majstor/${majstor.slug}`}
-        className="inline-flex items-center gap-1 text-sm text-content-secondary transition-colors hover:text-content-primary"
-      >
-        <ChevronLeft width={16} height={16} aria-hidden />
-        {name}
-      </Link>
+    <div className="page-container pt-4 pb-6 lg:pt-5 lg:pb-8">
+      <NazadLink href={`/majstor/${majstor.slug}`}>{name}</NazadLink>
 
       <div className="mt-4">
         <h1 className="text-2xl font-semibold text-content-primary">

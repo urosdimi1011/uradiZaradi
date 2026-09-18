@@ -33,6 +33,14 @@ export type PriceTag = {
 
 export type MajstorCardView = {
   id: string;
+  /**
+   * Vlasnik profila.
+   *
+   * Služi SAMO serverskom poređenju „gleda li ovo njegov vlasnik". Kartica je
+   * serverska komponenta, pa ova vrednost nikad ne pređe u HTML — ako se
+   * kartica ikad pretvori u klijentsku, ovo polje mora prvo da izađe odavde.
+   */
+  userId: string;
   slug: string;
   displayName: string;
   avatarUrl: string | null;
@@ -56,8 +64,6 @@ export type ServiceRow = {
 };
 
 export type MajstorDetailView = MajstorCardView & {
-  /** Vlasnik profila — da se njemu prikažu podaci koje posetilac ne vidi. */
-  userId: string;
   bio: string;
   yearsExperience: number | null;
   badges: MajstorBadge[];
@@ -105,6 +111,7 @@ async function toCardView(majstor: Majstor, viewCount: number, messageCount: num
 
   return {
     id: majstor.id,
+    userId: majstor.userId,
     slug: majstor.slug,
     displayName: majstor.displayName,
     avatarUrl: majstor.avatarUrl,
@@ -116,7 +123,10 @@ async function toCardView(majstor: Majstor, viewCount: number, messageCount: num
     priceFrom: headlineService(majstor),
     profileViews: viewCount,
     messageCount,
-    jeNov: jeNovProfil(majstor.createdAt),
+    jeNov: jeNovProfil({
+      createdAt: majstor.createdAt,
+      brojRecenzija: majstor.rating.count,
+    }),
     // Promocije nisu u MVP opsegu; polje postoji da ranking ne mora da se menja kasnije.
     isPromoted: false,
   };
@@ -174,7 +184,6 @@ export const getMajstorDetail = cache(async (slug: string): Promise<MajstorDetai
 
   return {
     ...card,
-    userId: majstor.userId,
     bio: majstor.bio,
     yearsExperience: majstor.yearsExperience,
     badges: majstor.badges,

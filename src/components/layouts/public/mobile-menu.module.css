@@ -201,6 +201,17 @@
   color: var(--color-content-primary);
 }
 
+/*
+ * Aktivna stavka — zlatna, kao i aktivna kategorija ispod. Ikona tada gubi
+ * `linkIcon` i nasleđuje boju teksta, pa red svetli ceo umesto da mu ikona
+ * ostane prigušena.
+ */
+.linkActive {
+  color: var(--color-brand);
+  background-color: color-mix(in srgb, var(--color-brand) 10%, transparent);
+  font-weight: 500;
+}
+
 .linkIcon {
   flex-shrink: 0;
   color: var(--color-content-muted);

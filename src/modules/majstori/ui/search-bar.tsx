@@ -1,6 +1,6 @@
 import { MapPin, Search } from "lucide-react";
 
-import { Combobox } from "@/components/ui/combobox";
+import { Combobox } from "@/components/ui/select";
 import { GetForm } from "@/components/ui/get-form";
 import type { City } from "@/modules/geo/domain";
 import { makeT } from "@/lib/dictionary";

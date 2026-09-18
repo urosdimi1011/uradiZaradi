@@ -16,11 +16,11 @@ import {
  * posetiocu da niko nije bio ovde. Bolje ništa nego nula.
  */
 describe("prikaz broja pregleda", () => {
-  it.each([0, 1, 5, 19])("%d se ne prikazuje", (broj) => {
+  it.each([0, 1, 4])("%d se ne prikazuje", (broj) => {
     expect(prikaziPreglede(broj)).toBe(false);
   });
 
-  it.each([20, 21, 100, 5000])("%d se prikazuje", (broj) => {
+  it.each([5, 6, 100, 5000])("%d se prikazuje", (broj) => {
     expect(prikaziPreglede(broj)).toBe(true);
   });
 
@@ -33,11 +33,11 @@ describe("prikaz broja pregleda", () => {
 /**
  * Vlasnik je izuzet od praga.
  *
- * Bez ovoga majstor ne vidi nikakav dokaz da se pregledi broje dok ne skupi
- * dvadeset — pa prijavi da brojanje ne radi. Tačno to se i dogodilo.
+ * Bez ovoga majstor ne vidi nikakav dokaz da se pregledi broje dok ne pređe
+ * prag — pa prijavi da brojanje ne radi. Tačno to se i dogodilo.
  */
 describe("vidljivost pregleda", () => {
-  it.each([0, 1, 19])("vlasnik vidi i %d, ispod praga", (broj) => {
+  it.each([0, 1, 4])("vlasnik vidi i %d, ispod praga", (broj) => {
     expect(vidljivostPregleda({ broj, jeVlasnik: true })).toBe("samo-vlasnik");
   });
 
@@ -45,11 +45,11 @@ describe("vidljivost pregleda", () => {
     expect(vidljivostPregleda({ broj: 500, jeVlasnik: true })).toBe("samo-vlasnik");
   });
 
-  it.each([0, 1, 19])("posetiocu se %d ne prikazuje", (broj) => {
+  it.each([0, 1, 4])("posetiocu se %d ne prikazuje", (broj) => {
     expect(vidljivostPregleda({ broj, jeVlasnik: false })).toBe("skriveno");
   });
 
-  it.each([20, 21, 5000])("posetilac vidi %d kao javan podatak", (broj) => {
+  it.each([5, 6, 5000])("posetilac vidi %d kao javan podatak", (broj) => {
     expect(vidljivostPregleda({ broj, jeVlasnik: false })).toBe("javno");
   });
 
@@ -62,52 +62,89 @@ describe("vidljivost pregleda", () => {
 });
 
 /**
- * Oznaka „nov na sajtu".
+ * Oznaka „Novo".
  *
- * Postoji zbog rupe: kartica majstora ispod praga imala je praznu donju traku,
- * u istom redu sa karticom koja piše „213 pregleda". Prazno mesto nije neutralno
- * — čita se kao da nešto nedostaje.
+ * Nije tajmer nego odsustvo traga: postoji da objasni zašto profil stoji na
+ * nula recenzija. Čim recenzija ima, one govore umesto nje.
  */
-describe("kada je profil nov", () => {
-  const sada = new Date("2026-09-16T12:00:00Z");
+describe("kada profil nosi oznaku Novo", () => {
+  const sada = new Date("2026-09-18T12:00:00Z");
   const preDana = (n: number) => new Date(sada.getTime() - n * 24 * 60 * 60 * 1000);
+  const nov = (createdAt: Date, brojRecenzija = 0) =>
+    jeNovProfil({ createdAt, brojRecenzija }, sada);
 
-  it("postavljen istog trenutka je nov", () => {
-    expect(jeNovProfil(sada, sada)).toBe(true);
+  it("postavljen istog trenutka, bez recenzija — nov", () => {
+    expect(nov(sada)).toBe(true);
   });
 
-  it.each([1, 7, DANA_ZA_OZNAKU_NOV - 1])("od pre %d dana je nov", (dana) => {
-    expect(jeNovProfil(preDana(dana), sada)).toBe(true);
+  it.each([1, 7, 30, DANA_ZA_OZNAKU_NOV - 1])("od pre %d dana bez recenzija je nov", (dana) => {
+    expect(nov(preDana(dana))).toBe(true);
   });
 
-  it("tačno na granici više nije nov", () => {
-    expect(jeNovProfil(preDana(DANA_ZA_OZNAKU_NOV), sada)).toBe(false);
+  /** Ovo je srž pravila: recenzija gasi oznaku bez obzira na datum. */
+  it("jedna recenzija gasi oznaku i prvog dana", () => {
+    expect(nov(sada, 1)).toBe(false);
   });
 
-  it.each([31, 90, 400])("od pre %d dana nije nov", (dana) => {
-    expect(jeNovProfil(preDana(dana), sada)).toBe(false);
+  it("recenzija gasi oznaku i kad je profil star jedan dan", () => {
+    expect(nov(preDana(1), 3)).toBe(false);
+  });
+
+  it("tačno na kapi više nije nov, ni bez ijedne recenzije", () => {
+    expect(nov(preDana(DANA_ZA_OZNAKU_NOV))).toBe(false);
+  });
+
+  it.each([61, 120, 400])("od pre %d dana nije nov — to je neaktivan, ne nov", (dana) => {
+    expect(nov(preDana(dana))).toBe(false);
   });
 
   it("datum iz budućnosti se ne računa kao nov", () => {
-    expect(jeNovProfil(new Date(sada.getTime() + 60_000), sada)).toBe(false);
+    expect(nov(new Date(sada.getTime() + 60_000))).toBe(false);
+  });
+
+  it("kapa je 60 dana, ne 30 — prva recenzija kod zanata stiže sporo", () => {
+    expect(DANA_ZA_OZNAKU_NOV).toBe(60);
+    expect(nov(preDana(45))).toBe(true);
   });
 });
 
 describe("oznaka u donjoj traci kartice", () => {
-  it("pregledi imaju prednost nad oznakom „nov”", () => {
-    expect(oznakaKartice({ profileViews: 250, jeNov: true })).toBe("pregledi");
+  const posetilac = (profileViews: number) => oznakaKartice({ profileViews, jeVlasnik: false });
+  const vlasnik = (profileViews: number) => oznakaKartice({ profileViews, jeVlasnik: true });
+
+  it("posetilac vidi brojku od praga naviše", () => {
+    expect(posetilac(PRAG_PRIKAZA_PREGLEDA)).toBe("pregledi");
+    expect(posetilac(5000)).toBe("pregledi");
   });
 
-  it("star profil sa dovoljno pregleda prikazuje brojku", () => {
-    expect(oznakaKartice({ profileViews: PRAG_PRIKAZA_PREGLEDA, jeNov: false })).toBe("pregledi");
+  it.each([0, 1, 4])("posetiocu se %d ne prikazuje — traka se sklanja", (broj) => {
+    expect(posetilac(broj)).toBe("nista");
   });
 
-  it.each([0, 1, 19])("nov profil sa %d pregleda dobija oznaku umesto brojke", (broj) => {
-    expect(oznakaKartice({ profileViews: broj, jeNov: true })).toBe("nov");
+  /**
+   * Zbog ovoga je pravilo i prošireno: ista brojka postojala je na profilu, a
+   * na kartici ne — što izgleda kao greška čak i kad se zna zašto je tako.
+   */
+  it.each([0, 1, 3])("vlasnik vidi i %d, označeno kao samo njegovo", (broj) => {
+    expect(vlasnik(broj)).toBe("moji-pregledi");
   });
 
-  it("star profil ispod praga ne dobija ništa — traka se sklanja", () => {
-    expect(oznakaKartice({ profileViews: 3, jeNov: false })).toBe("nista");
-    expect(oznakaKartice({ profileViews: 0, jeNov: false })).toBe("nista");
+  it("vlasniku se i iznad praga zadržava oznaka da brojku vidi samo on", () => {
+    expect(vlasnik(500)).toBe("moji-pregledi");
+  });
+
+  it("prag je 5 — u početku pregleda nema mnogo", () => {
+    expect(PRAG_PRIKAZA_PREGLEDA).toBe(5);
+    expect(posetilac(4)).toBe("nista");
+    expect(posetilac(5)).toBe("pregledi");
+  });
+
+  /**
+   * „Nov na sajtu" je nekad stajao ovde kao zamena za preglede. Preselio se na
+   * pilulu preko fotografije — ista stvar rečena na dva mesta na jednoj kartici
+   * razvodnjava oba.
+   */
+  it("novost se više ne saopštava kroz traku", () => {
+    expect(posetilac(0)).toBe("nista");
   });
 });

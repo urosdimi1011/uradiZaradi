@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { filtrirajOpcije, type Opcija } from "./filtriranje";
 import { useNadogradnja } from "./nadogradnja";
-import styles from "./combobox.module.css";
+import styles from "./select.module.css";
 
 export type { Opcija };
 

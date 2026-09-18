@@ -9,6 +9,7 @@ import { ScriptToggle } from "./script-toggle";
 import { CategoryIcon } from "@/modules/catalog/ui/category-icon";
 import type { Category } from "@/modules/catalog/domain";
 import { cn } from "@/lib/cn";
+import { jeAktivnaPutanja } from "@/lib/aktivna-putanja";
 import { makeT } from "@/lib/dictionary";
 import { t as pick, type Script } from "@/lib/script";
 /* Samo tip — `import type` se briše pri prevođenju, pa `server-only` iz sesije
@@ -156,12 +157,25 @@ export function MobileMenu({
             <nav className={styles.section} aria-label={t("navigation")}>
               <p className={styles.sectionLabel}>{t("navigation")}</p>
               <div className={styles.links}>
-                {links.map(({ href, icon: Icon, label }) => (
-                  <Link key={href} href={href} className={styles.link}>
-                    <Icon width={18} height={18} aria-hidden className={styles.linkIcon} />
-                    {label}
-                  </Link>
-                ))}
+                {links.map(({ href, icon: Icon, label }) => {
+                  const active = jeAktivnaPutanja(pathname, href);
+                  return (
+                    <Link
+                      key={href}
+                      href={href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(styles.link, active && styles.linkActive)}
+                    >
+                      <Icon
+                        width={18}
+                        height={18}
+                        aria-hidden
+                        className={active ? undefined : styles.linkIcon}
+                      />
+                      {label}
+                    </Link>
+                  );
+                })}
               </div>
             </nav>
 
@@ -169,7 +183,7 @@ export function MobileMenu({
               <p className={styles.sectionLabel}>{t("allCategories")}</p>
               <div className={styles.links}>
                 {categories.map((category) => {
-                  const active = pathname === `/${category.slug}`;
+                  const active = jeAktivnaPutanja(pathname, `/${category.slug}`);
                   return (
                     <Link
                       key={category.id}

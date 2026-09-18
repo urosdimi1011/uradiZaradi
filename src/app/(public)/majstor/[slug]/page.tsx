@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import {
   BadgeCheck,
   CalendarClock,
-  ChevronLeft,
   ChevronRight,
   Eye,
   FileText,
@@ -18,6 +17,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import { Avatar } from "@/components/ui/avatar";
+import { NazadLink } from "@/components/ui/nazad-link";
 import { Button } from "@/components/ui/button";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { Stars } from "@/components/ui/stars";
@@ -34,6 +34,9 @@ import { savedRepository } from "@/modules/saved/repository";
 import { getCurrentUser } from "@/lib/session";
 import { EmptyState } from "@/components/ui/empty-state";
 import { RatingBreakdown } from "@/modules/reviews/ui/rating-breakdown";
+import { PozivNaOcenu, type Vidljivost } from "@/modules/reviews/ui/poziv-na-ocenu";
+import { smeDaOceni } from "@/modules/reviews/domain/pravila";
+import { reviewRepository } from "@/modules/reviews/repository";
 import { ReviewItem } from "@/modules/reviews/ui/review-item";
 import { approxEur, formatCount, formatPriceFrom } from "@/lib/format";
 import { makeT, ui, type UiKey } from "@/lib/dictionary";
@@ -113,6 +116,26 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
     jeVlasnik: korisnik?.id === majstor.userId,
   });
 
+  /*
+   * Sme li posetilac da oceni — ista provera kao na stranici recenzija, da se
+   * poziv ne prikaže nekome ko posle klika dobije odbijenicu.
+   *
+   * Za goste se baza ne dodiruje: `smeDaOceni` ih odbija na prvoj liniji, pa
+   * upit „da li je već ocenio" nema koga da traži.
+   */
+  const pravoNaOcenu = smeDaOceni({
+    korisnikId: korisnik?.id ?? null,
+    majstorUserId: majstor.userId,
+    majstorStatus: "ACTIVE",
+    vecOcenio: korisnik ? await reviewRepository.vecOcenio(majstor.id, korisnik.id) : false,
+  });
+
+  const pozivNaOcenu: Vidljivost = pravoNaOcenu.sme
+    ? { vrsta: "moze" }
+    : pravoNaOcenu.razlog === "nije-prijavljen"
+      ? { vrsta: "gost" }
+      : { vrsta: "ne-moze", razlog: pravoNaOcenu.razlog };
+
   const bio = script === "cyrl" ? toCyrillic(majstor.bio) : majstor.bio;
   const name = script === "cyrl" ? toCyrillic(majstor.displayName) : majstor.displayName;
   const location = majstor.municipalityLabel
@@ -125,19 +148,13 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
   const hiddenPhotos = majstor.gallery.length - visiblePhotos.length;
 
   return (
-    <div className="page-container py-6 lg:py-8">
+    <div className="page-container pt-4 pb-6 lg:pt-5 lg:pb-8">
       <MajstorJsonLd majstor={majstor} />
 
       {/* Broji pregled — vidi komentar u `statistika.ts` zašto iz pretraživača. */}
       <BrojacPregleda majstorId={majstor.id} />
 
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1 text-sm text-content-secondary transition-colors hover:text-content-primary"
-      >
-        <ChevronLeft width={16} height={16} aria-hidden />
-        {t("backToSearch")}
-      </Link>
+      <NazadLink href="/">{t("backToSearch")}</NazadLink>
 
       {/* ── Zaglavlje profila ── */}
       <div className="mt-4 grid gap-6 lg:grid-cols-[240px_1fr_300px]">
@@ -152,9 +169,16 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
         <div className="min-w-0">
           <h1 className="text-2xl font-semibold text-content-primary sm:text-3xl">{name}</h1>
 
-          <p className="mt-1.5 flex items-center gap-1.5 text-content-secondary">
+          <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-content-secondary">
             {pick(majstor.categoryLabel, script)}
             <VerifiedBadge level={majstor.verificationLevel} size={17} />
+
+            {/* Ista oznaka kao na kartici — da ne nestane kad se profil otvori. */}
+            {majstor.jeNov ? (
+              <span className="rounded-[var(--radius-pill)] border border-brand px-2 py-0.5 text-xs font-medium text-brand">
+                {t("newLabel")}
+              </span>
+            ) : null}
           </p>
 
           <p className="mt-3 flex flex-wrap items-center gap-2 text-sm">
@@ -317,14 +341,32 @@ export default async function MajstorPage({ params }: PageProps<"/majstor/[slug]
                       <ReviewItem key={review.id} review={review} script={script} />
                     ))}
                   </div>
+
+                  {/* Sažeta traka ispod recenzija — ne otima pažnju od onoga što piše iznad. */}
+                  <PozivNaOcenu
+                    slug={majstor.slug}
+                    vidljivost={pozivNaOcenu}
+                    varijanta="sazeto"
+                    className="mt-5"
+                  />
                 </>
-              ) : (
+              ) : pozivNaOcenu.vrsta === "ne-moze" ? (
                 /*
                   Bez recenzija se NE prikazuje raspodela: pet praznih traka i
                   „0.0" izgledaju kao loša ocena, a ne kao odsustvo ocene. Novom
                   majstoru bi to odbijalo posetioce zbog nečega što nije skrivio.
+
+                  Ovo stanje vidi samo onaj ko ne sme da oceni — sam majstor ili
+                  neko ko je već ocenio. Svima ostalima prazno mesto je prilika,
+                  pa umesto saopštenja stoji poziv.
                 */
                 <EmptyState icon={MessageSquare} naslov={t("noReviews")} opis={t("noReviewsHint")} />
+              ) : (
+                <PozivNaOcenu
+                  slug={majstor.slug}
+                  vidljivost={pozivNaOcenu}
+                  varijanta="prazno"
+                />
               )}
             </CardBody>
           </Card>

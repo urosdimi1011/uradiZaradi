@@ -25,12 +25,23 @@ export function FormaRecenzije({
   usluge,
   mozeDaOceni,
   razlog,
+  pocetnaOcena = 0,
+  povratak,
 }: {
   slug: string;
   usluge: UslugaZaIzbor[];
   mozeDaOceni: boolean;
   /** Zašto ne može — prikazuje se umesto forme. */
   razlog?: string;
+  /**
+   * Ocena izabrana klikom na zvezdicu sa profila (`?ocena=4`).
+   *
+   * Prvi korak je tako već obavljen kad se forma otvori — ostaje samo tekst.
+   * Vrednost se i dalje može promeniti ovde; ovo je polazna tačka, ne odluka.
+   */
+  pocetnaOcena?: number;
+  /** Adresa na koju gost treba da se vrati posle prijave; podrazumevano ova stranica. */
+  povratak?: string;
 }) {
   const pathname = usePathname();
   const [state, formAction, pending] = useActionState<RecenzijaStanje, FormData>(
@@ -38,7 +49,7 @@ export function FormaRecenzije({
     {},
   );
 
-  const [ocena, setOcena] = useState(0);
+  const [ocena, setOcena] = useState(pocetnaOcena);
   const [tekst, setTekst] = useState("");
 
   if (state.uspeh) {
@@ -69,7 +80,7 @@ export function FormaRecenzije({
         <p className="text-sm text-content-secondary">{razlog}</p>
         {razlog?.includes("Prijavite") ? (
           <Link
-            href={`/prijava?next=${encodeURIComponent(pathname)}`}
+            href={`/prijava?next=${encodeURIComponent(povratak ?? pathname)}`}
             className="mt-3 inline-flex h-10 items-center rounded-[var(--radius-control)] bg-brand px-5 text-sm font-semibold text-brand-foreground"
           >
             Prijava
@@ -187,7 +198,7 @@ export function FormaRecenzije({
         {preostalo > 0 ? `Još ${preostalo} znakova.` : `${tekst.trim().length} znakova.`}
       </p>
 
-      <Button type="submit" size="lg" disabled={pending} className="sm:w-56">
+      <Button type="submit" size="lg" disabled={pending} fullWidth className="h-12 sm:w-56">
         {pending ? (
           <Loader2 aria-hidden className="h-[1em] w-[1em] animate-spin" />
         ) : (

@@ -9,6 +9,18 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    /*
+     * CLI ide na DIRECT_URL kad postoji, aplikacija uvek na DATABASE_URL.
+     *
+     * Razlog je Supabase (i svaki PgBouncer ispred Postgresa): aplikacija na
+     * serverlessu mora kroz transakcioni pooler, jer bi inače potrošila
+     * konekcije. Ali migracije kroz taj isti pooler ne rade — traže savetodavne
+     * brave i session-level stanje koje transakcioni režim ne drži, pa
+     * `migrate deploy` ume da zablokira ili da prijavi grešku koja ne govori
+     * ništa o pravom uzroku.
+     *
+     * Lokalno DIRECT_URL ne postoji i sve ide na DATABASE_URL, kao i pre.
+     */
+    url: process.env["DIRECT_URL"] ?? process.env["DATABASE_URL"],
   },
 });

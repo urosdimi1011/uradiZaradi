@@ -34,7 +34,8 @@ export async function PublicLayout({
    * ovaj poziv i onaj iz zaglavlja dele isti rezultat. Za korisnike koji nisu
    * majstori vraća `null` bez ijednog dodira baze.
    */
-  const stanjeProfila = await getStanjeProfila(await getCurrentUser());
+  const korisnik = await getCurrentUser();
+  const stanjeProfila = await getStanjeProfila(korisnik);
 
   return (
     /*
@@ -59,7 +60,7 @@ export async function PublicLayout({
       <SiteHeader script={script} categories={categories} />
       <main className="flex-1">{children}</main>
       <SiteFooter script={script} />
-      <MobileNav script={script} />
+      <MobileNav script={script} user={korisnik} />
     </div>
   );
 }

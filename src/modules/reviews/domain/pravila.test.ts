@@ -6,6 +6,7 @@ import {
   pocetniStatus,
   recenzijaSchema,
   smeDaOceni,
+  ocenaIzUpita,
 } from "./pravila";
 
 /**
@@ -136,5 +137,32 @@ describe("ko sme da oceni", () => {
   it("gost koji je nekako i sam svoj majstor dobija poruku o prijavi", () => {
     const r = smeDaOceni({ ...osnova, korisnikId: null, vecOcenio: true });
     expect(r.sme === false && r.razlog).toBe("nije-prijavljen");
+  });
+});
+
+/**
+ * Ocena iz adrese.
+ *
+ * Ulaz piše korisnik — ovo je granica između njegove adrese i forme koja se
+ * otvara sa već izabranom vrednošću.
+ */
+describe("ocena iz upita", () => {
+  it.each([1, 2, 3, 4, 5])("prihvata %d", (n) => {
+    expect(ocenaIzUpita(String(n))).toBe(n);
+  });
+
+  it.each(["0", "6", "-1", "100"])("odbija %s kao van opsega", (v) => {
+    expect(ocenaIzUpita(v)).toBe(0);
+  });
+
+  it.each(["3.5", "abc", "", "   ", "4a", "١"])("odbija „%s\" kao neispravno", (v) => {
+    expect(ocenaIzUpita(v)).toBe(0);
+  });
+
+  it("odbija sve što nije tekst", () => {
+    expect(ocenaIzUpita(undefined)).toBe(0);
+    expect(ocenaIzUpita(null)).toBe(0);
+    expect(ocenaIzUpita(4)).toBe(0);
+    expect(ocenaIzUpita(["4"])).toBe(0);
   });
 });

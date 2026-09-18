@@ -47,7 +47,7 @@ export function ObjavaForm({ spreman }: { spreman: boolean }) {
         </div>
       </div>
 
-      <Button type="submit" size="lg" disabled={pending || !spreman} className="sm:w-56">
+      <Button type="submit" size="lg" disabled={pending || !spreman} fullWidth className="h-12 sm:w-56">
         {pending ? (
           <Loader2 aria-hidden className="h-[1em] w-[1em] animate-spin" />
         ) : (

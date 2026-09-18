@@ -70,7 +70,14 @@ export default async function SacuvanoPage() {
           {poredjane.map((majstor, i) => (
             <li key={majstor.id} className="flex">
               {/* Svi su po definiciji sačuvani — srce je puno od prvog kadra. */}
-              <MajstorCard majstor={majstor} script={script} priority={i < 3} sacuvan prijavljen />
+              <MajstorCard
+                majstor={majstor}
+                script={script}
+                priority={i < 3}
+                sacuvan
+                prijavljen
+                prijavljeniId={user.id}
+              />
             </li>
           ))}
         </ul>

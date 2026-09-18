@@ -1,4 +1,4 @@
-import { Eye, Sparkles } from "lucide-react";
+import { Eye } from "lucide-react";
 import { oznakaKartice } from "@/modules/majstori/domain/statistika";
 
 import { formatCount } from "@/lib/format";
@@ -17,16 +17,16 @@ import styles from "./majstor-card.module.css";
  */
 export function MajstorStats({
   profileViews,
-  jeNov,
+  jeVlasnik,
   script,
 }: {
   profileViews: number;
-  /** Skoro postavljen profil — vidi `oznakaKartice`. */
-  jeNov: boolean;
+  /** Gleda li ovu karticu njen vlasnik — njemu brojka ide bez praga. */
+  jeVlasnik: boolean;
   script: Script;
 }) {
   const t = makeT(script);
-  const oznaka = oznakaKartice({ profileViews, jeNov });
+  const oznaka = oznakaKartice({ profileViews, jeVlasnik });
 
   /*
    * Prazna traka se NE iscrtava. Ranije je `div` sa gornjom linijom i unutrašnjim
@@ -37,27 +37,23 @@ export function MajstorStats({
 
   return (
     <div className={styles.stats}>
-      {oznaka === "pregledi" ? (
-        /*
-          Brojka i reč su u ISTOM span-u sa običnim razmakom.
-          Da su odvojeni elementi, `gap` bi ih razmakao kao dve stavke ("126   pregleda")
-          umesto da izgledaju kao jedna fraza. Gap razdvaja samo ikonu od teksta.
+      {/*
+        Brojka i reč su u ISTOM span-u sa običnim razmakom. Da su odvojeni
+        elementi, `gap` bi ih razmakao kao dve stavke („126   pregleda") umesto
+        da izgledaju kao jedna fraza. Gap razdvaja samo ikonu od teksta.
 
-          Poruke se ne prikazuju dok ćaskanje ne postoji — inače je to broj koji
-          nikad nije ni mogao da poraste.
-        */
-        <span className={styles.stat}>
-          <Eye width={16} height={16} className={styles.statIcon} aria-hidden />
-          <span>
-            <span className={styles.statValue}>{formatCount(profileViews)}</span> {t("views")}
-          </span>
+        Poruke se ne prikazuju dok ćaskanje ne postoji — inače je to broj koji
+        nikad nije ni mogao da poraste.
+      */}
+      <span className={styles.stat}>
+        <Eye width={16} height={16} className={styles.statIcon} aria-hidden />
+        <span>
+          <span className={styles.statValue}>{formatCount(profileViews)}</span> {t("views")}
+          {oznaka === "moji-pregledi" ? (
+            <span className={styles.statNote}> {t("onlyYouSee")}</span>
+          ) : null}
         </span>
-      ) : (
-        <span className={`${styles.stat} ${styles.statNew}`}>
-          <Sparkles width={16} height={16} className={styles.statIcon} aria-hidden />
-          {t("newOnSite")}
-        </span>
-      )}
+      </span>
     </div>
   );
 }

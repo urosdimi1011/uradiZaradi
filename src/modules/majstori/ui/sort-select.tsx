@@ -3,18 +3,19 @@
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
-import { Select } from "@/components/ui/field";
+import { Dropdown } from "@/components/ui/select";
 import { makeT } from "@/lib/dictionary";
 import type { Script } from "@/lib/script";
 
 /**
- * Sortiranje — menja URL na promenu izbora, bez dugmeta.
+ * Sortiranje — menja URL na izbor, bez dugmeta.
  *
  * Ranije je ovo bila obična forma sa `<noscript>` dugmetom: sa uključenim
  * JavaScriptom promena selekta nije radila NIŠTA, jer forma nije imala ni
  * `onChange` ni vidljivo dugme za slanje.
  *
- * `<noscript>` grana i dalje postoji radi rada bez JavaScripta.
+ * `<noscript>` grana i dalje postoji radi rada bez JavaScripta — tada se
+ * iscrtava nativni `select` i formu šalje dugme ispod njega.
  */
 export function SortSelect({
   basePath,
@@ -35,6 +36,7 @@ export function SortSelect({
   const push = (sort: string) => {
     const params = new URLSearchParams();
     for (const [key, v] of carriedFilters) params.append(key, v);
+    /* Podrazumevano sortiranje se ne upisuje u adresu — inače ista lista ima dve adrese. */
     if (sort !== "newest") params.set("sort", sort);
     const query = params.toString();
     startTransition(() => router.push(query ? `${basePath}?${query}` : basePath));
@@ -44,7 +46,6 @@ export function SortSelect({
     <form
       action={basePath}
       method="get"
-      className="flex items-center gap-2"
       onSubmit={(e) => {
         e.preventDefault();
         push(value);
@@ -54,23 +55,22 @@ export function SortSelect({
         <input key={`${key}-${i}`} type="hidden" name={key} value={v} />
       ))}
 
-      <label htmlFor="sort" className="text-sm text-content-secondary">
-        {t("sortBy")}:
-      </label>
-      <Select
+      <Dropdown
         id="sort"
         name="sort"
-        defaultValue={value}
-        onChange={(e) => push(e.target.value)}
-        className="h-9 w-44 text-sm"
-      >
-        <option value="newest">{t("newest")}</option>
-        <option value="rating">{t("bestRated")}</option>
-        <option value="priceAsc">{t("priceAsc")}</option>
-      </Select>
+        label={`${t("sortBy")}:`}
+        raspored="u-redu"
+        vrednost={value}
+        onIzbor={push}
+        opcije={[
+          { vrednost: "newest", tekst: t("newest") },
+          { vrednost: "rating", tekst: t("bestRated") },
+          { vrednost: "priceAsc", tekst: t("priceAsc") },
+        ]}
+      />
 
       <noscript>
-        <button type="submit" className="text-sm text-brand underline">
+        <button type="submit" className="ml-2 text-sm text-brand underline">
           OK
         </button>
       </noscript>

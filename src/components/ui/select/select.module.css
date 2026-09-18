@@ -131,3 +131,68 @@
   font-size: 0.8125rem;
   text-align: center;
 }
+
+/* ─────────────────── Dropdown (bez pretrage) ─────────────────── */
+
+/*
+ * Okidač izgleda kao polje, ali JESTE dugme — u njega se ne kuca.
+ * Deli meru i boje sa `.input`, pa se dve kontrole ne razilaze pri izmeni
+ * tokena; razlika je samo u poravnanju teksta i kursoru.
+ */
+.okidac {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 2.25rem;
+  padding-inline: 0.75rem 2rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-input);
+  color: var(--color-content-primary);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.okidac:hover {
+  border-color: var(--color-line-strong);
+}
+
+.okidac[aria-expanded="true"] {
+  border-color: var(--color-brand);
+}
+
+/* Naziv se skraćuje trotačkom umesto da razvuče kontrolu. */
+.okidacTekst {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Naziv polja i kontrola jedno uz drugo — za trake iznad rezultata. */
+.uRedu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.uRedu .label {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+/*
+ * U redu sa oznakom kontejner se skuplja na sadržaj, pa `width: 100%` na
+ * okidaču nema od čega da uzme meru — dugme je ispadalo uže od najduže stavke
+ * („Najbolje ocenjeni") i tekst se sekao trotačkom.
+ *
+ * Mera ide OVDE, na polje: okidač i dalje popunjava svoj kontejner, a kontejner
+ * sada ima širinu. Postavljanje širine na samom dugmetu ne bi radilo — pravilo
+ * iz modula pobeđuje utility klasu sa komponente.
+ */
+.uRedu .field {
+  width: 11rem;
+  flex-shrink: 0;
+}
